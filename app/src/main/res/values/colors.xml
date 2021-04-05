@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="hektar_accent">#FBB547</color>
+    <color name="hektar_dark">#23262F</color>
+    <color name="hektar_medium">#444752</color>
+    <color name="hektar_light">#ADB7D0</color>
+    <color name="hektar_accentVariant">#365ABB</color>
+    <color name="hektar_background">#363B49</color>
+    <color name="hektar_text_light">#E1E1E1</color>
+    <color name="grey">#03000000</color>
+</resources>

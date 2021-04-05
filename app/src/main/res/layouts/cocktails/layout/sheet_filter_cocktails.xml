@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cocktails_filter_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/hektar_background"
+    android:orientation="vertical"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="289dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/filters"
+            android:textColor="@color/hektar_text_light"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/filter_sheet_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7.5dp"
+            android:elevation="0dp"
+            android:text="Done" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.12"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Strength"
+        android:textColor="@color/hektar_text_light" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.App.Chip.Filter"
+            android:id="@+id/chip_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Strong" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.App.Chip.Filter"
+            android:id="@+id/chip_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moderately strong" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.App.Chip.Filter"
+            android:id="@+id/chip_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soft" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.App.Chip.Filter"
+            android:id="@+id/chip_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non alcoholic" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.12"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:textColor="@color/hektar_text_light" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.App.Chip.Filter"
+            android:id="@+id/chip2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Long" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.App.Chip.Filter"
+            android:id="@+id/chip2_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shot"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.12"
+        android:background="@color/white" />
+
+</LinearLayout>

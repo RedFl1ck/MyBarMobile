@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_cocktails">
+
+    <fragment
+        android:id="@+id/nav_cocktails"
+        android:name="com.example.bottomtest.ui.cocktails.CocktailsFragment"
+        android:label="@string/menu_cocktails"
+        tools:layout="@layout/fragment_cocktails" />
+
+    <fragment
+        android:id="@+id/nav_ingredients"
+        android:name="com.example.bottomtest.ui.ingredients.IngredientsFragment"
+        android:label="@string/menu_ingredients"
+        tools:layout="@layout/fragment_ingredients" />
+
+    <fragment
+        android:id="@+id/nav_favourite"
+        android:name="com.example.bottomtest.ui.favourite.FavouriteFragment"
+        android:label="@string/menu_favourite"
+        tools:layout="@layout/fragment_favourite" />
+
+    <fragment
+        android:id="@+id/nav_shopping"
+        android:name="com.example.bottomtest.ui.shopping_list.ShoppingFragment"
+        android:label="@string/menu_shopping"
+        tools:layout="@layout/fragment_shopping" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.bottomtest.ui.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login"/>
+</navigation>
