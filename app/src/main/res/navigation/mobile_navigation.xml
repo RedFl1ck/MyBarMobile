@@ -10,6 +10,9 @@
         android:name="com.example.bottomtest.ui.cocktails.CocktailsFragment"
         android:label="@string/menu_cocktails"
         tools:layout="@layout/fragment_cocktails" >
+        <action
+            android:id="@+id/action_nav_cocktails_to_updateActivity"
+            app:destination="@id/updateActivity" />
     </fragment>
 
     <fragment

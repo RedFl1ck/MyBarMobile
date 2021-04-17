@@ -66,9 +66,6 @@ class CocktailsFragment : Fragment() {
         sort_button = root.findViewById(R.id.sort_cocktails_button)
 
 
-
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_cocktails, container, false)
         // Recyclerview
         val adapter = CocktailListAdapter(this@CocktailsFragment, this.requireContext())
         val recyclerView = root.findViewById<RecyclerView>(R.id.recyclerView)
@@ -163,34 +160,7 @@ class CocktailsFragment : Fragment() {
             }
         }
 
-
-        setSwipeRefreshLayout()
-
-        /*customAdapter = CustomAdapter(this@CocktailsFragment, this.requireContext(), book_id!!, book_title!!, book_author!!,
-                book_pages!!)
-        recyclerView?.adapter = customAdapter
-        customAdapter?.setData(book_id, book_title, book_author, book_pages)
-        recyclerView?.layoutManager = LinearLayoutManager(this@CocktailsFragment.requireContext())*/
-
         return root
     }
 
-
-    override fun onStart() {
-        super.onStart()
-        refreshData()
-    }
-
-    private fun refreshData() {
-
-    }
-
-    private fun setSwipeRefreshLayout() {
-        mSwipeRefreshLayout?.setOnRefreshListener {
-            // callback when swiped from top of screen
-            // make your network request again, modify recycler adapter,etc
-            refreshData()
-            mSwipeRefreshLayout?.isRefreshing = false // set false to dismiss the progress loader once your job is done
-        }
-    }
 }

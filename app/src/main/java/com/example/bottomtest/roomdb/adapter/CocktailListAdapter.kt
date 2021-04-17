@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.fragments.update.UpdateCocktail
+import com.example.bottomtest.ui.cocktails.CocktailsFragmentDirections
 import kotlinx.android.synthetic.main.my_row.view.*
 
 class CocktailListAdapter constructor(private val activity: Fragment, private val context: Context) : RecyclerView.Adapter<CocktailListAdapter.MyViewHolder>() {
@@ -34,18 +36,9 @@ class CocktailListAdapter constructor(private val activity: Fragment, private va
         holder.itemView.book_pages_txt.text = currentItem.age.toString()
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, UpdateCocktail::class.java)
-            intent.putExtra("id", currentItem.id.toString())
-            intent.putExtra("title", currentItem.firstName)
-            intent.putExtra("author", currentItem.lastName)
-            intent.putExtra("pages", currentItem.age.toString())
-            activity.startActivityForResult(intent, 1)
-        }
-
-        /*holder.itemView.cardView.setOnClickListener {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+            val action = CocktailsFragmentDirections.actionNavCocktailsToUpdateActivity(currentItem)
             holder.itemView.findNavController().navigate(action)
-        }*/
+        }
     }
 
     fun setData(cocktail: List<Cocktail>){

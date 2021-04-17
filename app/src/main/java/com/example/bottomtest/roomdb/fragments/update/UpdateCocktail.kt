@@ -3,27 +3,24 @@ package com.example.bottomtest.roomdb.fragments.update
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import com.example.bottomtest.R
+import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
-import kotlinx.android.synthetic.main.activity_add.*
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_update.*
 
 
 class UpdateCocktail : AppCompatActivity() {
 
-    var editTitle: EditText? = null
-    var editAuthor: EditText? = null
-    var editPages: EditText? = null
 
-    //private val args by navArgs<UpdateCocktailArgs>()
+    private val args by navArgs<UpdateCocktailArgs>()
 
     private lateinit var mCocktailViewModel: CocktailViewModel
     private var delete_button: Button? = null
@@ -33,53 +30,45 @@ class UpdateCocktail : AppCompatActivity() {
         setContentView(R.layout.activity_update)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        editTitle = findViewById(R.id.title_input2)
-        editAuthor = findViewById(R.id.author_input2)
-        editPages = findViewById(R.id.pages_input2)
         delete_button = findViewById(R.id.delete_button)
 
 
-        //TODO: UPDATE STUPID ITEMS
-        //delete_button?.setOnClickListener { deleteUser() }
-
-        //val view = inflater.inflate(R.layout.activity_update, container_cocktail, false)
+        delete_button?.setOnClickListener { deleteUser() }
 
         mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
 
-        /*view.updateFirstName_et.setText(args.currentUser.firstName)
-        view.updateLastName_et.setText(args.currentUser.lastName)
-        view.updateAge_et.setText(args.currentUser.age.toString())*/
+        title_input2.setText(args.currentCocktail.firstName)
+        author_input2.setText(args.currentCocktail.lastName)
+        pages_input2.setText(args.currentCocktail.age.toString())
 
     }
 
 
-    /*private fun updateItem(fN: String, lN: String, ag: Editable) {
+    private fun updateItem(fN: String, lN: String, ag: Editable) {
 
         // Create Cocktail Object
-        val updatedCocktail = Cocktail(args.currentUser.id, firstName, lastName, age)
+        val updatedCocktail = Cocktail(args.currentCocktail.id, fN, lN, Integer.parseInt(ag.toString()))
         // Update Current User
-        mUserViewModel.updateUser(updatedUser)
-        Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
-        // Navigate Back
-        findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        mCocktailViewModel.updateCocktail(updatedCocktail)
+        Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
 
     }
 
     private fun deleteUser() {
-        val builder = android.app.AlertDialog.Builder(requireContext())
+        val builder = android.app.AlertDialog.Builder(this)
         builder.setPositiveButton("Yes") { _, _ ->
-            mUserViewModel.deleteUser(args.currentUser)
+            mCocktailViewModel.deleteCocktail(args.currentCocktail)
             Toast.makeText(
-                requireContext(),
-                "Successfully removed: ${args.currentUser.firstName}",
+                this,
+                "Successfully removed: ${args.currentCocktail.firstName}",
                 Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            finish()
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete ${args.currentUser.firstName}?")
-        builder.setMessage("Are you sure you want to delete ${args.currentUser.firstName}?")
+        builder.setTitle("Delete ${args.currentCocktail.firstName}?")
+        builder.setMessage("Are you sure you want to delete ${args.currentCocktail.firstName}?")
         builder.create().show()
-    }*/
+    }
 
     private fun inputCheck(firstName: String, lastName: String, age: Editable?): Boolean {
         return if (age != null) {
@@ -102,12 +91,12 @@ class UpdateCocktail : AppCompatActivity() {
                 true
             }
             R.id.add_button -> {
-                val firstName = editTitle?.text.toString()
-                val lastName = editAuthor?.text.toString()
-                val age = editPages?.text
+                val firstName = title_input2.text.toString()
+                val lastName = author_input2.text.toString()
+                val age = pages_input2.text
 
                 if(inputCheck(firstName, lastName, age)){
-                    //updateItem(firstName, lastName, age)
+                    updateItem(firstName, lastName, age)
                     finish()
                     true
                 } else {

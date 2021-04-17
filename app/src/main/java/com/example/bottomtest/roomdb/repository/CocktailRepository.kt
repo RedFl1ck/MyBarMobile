@@ -1,7 +1,7 @@
 package com.example.bottomtest.roomdb.repository
 
 import androidx.lifecycle.LiveData
-import com.example.bottomtest.roomdb.CocktailDao
+import com.example.bottomtest.roomdb.interfaces.CocktailDao
 import com.example.bottomtest.roomdb.model.Cocktail
 
 class CocktailRepository(private val cocktailDao: CocktailDao) {
