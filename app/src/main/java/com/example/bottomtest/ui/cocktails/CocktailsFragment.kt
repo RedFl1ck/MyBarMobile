@@ -80,8 +80,9 @@ class CocktailsFragment : Fragment() {
         })
 
 
+        val parent = root.findViewById<ViewGroup>(R.id.container_cocktail)
         //SHEET FILTER
-        val btnsheetfilter = layoutInflater.inflate(R.layout.sheet_filter_cocktails, null)
+        val btnsheetfilter = layoutInflater.inflate(R.layout.sheet_filter_cocktails, parent, false)
 
         filter_button?.setOnClickListener{
             //TODO: add filter sheet logic
@@ -145,7 +146,7 @@ class CocktailsFragment : Fragment() {
         }
 
         //SHEET SORT
-        val btnsheetsort = layoutInflater.inflate(R.layout.sheet_sort_cocktails, null)
+        val btnsheetsort = layoutInflater.inflate(R.layout.sheet_sort_cocktails, parent, false)
 
         sort_button?.setOnClickListener{
             //TODO: add sort sheet logic
