@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BOTTOMTEST">
         <activity
-            android:name=".sqlite.UpdateActivity"
+            android:name=".roomdb.fragments.update.UpdateCocktail"
             android:label="@string/title_activity_update"/>
         <activity
-            android:name=".AddNewActivity"
+            android:name=".roomdb.fragments.add.AddNewCocktail"
             android:label="@string/title_activity_add_new"/>
         <activity
             android:name=".RegisterActivity"

@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
-import com.example.bottomtest.sqlite.UpdateActivity
+import com.example.bottomtest.roomdb.fragments.update.UpdateCocktail
 import java.util.*
 
 
@@ -33,7 +33,7 @@ class CustomAdapter internal constructor(private val activity: Fragment, private
         holder.book_pages_txt.text = (book_pages?.get(position))
         //Recyclerview onClickListener
         holder.mainLayout.setOnClickListener {
-            val intent = Intent(context, UpdateActivity::class.java)
+            val intent = Intent(context, UpdateCocktail::class.java)
             intent.putExtra("id", book_id?.get(position))
             intent.putExtra("title", book_title?.get(position))
             intent.putExtra("author", book_author?.get(position))

@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.bottomtest.AddNewActivity
+import com.example.bottomtest.roomdb.fragments.add.AddNewCocktail
 import com.example.bottomtest.R
+import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
+import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.example.bottomtest.sqlite.CustomAdapter
 import com.example.bottomtest.sqlite.MyDatabaseHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -22,27 +25,23 @@ import java.util.*
 
 class CocktailsFragment : Fragment() {
 
+    private lateinit var mCocktailViewModel: CocktailViewModel
+
     var mSwipeRefreshLayout: SwipeRefreshLayout? = null
 
     private var filter_button : Button? = null
     private var sort_button : Button? = null
     
-    private var chip1 = true
-    private var chip2 = true
-    private var chip3 = true
-    private var chip4 = true
-    private var chip2_1 = true
-    private var chip2_2 = true
+    private var chip1 = false
+    private var chip2 = false
+    private var chip3 = false
+    private var chip4 = false
+    private var chip2_1 = false
+    private var chip2_2 = false
 
 
     ////////////////////////////////////////////////////
     private var recyclerView: RecyclerView? = null
-    private var myDB: MyDatabaseHelper? = null
-    private var book_id: ArrayList<String>? = null
-    private var book_author: ArrayList<String>? = null
-    private var book_title: ArrayList<String>? = null
-    private var book_pages: ArrayList<String>? = null
-    private var customAdapter: CustomAdapter? = null
     private var empty_imageview: ImageView? = null
     private var no_data: TextView? = null
     ///////////////////////////////////////////////////
@@ -56,7 +55,7 @@ class CocktailsFragment : Fragment() {
 
         val fab: FloatingActionButton = root.findViewById(R.id.fab_cocktails)
         fab.setOnClickListener {
-            startActivity(Intent(activity, AddNewActivity::class.java))
+            startActivity(Intent(activity, AddNewCocktail::class.java))
         }
 
         recyclerView = root.findViewById(R.id.recyclerView)
@@ -65,6 +64,23 @@ class CocktailsFragment : Fragment() {
         no_data = root.findViewById(R.id.no_data)
         filter_button = root.findViewById(R.id.filter_cocktails_button)
         sort_button = root.findViewById(R.id.sort_cocktails_button)
+
+
+
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_cocktails, container, false)
+        // Recyclerview
+        val adapter = CocktailListAdapter(this@CocktailsFragment, this.requireContext())
+        val recyclerView = root.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+
+        // CocktailViewModel
+        mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
+        mCocktailViewModel.readAllData.observe(viewLifecycleOwner, { cocktail ->
+            adapter.setData(cocktail)
+        })
 
 
         //SHEET FILTER
@@ -150,38 +166,23 @@ class CocktailsFragment : Fragment() {
 
         setSwipeRefreshLayout()
 
-        myDB = MyDatabaseHelper(this@CocktailsFragment.requireContext())
-        book_id = ArrayList()
-        book_title = ArrayList()
-        book_author = ArrayList()
-        book_pages = ArrayList()
-
-        storeDataInArrays(book_id, book_title, book_author, book_pages)
-
-
-        customAdapter = CustomAdapter(this@CocktailsFragment, this.requireContext(), book_id!!, book_title!!, book_author!!,
+        /*customAdapter = CustomAdapter(this@CocktailsFragment, this.requireContext(), book_id!!, book_title!!, book_author!!,
                 book_pages!!)
         recyclerView?.adapter = customAdapter
         customAdapter?.setData(book_id, book_title, book_author, book_pages)
-        recyclerView?.layoutManager = LinearLayoutManager(this@CocktailsFragment.requireContext())
+        recyclerView?.layoutManager = LinearLayoutManager(this@CocktailsFragment.requireContext())*/
 
         return root
     }
 
 
-    private fun refreshData() {
-        val new_book_id : ArrayList<String> = ArrayList()
-        val new_book_title : ArrayList<String> = ArrayList()
-        val new_book_author : ArrayList<String> = ArrayList()
-        val new_book_pages : ArrayList<String> = ArrayList()
-        storeDataInArrays(new_book_id, new_book_title, new_book_author, new_book_pages)
-        /*book_title?.clear()
-        book_author?.clear()
-        book_pages?.clear()
-        storeDataInArrays()*/
+    override fun onStart() {
+        super.onStart()
+        refreshData()
+    }
 
-        //recyclerView?.layoutManager = LinearLayoutManager(this@CocktailsFragment.requireContext())
-        customAdapter?.updateData(new_book_id, new_book_title, new_book_author, new_book_pages)
+    private fun refreshData() {
+
     }
 
     private fun setSwipeRefreshLayout() {
@@ -190,24 +191,6 @@ class CocktailsFragment : Fragment() {
             // make your network request again, modify recycler adapter,etc
             refreshData()
             mSwipeRefreshLayout?.isRefreshing = false // set false to dismiss the progress loader once your job is done
-        }
-    }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun storeDataInArrays(listId : ArrayList<String>?, listTitle : ArrayList<String>?, listAuthor : ArrayList<String>?, listPages : ArrayList<String>?, ) {
-        val cursor = myDB!!.readAllData()
-        if (cursor!!.count == 0) {
-            empty_imageview?.visibility = View.VISIBLE
-            no_data?.visibility = View.VISIBLE
-        } else {
-            while (cursor.moveToNext()) {
-                listId?.add(cursor.getString(0))
-                listTitle?.add(cursor.getString(1))
-                listAuthor?.add(cursor.getString(2))
-                listPages?.add(cursor.getString(3))
-            }
-            empty_imageview?.visibility = View.GONE
-            no_data?.visibility = View.GONE
         }
     }
 }
