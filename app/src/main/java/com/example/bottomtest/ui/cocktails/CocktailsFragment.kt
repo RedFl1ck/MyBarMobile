@@ -27,8 +27,6 @@ class CocktailsFragment : Fragment() {
 
     private lateinit var mCocktailViewModel: CocktailViewModel
 
-    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
-
     private var filter_button : Button? = null
     private var sort_button : Button? = null
     
@@ -59,7 +57,6 @@ class CocktailsFragment : Fragment() {
         }
 
         recyclerView = root.findViewById(R.id.recyclerView)
-        mSwipeRefreshLayout = root.findViewById(R.id.swipe_refresh)
         empty_imageview = root.findViewById(R.id.empty_imageview)
         no_data = root.findViewById(R.id.no_data)
         filter_button = root.findViewById(R.id.filter_cocktails_button)
