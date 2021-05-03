@@ -41,4 +41,9 @@
     <string name="favourite">Избранное</string>
     <string name="shopping">Список покупок</string>
     <string name="account">Личный кабинет</string>
+    <string name="error_not_found">Нет информации</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="exit">Выход</string>
+    <string name="exit_sure">Вы действительно хотите выйти?</string>
 </resources>

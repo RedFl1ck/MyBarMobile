@@ -56,4 +56,9 @@
             app:argType="com.example.bottomtest.roomdb.model.Cocktail" />
     </activity>
 
+    <fragment
+        android:id="@+id/nav_personal_account"
+        android:name="com.example.bottomtest.ui.login.PersonalAccountFragment"
+        android:label="PersonalAccountFragment" />
+
 </navigation>

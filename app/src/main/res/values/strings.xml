@@ -56,4 +56,9 @@
     <string name="favourite">Favourite</string>
     <string name="shopping">Shopping</string>
     <string name="account">Personal Account</string>
+    <string name="error_not_found">Not found</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="exit">Exit</string>
+    <string name="exit_sure">Are you sure you want to exit?</string>
 </resources>
