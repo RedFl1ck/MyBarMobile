@@ -4,26 +4,23 @@
         <item
             android:id="@+id/nav_cocktails"
             android:icon="@drawable/cocktails"
-            android:title="cocktails" />
+            android:title="@string/cocktails" />
         <item
             android:id="@+id/nav_ingredients"
             android:icon="@drawable/ingredients"
-            android:title="ingredients" />
+            android:title="@string/ingredients" />
         <item
             android:id="@+id/nav_favourite"
             android:icon="@drawable/favourite"
-            android:title="favourite" />
+            android:title="@string/favourite" />
         <item
             android:id="@+id/nav_shopping"
             android:icon="@drawable/shopping_cart"
-            android:title="shopping" />
-    </group>
-
-    <group android:id="@+id/nav_group2"
-        android:checkableBehavior="none">
+            android:title="@string/shopping" />
         <item
             android:id="@+id/loginActivity"
             android:icon="@drawable/account"
-            android:title="account"/>
+            android:title="@string/account"/>
     </group>
+
 </menu>

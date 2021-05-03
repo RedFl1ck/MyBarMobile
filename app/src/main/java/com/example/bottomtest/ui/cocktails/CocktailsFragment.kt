@@ -10,13 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.bottomtest.roomdb.fragments.add.AddNewCocktail
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
+import com.example.bottomtest.roomdb.fragments.add.AddNewCocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
-import com.example.bottomtest.sqlite.CustomAdapter
-import com.example.bottomtest.sqlite.MyDatabaseHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,7 +36,6 @@ class CocktailsFragment : Fragment() {
 
 
     ////////////////////////////////////////////////////
-    private var recyclerView: RecyclerView? = null
     private var empty_imageview: ImageView? = null
     private var no_data: TextView? = null
     ///////////////////////////////////////////////////
@@ -56,7 +52,6 @@ class CocktailsFragment : Fragment() {
             startActivity(Intent(activity, AddNewCocktail::class.java))
         }
 
-        recyclerView = root.findViewById(R.id.recyclerView)
         empty_imageview = root.findViewById(R.id.empty_imageview)
         no_data = root.findViewById(R.id.no_data)
         filter_button = root.findViewById(R.id.filter_cocktails_button)

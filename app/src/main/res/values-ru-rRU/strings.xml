@@ -36,4 +36,9 @@
     <string name="title_activity_update">Изменение</string>
     <string name="filters">Фильтры</string>
     <string name="sort">Сортировать</string>
+    <string name="cocktails">Коктейли</string>
+    <string name="ingredients">Ингредиенты</string>
+    <string name="favourite">Избранное</string>
+    <string name="shopping">Список покупок</string>
+    <string name="account">Личный кабинет</string>
 </resources>

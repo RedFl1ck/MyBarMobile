@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.bottomtest.sqlite.MyDatabaseHelper
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,8 +63,6 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Delete All?")
         builder.setMessage("Are you sure you want to delete all Data?")
         builder.setPositiveButton("Yes") { _, _ ->
-            val myDB = MyDatabaseHelper(this@MainActivity)
-            myDB.deleteAllData()
             //Refresh Activity
             val intent = Intent(this@MainActivity, MainActivity::class.java)
             startActivity(intent)

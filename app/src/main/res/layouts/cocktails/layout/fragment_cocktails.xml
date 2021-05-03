@@ -52,16 +52,16 @@
 
     <ImageView
         android:id="@+id/empty_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
         android:layout_marginTop="230dp"
         android:alpha="0.2"
+        android:contentDescription="@string/empty_db"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_empty"
-        android:contentDescription="@string/empty_db" />
+        app:srcCompat="@drawable/ic_empty" />
 
     <TextView
         android:id="@+id/no_data"
@@ -88,6 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         android:layout_marginBottom="70dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/empty_db"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
