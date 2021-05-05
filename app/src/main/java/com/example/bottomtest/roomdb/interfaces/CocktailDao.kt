@@ -2,7 +2,7 @@ package com.example.bottomtest.roomdb.interfaces
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.*
 
 @Dao
 interface CocktailDao {
@@ -16,10 +16,6 @@ interface CocktailDao {
     @Delete
     suspend fun deleteCocktail(cocktail: Cocktail)
 
-    @Query("DELETE FROM cocktail_table")
-    suspend fun deleteAllCocktails()
-
-    @Query("SELECT * FROM cocktail_table ORDER BY id ASC")
+    @Query("SELECT * FROM cocktails ORDER BY id ASC")
     fun readAllData(): LiveData<List<Cocktail>>
-
 }

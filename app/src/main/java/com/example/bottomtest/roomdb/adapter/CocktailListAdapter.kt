@@ -31,9 +31,9 @@ class CocktailListAdapter constructor(private val activity: Fragment, private va
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = cocktailList[position]
         holder.itemView.book_id_txt.text = currentItem.id.toString()
-        holder.itemView.book_author_txt.text = currentItem.firstName
-        holder.itemView.book_title_txt.text = currentItem.lastName
-        holder.itemView.book_pages_txt.text = currentItem.age.toString()
+        holder.itemView.book_author_txt.text = currentItem.name
+        holder.itemView.book_title_txt.text = currentItem.description
+        holder.itemView.book_pages_txt.text = currentItem.degree.toString()
 
         holder.itemView.setOnClickListener {
             val action = CocktailsFragmentDirections.actionNavCocktailsToUpdateActivity(currentItem)

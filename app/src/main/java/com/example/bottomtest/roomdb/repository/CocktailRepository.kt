@@ -2,7 +2,7 @@ package com.example.bottomtest.roomdb.repository
 
 import androidx.lifecycle.LiveData
 import com.example.bottomtest.roomdb.interfaces.CocktailDao
-import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.*
 
 class CocktailRepository(private val cocktailDao: CocktailDao) {
 
@@ -19,9 +19,4 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
     suspend fun deleteCocktail(cocktail: Cocktail){
         cocktailDao.deleteCocktail(cocktail)
     }
-
-    suspend fun deleteAllCocktails(){
-        cocktailDao.deleteAllCocktails()
-    }
-
 }

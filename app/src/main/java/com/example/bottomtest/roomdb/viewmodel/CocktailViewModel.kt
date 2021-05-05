@@ -40,11 +40,4 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
             repository.deleteCocktail(cocktail)
         }
     }
-
-    fun deleteAllCocktails(){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllCocktails()
-        }
-    }
-
 }

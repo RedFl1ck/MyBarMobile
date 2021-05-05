@@ -26,7 +26,7 @@ class AddNewCocktail : AppCompatActivity() {
     }
 
 
-    private fun insertDataToDatabase(fN: String, lN: String, ag: Editable) {
+    /*private fun insertDataToDatabase(fN: String, lN: String, ag: Editable) {
         // Create Cocktail Object
         val cocktail = Cocktail(
             0,
@@ -38,7 +38,7 @@ class AddNewCocktail : AppCompatActivity() {
         mCocktailViewModel.addCocktail(cocktail)
         Toast.makeText(this, "Successfully added!", Toast.LENGTH_LONG).show()
 
-    }
+    }*/
 
     private fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean{
         return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
@@ -63,7 +63,7 @@ class AddNewCocktail : AppCompatActivity() {
                 val age = pages_input.text
 
                 if(inputCheck(firstName, lastName, age)){
-                    insertDataToDatabase(firstName, lastName, age)
+                    //insertDataToDatabase(firstName, lastName, age)
                     finish()
                     true
                 } else {

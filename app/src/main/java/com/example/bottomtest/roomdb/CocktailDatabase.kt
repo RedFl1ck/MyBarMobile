@@ -5,9 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.bottomtest.roomdb.interfaces.CocktailDao
-import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.*
+import java.io.File
 
-@Database(entities = [Cocktail::class], version = 1, exportSchema = false)
+@Database(entities = [Cocktail::class,
+                     CocktailsIngredients::class,
+                     CocktailsTools::class,
+                     Ingredients::class,
+                     IngredientsInStock::class,
+                     ShoppingList::class,
+                     Tools::class],
+        version = 1, exportSchema = true)
 abstract class CocktailDatabase : RoomDatabase() {
 
     abstract fun cocktailDao(): CocktailDao
@@ -26,11 +34,12 @@ abstract class CocktailDatabase : RoomDatabase() {
                     context.applicationContext,
                     CocktailDatabase::class.java,
                     "cocktail_database"
-                ).build()
+                )
+                        //.createFromAsset("cocktails.sql")
+                        .build()
                 INSTANCE = instance
                 return instance
             }
         }
     }
-
 }

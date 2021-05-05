@@ -37,9 +37,9 @@ class UpdateCocktail : AppCompatActivity() {
 
         mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
 
-        title_input2.setText(args.currentCocktail.firstName)
+        /*title_input2.setText(args.currentCocktail.firstName)
         author_input2.setText(args.currentCocktail.lastName)
-        pages_input2.setText(args.currentCocktail.age.toString())
+        pages_input2.setText(args.currentCocktail.age.toString())*/
 
     }
 
@@ -47,9 +47,9 @@ class UpdateCocktail : AppCompatActivity() {
     private fun updateItem(fN: String, lN: String, ag: Editable) {
 
         // Create Cocktail Object
-        val updatedCocktail = Cocktail(args.currentCocktail.id, fN, lN, Integer.parseInt(ag.toString()))
+        //val updatedCocktail = Cocktail(args.currentCocktail.id, fN, lN, Integer.parseInt(ag.toString()))
         // Update Current User
-        mCocktailViewModel.updateCocktail(updatedCocktail)
+        //mCocktailViewModel.updateCocktail(updatedCocktail)
         Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
 
     }
@@ -58,15 +58,15 @@ class UpdateCocktail : AppCompatActivity() {
         val builder = android.app.AlertDialog.Builder(this)
         builder.setPositiveButton("Yes") { _, _ ->
             mCocktailViewModel.deleteCocktail(args.currentCocktail)
-            Toast.makeText(
+            /*Toast.makeText(
                 this,
                 "Successfully removed: ${args.currentCocktail.firstName}",
-                Toast.LENGTH_SHORT).show()
+                Toast.LENGTH_SHORT).show()*/
             finish()
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete ${args.currentCocktail.firstName}?")
-        builder.setMessage("Are you sure you want to delete ${args.currentCocktail.firstName}?")
+        //builder.setTitle("Delete ${args.currentCocktail.firstName}?")
+        //builder.setMessage("Are you sure you want to delete ${args.currentCocktail.firstName}?")
         builder.create().show()
     }
 
