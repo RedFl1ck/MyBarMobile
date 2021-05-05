@@ -25,6 +25,10 @@ class UpdateCocktail : AppCompatActivity() {
     private lateinit var mCocktailViewModel: CocktailViewModel
     private var delete_button: Button? = null
 
+    private var isFavourite: Boolean = false
+    private var isDeleted: Boolean = false
+    private var isUpdatable: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update)
@@ -33,31 +37,61 @@ class UpdateCocktail : AppCompatActivity() {
         delete_button = findViewById(R.id.delete_button)
 
 
-        delete_button?.setOnClickListener { deleteUser() }
+        delete_button?.setOnClickListener { deleteCocktail() }
 
         mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
 
-        /*title_input2.setText(args.currentCocktail.firstName)
-        author_input2.setText(args.currentCocktail.lastName)
-        pages_input2.setText(args.currentCocktail.age.toString())*/
+        /*
+        name_input_update.setText(args.currentCocktail.name)
+        description_input_update.setText(args.currentCocktail.description)
+        degree_input_update.setText(args.currentCocktail.degree)
+        volume_input_update.setText(args.currentCocktail.volume)
+        receipt_input_update.setText(args.currentCocktail.receipt)
+        group_input_update.setText(args.currentCocktail.group)
+        basis_id_input_update.setText(args.currentCocktail.basis_id)
+        taste_input_update.setText(args.currentCocktail.taste)
+        isFavourite = args.currentCocktail.is_favourite
+        isDeleted = args.currentCocktail.is_deleted
+        isUpdatable = args.currentCocktail.is_updatable
+        */
 
     }
 
 
-    private fun updateItem(fN: String, lN: String, ag: Editable) {
+    private fun updateItem(name: String,
+                           description: String,
+                           degree: Editable,
+                           volume: Editable,
+                           receipt: String,
+                           group: String,
+                           basis_id: Editable,
+                           taste: String,
+                           is_updatable: Boolean,
+                           is_deleted: Boolean,
+                           is_favourite: Boolean) {
 
         // Create Cocktail Object
-        //val updatedCocktail = Cocktail(args.currentCocktail.id, fN, lN, Integer.parseInt(ag.toString()))
-        // Update Current User
+        //val updatedCocktail = Cocktail(args.currentCocktail.id, name,
+        //            description,
+        //            Integer.parseInt(degree.toString()),
+        //            Integer.parseInt(volume.toString()),
+        //            receipt,
+        //            group,
+        //            Integer.parseInt(basis_id.toString()),
+        //            taste,
+        //            is_updatable,
+        //            is_deleted,
+        //            is_favourite)
+        // Update Current Cocktail
         //mCocktailViewModel.updateCocktail(updatedCocktail)
         Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
 
     }
 
-    private fun deleteUser() {
+    private fun deleteCocktail() {
         val builder = android.app.AlertDialog.Builder(this)
         builder.setPositiveButton("Yes") { _, _ ->
-            mCocktailViewModel.deleteCocktail(args.currentCocktail)
+            args.currentCocktail.is_deleted = true
             /*Toast.makeText(
                 this,
                 "Successfully removed: ${args.currentCocktail.firstName}",
@@ -70,9 +104,27 @@ class UpdateCocktail : AppCompatActivity() {
         builder.create().show()
     }
 
-    private fun inputCheck(firstName: String, lastName: String, age: Editable?): Boolean {
-        return if (age != null) {
-            !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
+    private fun inputCheck(name: String,
+                           description: String,
+                           degree: Editable?,
+                           volume: Editable?,
+                           receipt: String,
+                           group: String,
+                           basis_id: Editable?,
+                           taste: String,
+                           is_updatable: Boolean,
+                           is_favourite: Boolean): Boolean {
+        return if (degree != null && volume != null && basis_id != null) {
+            !(TextUtils.isEmpty(name)
+                    && TextUtils.isEmpty(description)
+                    && degree.isEmpty()
+                    && volume.isEmpty()
+                    && TextUtils.isEmpty(receipt)
+                    && TextUtils.isEmpty(group)
+                    && basis_id.isEmpty()
+                    && TextUtils.isEmpty(taste)
+                    && TextUtils.isEmpty(is_updatable.toString())
+                    && TextUtils.isEmpty(is_favourite.toString()))
         }
         else{
             false
@@ -84,19 +136,27 @@ class UpdateCocktail : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
             R.id.add_button -> {
-                val firstName = title_input2.text.toString()
-                val lastName = author_input2.text.toString()
-                val age = pages_input2.text
+                val name = name_input_update.text.toString()
+                val description = description_input_update.text.toString()
+                val degree = degree_input_update.text
+                val volume = volume_input_update.text
+                val receipt = receipt_input_update.text.toString()
+                val group = group_input_update.text.toString()
+                val basis_id = basis_id_input_update.text
+                val taste = taste_input_update.text.toString()
+                val is_updatable = if ()
+                val is_deleted = false
+                val is_favourite = is_favourite_input_update.text.toString()
 
-                if(inputCheck(firstName, lastName, age)){
-                    updateItem(firstName, lastName, age)
+                if(inputCheck(name, description, degree, volume, receipt, group, basis_id, taste, is_updatable, is_favourite)){
+                    updateItem(name, description, degree, volume, receipt, group, basis_id, taste, is_updatable, is_deleted, is_favourite)
                     finish()
                     true
                 } else {
@@ -107,5 +167,5 @@ class UpdateCocktail : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
+    }*/
 }

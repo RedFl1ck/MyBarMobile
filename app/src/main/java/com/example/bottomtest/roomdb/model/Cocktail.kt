@@ -17,17 +17,17 @@ import kotlinx.android.parcel.Parcelize
                 onDelete = NO_ACTION,
                 onUpdate = NO_ACTION)])
 data class Cocktail(
-    @PrimaryKey(autoGenerate = true)
+        @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val name: String,
-    val description: String,
-    val degree: Int,
-    val volume: Int,
-    val receipt: String,
-    val group: String,
-    val basis_id: Int,
-    val taste: String,
-    val is_updatable: Boolean,
-    val is_deleted: Boolean,
-    val is_favourite: Boolean
+        val name: String,
+        val description: String,
+        val degree: Int,
+        val volume: Int,
+        val receipt: String,
+        val group: String,
+        val basis_id: Int,
+        val taste: String,
+        val is_updatable: Boolean,
+        var is_deleted: Boolean,
+        val is_favourite: Boolean
 ): Parcelable

@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
         register.isEnabled = true
         register.setOnClickListener(View.OnClickListener {
             //TODO: close login tab or not?
-            finish()
             startActivity(Intent(this, RegisterActivity::class.java))
         })
 
@@ -111,17 +110,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {}
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)

@@ -50,10 +50,10 @@ android {
                         'src\\main\\res\\activities\\login_register\\layout',
                         'src\\main\\res\\activities\\db',
                         'src\\main\\res\\activities\\login_register'
+                }
             }
         }
     }
-}
 
 dependencies {
 
