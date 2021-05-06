@@ -27,7 +27,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="Cocktail Name"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                android:inputType="textAutoComplete" />
 
             <EditText
 
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Receipt"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="textMultiLine" />
 
             <EditText
                 android:id="@+id/group_input"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Taste"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="textAutoComplete" />
 
         </LinearLayout>
 
