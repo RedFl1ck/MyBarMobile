@@ -18,4 +18,10 @@ interface CocktailDao {
 
     @Query("SELECT * FROM cocktails ORDER BY id ASC")
     fun readAllData(): LiveData<List<Cocktail>>
+
+    @Query("SELECT * FROM cocktails where is_deleted == 0 ORDER BY id ASC")
+    fun readNotDeletedData(): LiveData<List<Cocktail>>
+
+    @Query("SELECT * FROM cocktails where is_deleted == 1 ORDER BY id ASC")
+    fun readDeletedData(): LiveData<List<Cocktail>>
 }

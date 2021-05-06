@@ -1,7 +1,6 @@
 package com.example.bottomtest.roomdb.fragments.update
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -53,17 +52,18 @@ class UpdateCocktail : AppCompatActivity() {
     }
 
 
-    private fun updateItem(name: String,
-                           description: String,
-                           degree: Editable,
-                           volume: Editable,
-                           receipt: String,
-                           group: String,
-                           basis_id: Editable,
-                           taste: String,
-                           is_updatable: Boolean,
-                           is_deleted: Boolean,
-                           is_favourite: Boolean) {
+    private fun updateItem(
+        name: String,
+        description: String,
+        degree: Int,
+        volume: Int,
+        receipt: String,
+        group: String,
+        basis_id: Int,
+        taste: String,
+        is_updatable: Boolean,
+        is_deleted: Boolean,
+        is_favourite: Boolean) {
         // Create Cocktail Object
         val updatedCocktail = Cocktail(args.currentCocktail.id, name,
                     description,
@@ -78,14 +78,21 @@ class UpdateCocktail : AppCompatActivity() {
                     is_favourite)
         // Update Current Cocktail
         mCocktailViewModel.updateCocktail(updatedCocktail)
-        Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
-
     }
 
     private fun deleteCocktail() {
         val builder = android.app.AlertDialog.Builder(this)
         builder.setPositiveButton("Yes") { _, _ ->
-            args.currentCocktail.is_deleted = true
+            //TODO: CHECK FOR CREATED BY USER
+            isDeleted = true
+            updateItem(args.currentCocktail.name,
+                args.currentCocktail.description,
+                args.currentCocktail.degree,
+                args.currentCocktail.volume,
+                args.currentCocktail.receipt,
+                args.currentCocktail.group,
+                args.currentCocktail.basis_id,
+                args.currentCocktail.taste, isUpdatable, isDeleted, isFavourite)
             Toast.makeText(
                 this,
                 "Successfully removed: ${args.currentCocktail.name}",
@@ -112,15 +119,16 @@ class UpdateCocktail : AppCompatActivity() {
             R.id.add_button -> {
                 val name = binding.nameInputUpdate.text.toString()
                 val description = binding.descriptionInputUpdate.text.toString()
-                val degree = binding.degreeInputUpdate.text
-                val volume = binding.volumeInputUpdate.text
+                val degree = binding.degreeInputUpdate.text.toString().toInt()
+                val volume = binding.volumeInputUpdate.text.toString().toInt()
                 val receipt = binding.receiptInputUpdate.text.toString()
                 val group = binding.groupInputUpdate.text.toString()
-                val basisId = binding.basisIdInputUpdate.text
+                val basisId = binding.basisIdInputUpdate.text.toString().toInt()
                 val taste = binding.tasteInputUpdate.text.toString()
 
                 if(mCocktailViewModel.inputCheck(name, description, degree, volume, receipt, group, basisId, taste, isUpdatable, isDeleted, isFavourite)){
                     updateItem(name, description, degree, volume, receipt, group, basisId, taste, isUpdatable, isDeleted, isFavourite)
+                    Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
                     finish()
                     true
                 } else {

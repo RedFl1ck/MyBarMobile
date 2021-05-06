@@ -1,7 +1,6 @@
 package com.example.bottomtest.roomdb.viewmodel
 
 import android.app.Application
-import android.text.Editable
 import android.text.TextUtils
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -14,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class CocktailViewModel(application: Application): AndroidViewModel(application) {
 
-    val readAllData: LiveData<List<Cocktail>>
+    val readNotDeletedData: LiveData<List<Cocktail>>
+    val readDeletedData: LiveData<List<Cocktail>>
     private val repository: CocktailRepository
 
     init {
@@ -22,27 +22,30 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
             application
         ).cocktailDao()
         repository = CocktailRepository(cocktailDao)
-        readAllData = repository.readAllData
+        readNotDeletedData = repository.readNotDeletedData
+        readDeletedData = repository.readDeletedData
     }
 
-    fun inputCheck(name: String,
-                   description: String,
-                   degree: Editable,
-                   volume: Editable,
-                   receipt: String,
-                   group: String,
-                   basis_id: Editable,
-                   taste: String,
-                   is_updatable : Boolean,
-                   is_deleted : Boolean,
-                   is_favourite: Boolean): Boolean{
+
+    fun inputCheck(
+        name: String,
+        description: String,
+        degree: Int,
+        volume: Int,
+        receipt: String,
+        group: String,
+        basis_id: Int,
+        taste: String,
+        is_updatable: Boolean,
+        is_deleted: Boolean,
+        is_favourite: Boolean): Boolean{
         return !(TextUtils.isEmpty(name)
                 && TextUtils.isEmpty(description)
-                && degree.isEmpty()
-                && volume.isEmpty()
+                //&& degree.isEmpty()
+                //&& volume.isEmpty()
                 && TextUtils.isEmpty(receipt)
                 && TextUtils.isEmpty(group)
-                && basis_id.isEmpty()
+                //&& basis_id.isEmpty()
                 && TextUtils.isEmpty(taste)
                 && TextUtils.isEmpty(is_updatable.toString())
                 && TextUtils.isEmpty(is_deleted.toString())

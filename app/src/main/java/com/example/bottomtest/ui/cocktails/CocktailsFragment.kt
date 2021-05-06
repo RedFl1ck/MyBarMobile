@@ -67,7 +67,7 @@ class CocktailsFragment : Fragment() {
 
         // CocktailViewModel
         mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
-        mCocktailViewModel.readAllData.observe(viewLifecycleOwner, { cocktail ->
+        mCocktailViewModel.readNotDeletedData.observe(viewLifecycleOwner, { cocktail ->
             adapter.setData(cocktail)
         })
 

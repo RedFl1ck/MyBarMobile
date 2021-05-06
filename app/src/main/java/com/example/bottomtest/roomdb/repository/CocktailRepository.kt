@@ -6,7 +6,8 @@ import com.example.bottomtest.roomdb.model.*
 
 class CocktailRepository(private val cocktailDao: CocktailDao) {
 
-    val readAllData: LiveData<List<Cocktail>> = cocktailDao.readAllData()
+    val readNotDeletedData: LiveData<List<Cocktail>> = cocktailDao.readNotDeletedData()
+    val readDeletedData: LiveData<List<Cocktail>> = cocktailDao.readDeletedData()
 
     suspend fun addCocktail(cocktail: Cocktail){
         cocktailDao.addCocktail(cocktail)

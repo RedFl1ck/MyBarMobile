@@ -1,7 +1,6 @@
 package com.example.bottomtest.roomdb.fragments.add
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,15 +27,16 @@ class AddNewCocktail : AppCompatActivity() {
     }
 
 
-    private fun insertDataToDatabase(name: String,
-                                     description: String,
-                                     degree: Editable,
-                                     volume: Editable,
-                                     receipt: String,
-                                     group: String,
-                                     basis_id: Editable,
-                                     taste: String,
-                                     is_favourite: Boolean) {
+    private fun insertDataToDatabase(
+        name: String,
+        description: String,
+        degree: Int,
+        volume: Int,
+        receipt: String,
+        group: String,
+        basis_id: Int,
+        taste: String,
+        is_favourite: Boolean) {
         // Create Cocktail Object
         val cocktail = Cocktail(
             0,
@@ -72,11 +72,11 @@ class AddNewCocktail : AppCompatActivity() {
             R.id.add_button -> {
                 val name = binding.nameInput.text.toString()
                 val description = binding.descriptionInput.text.toString()
-                val degree = binding.degreeInput.text
-                val volume = binding.volumeInput.text
+                val degree = binding.degreeInput.text.toString().toInt()
+                val volume = binding.volumeInput.text.toString().toInt()
                 val receipt = binding.receiptInput.text.toString()
                 val group = binding.groupInput.text.toString()
-                val basisId = binding.basisIdInput.text
+                val basisId = binding.basisIdInput.text.toString().toInt()
                 val taste = binding.tasteInput.text.toString()
                 val isUpdatable = false
                 val isDeleted = false
