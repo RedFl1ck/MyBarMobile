@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Group"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="textAutoComplete" />
 
             <EditText
                 android:id="@+id/basis_id_input"

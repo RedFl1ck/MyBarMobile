@@ -40,11 +40,11 @@ class UpdateCocktail : AppCompatActivity() {
 
         binding.nameInputUpdate.setText(args.currentCocktail.name)
         binding.descriptionInputUpdate.setText(args.currentCocktail.description)
-        binding.degreeInputUpdate.setText(args.currentCocktail.degree)
-        binding.volumeInputUpdate.setText(args.currentCocktail.volume)
+        binding.degreeInputUpdate.setText(args.currentCocktail.degree.toString())
+        binding.volumeInputUpdate.setText(args.currentCocktail.volume.toString())
         binding.receiptInputUpdate.setText(args.currentCocktail.receipt)
         binding.groupInputUpdate.setText(args.currentCocktail.group)
-        binding.basisIdInputUpdate.setText(args.currentCocktail.basis_id)
+        binding.basisIdInputUpdate.setText(args.currentCocktail.basis_id.toString())
         binding.tasteInputUpdate.setText(args.currentCocktail.taste)
         isFavourite = args.currentCocktail.is_favourite
         isDeleted = args.currentCocktail.is_deleted
