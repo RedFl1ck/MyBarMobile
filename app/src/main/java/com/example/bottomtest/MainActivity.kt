@@ -42,10 +42,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, SettingsActivity::class.java))
                 true
             }
-            R.id.action_delete_all -> {
-                confirmDialog()
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -57,21 +53,6 @@ class MainActivity : AppCompatActivity() {
             recreate()
         }
     }
-
-    private fun confirmDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Delete All?")
-        builder.setMessage("Are you sure you want to delete all Data?")
-        builder.setPositiveButton("Yes") { _, _ ->
-            //Refresh Activity
-            val intent = Intent(this@MainActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.create().show()
-    }
-
 
 }
 

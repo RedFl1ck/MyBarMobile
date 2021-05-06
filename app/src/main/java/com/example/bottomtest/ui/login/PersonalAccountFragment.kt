@@ -1,5 +1,6 @@
 package com.example.bottomtest.ui.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +15,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 class PersonalAccountFragment : Fragment() {
 
-    var user = true
+    private var user = true
 
     private var loginButton : Button? = null
     private var exitButton : Button? = null
@@ -24,6 +25,7 @@ class PersonalAccountFragment : Fragment() {
     private var textName : TextView? = null
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
