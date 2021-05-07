@@ -2,11 +2,12 @@ package com.example.bottomtest.roomdb.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "tools")
+@Entity(tableName = "tools", indices = [Index(value = ["id"])])
 data class Tools(
     @PrimaryKey(autoGenerate = true)
     val id: Int,

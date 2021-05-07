@@ -43,6 +43,7 @@ class AddNewCocktail : AppCompatActivity() {
             name,
             description,
             Integer.parseInt(degree.toString()),
+            null,
             Integer.parseInt(volume.toString()),
             receipt,
             group,

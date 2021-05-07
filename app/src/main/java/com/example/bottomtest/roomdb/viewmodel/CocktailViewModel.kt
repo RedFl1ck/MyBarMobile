@@ -33,7 +33,7 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
         degree: Int,
         volume: Int,
         receipt: String,
-        group: String,
+        cocktail_group: String?,
         basis_id: Int,
         taste: String,
         is_updatable: Boolean,
@@ -44,7 +44,7 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
                 //&& degree.isEmpty()
                 //&& volume.isEmpty()
                 && TextUtils.isEmpty(receipt)
-                && TextUtils.isEmpty(group)
+                && TextUtils.isEmpty(cocktail_group)
                 //&& basis_id.isEmpty()
                 && TextUtils.isEmpty(taste)
                 && TextUtils.isEmpty(is_updatable.toString())

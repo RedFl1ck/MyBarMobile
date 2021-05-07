@@ -42,7 +42,7 @@ class UpdateCocktail : AppCompatActivity() {
         binding.degreeInputUpdate.setText(args.currentCocktail.degree.toString())
         binding.volumeInputUpdate.setText(args.currentCocktail.volume.toString())
         binding.receiptInputUpdate.setText(args.currentCocktail.receipt)
-        binding.groupInputUpdate.setText(args.currentCocktail.group)
+        binding.groupInputUpdate.setText(args.currentCocktail.cocktail_group)
         binding.basisIdInputUpdate.setText(args.currentCocktail.basis_id.toString())
         binding.tasteInputUpdate.setText(args.currentCocktail.taste)
         isFavourite = args.currentCocktail.is_favourite
@@ -58,7 +58,7 @@ class UpdateCocktail : AppCompatActivity() {
         degree: Int,
         volume: Int,
         receipt: String,
-        group: String,
+        group: String?,
         basis_id: Int,
         taste: String,
         is_updatable: Boolean,
@@ -68,6 +68,7 @@ class UpdateCocktail : AppCompatActivity() {
         val updatedCocktail = Cocktail(args.currentCocktail.id, name,
                     description,
                     Integer.parseInt(degree.toString()),
+                    null,
                     Integer.parseInt(volume.toString()),
                     receipt,
                     group,
@@ -90,7 +91,7 @@ class UpdateCocktail : AppCompatActivity() {
                 args.currentCocktail.degree,
                 args.currentCocktail.volume,
                 args.currentCocktail.receipt,
-                args.currentCocktail.group,
+                args.currentCocktail.cocktail_group,
                 args.currentCocktail.basis_id,
                 args.currentCocktail.taste, isUpdatable, isDeleted, isFavourite)
             Toast.makeText(
