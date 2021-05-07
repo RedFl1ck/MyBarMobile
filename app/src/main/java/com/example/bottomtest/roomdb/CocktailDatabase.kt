@@ -146,23 +146,23 @@ abstract class CocktailDatabase : RoomDatabase() {
 
         private fun fillCocktails(context: Context, db: SupportSQLiteDatabase) {
             var br: BufferedReader? = null
-            //try {
+            try {
                 br = context.assets.open("cocktails.sql").bufferedReader()
                 var line: String? = null
                 while (br.readLine().also { line = it } != null) {
                     db.execSQL(line)
                 }
-            //}
-            //catch (e: Exception){
-            //}
-            //finally {
+            }
+            catch (e: Exception){
+            }
+            finally {
                 if (br != null) {
                     try {
                         br.close()
                     } catch (e: Exception) {
                     }
                 }
-           // }
+           }
         }
         }
     }
