@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".roomdb.fragments.add.AddNewCocktail">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        tools:context=".roomdb.fragments.add.AddNewCocktail">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/name_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Cocktail Name"/>
+
+            <TextView
+
+                android:id="@+id/description_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cocktail Description"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:id="@+id/degree_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Degree" />
+
+            <TextView
+                android:id="@+id/volume_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Volume" />
+
+            <TextView
+                android:id="@+id/receipt_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Receipt"/>
+
+            <TextView
+                android:id="@+id/group_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Group" />
+
+            <TextView
+                android:id="@+id/basis_id_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Basis ID" />
+
+            <TextView
+                android:id="@+id/taste_input_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Taste" />
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60dp"
+                android:text="Edit"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

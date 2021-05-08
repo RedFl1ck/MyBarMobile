@@ -9,23 +9,24 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
+import com.example.bottomtest.databinding.FragmentCocktailsBinding
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
 import com.example.bottomtest.roomdb.fragments.add.AddNewCocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 
 class CocktailsFragment : Fragment() {
 
-    private lateinit var mCocktailViewModel: CocktailViewModel
+    private var _binding: FragmentCocktailsBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-    private var filter_button : Button? = null
-    private var sort_button : Button? = null
+    private lateinit var mCocktailViewModel: CocktailViewModel
     
     private var chip1 = false
     private var chip2 = false
@@ -34,35 +35,29 @@ class CocktailsFragment : Fragment() {
     private var chip2_1 = false
     private var chip2_2 = false
 
-
-    ////////////////////////////////////////////////////
-    private var empty_imageview: ImageView? = null
-    private var no_data: TextView? = null
-    ///////////////////////////////////////////////////
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentCocktailsBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        val root = inflater.inflate(R.layout.fragment_cocktails, container, false)
 
-        val fab: FloatingActionButton = root.findViewById(R.id.fab_cocktails)
-        fab.setOnClickListener {
+        binding.fabCocktails.setOnClickListener {
             startActivity(Intent(activity, AddNewCocktail::class.java))
         }
 
-        empty_imageview = root.findViewById(R.id.empty_imageview)
-        no_data = root.findViewById(R.id.no_data)
-        filter_button = root.findViewById(R.id.filter_cocktails_button)
-        sort_button = root.findViewById(R.id.sort_cocktails_button)
+        //empty_imageview = view.findViewById(R.id.empty_imageview)
+        //no_data = root.findViewById(R.id.no_data)
+        //filter_button = root.findViewById(R.id.filter_cocktails_button)
+        //sort_button = root.findViewById(R.id.sort_cocktails_button)
 
 
         // Recyclerview
         val adapter = CocktailListAdapter(this@CocktailsFragment, this.requireContext())
-        val recyclerView = root.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
         // CocktailViewModel
@@ -72,15 +67,15 @@ class CocktailsFragment : Fragment() {
         })
 
 
-        val parent = root.findViewById<ViewGroup>(R.id.container_cocktail)
+        val parent = view.findViewById<ViewGroup>(R.id.container_cocktail)
         //SHEET FILTER
         val btnsheetfilter = layoutInflater.inflate(R.layout.sheet_filter_cocktails, parent, false)
 
-        filter_button?.setOnClickListener{
+        binding.filterCocktailsButton.setOnClickListener{
             //TODO: add filter sheet logic
             val bottomSheetDialog =  BottomSheetDialog(this.requireContext())
             bottomSheetDialog.setContentView(btnsheetfilter)
-            val bottomSheetView = LayoutInflater.from(this.requireContext()).inflate(R.layout.sheet_filter_cocktails, root.findViewById(R.id.cocktails_filter_sheet))
+            val bottomSheetView = LayoutInflater.from(this.requireContext()).inflate(R.layout.sheet_filter_cocktails, view.findViewById(R.id.cocktails_filter_sheet))
             bottomSheetDialog.setContentView(bottomSheetView)
             bottomSheetDialog.show()
 
@@ -140,11 +135,11 @@ class CocktailsFragment : Fragment() {
         //SHEET SORT
         val btnsheetsort = layoutInflater.inflate(R.layout.sheet_sort_cocktails, parent, false)
 
-        sort_button?.setOnClickListener{
+        binding.sortCocktailsButton.setOnClickListener{
             //TODO: add sort sheet logic
             val bottomSheetDialog =  BottomSheetDialog(this.requireContext())
             bottomSheetDialog.setContentView(btnsheetsort)
-            val bottomSheetView = LayoutInflater.from(this.requireContext()).inflate(R.layout.sheet_sort_cocktails, root.findViewById(R.id.cocktails_sort_sheet))
+            val bottomSheetView = LayoutInflater.from(this.requireContext()).inflate(R.layout.sheet_sort_cocktails, view.findViewById(R.id.cocktails_sort_sheet))
             bottomSheetDialog.setContentView(bottomSheetView)
             bottomSheetDialog.show()
 
@@ -153,7 +148,12 @@ class CocktailsFragment : Fragment() {
             }
         }
 
-        return root
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

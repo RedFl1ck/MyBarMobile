@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_cocktails_to_updateActivity"
             app:destination="@id/updateActivity" />
+        <action
+            android:id="@+id/action_nav_cocktails_to_cocktailsShow"
+            app:destination="@id/cocktailsShow" />
     </fragment>
 
     <fragment
@@ -44,13 +47,13 @@
         android:id="@+id/addNewActivity"
         android:name="com.example.bottomtest.roomdb.fragments.add.AddNewCocktail"
         android:label="@string/title_activity_add_new"
-        tools:layout="@layout/activity_add"/>
+        tools:layout="@layout/activity_add_cocktail"/>
 
     <activity
         android:id="@+id/updateActivity"
         android:name="com.example.bottomtest.roomdb.fragments.update.UpdateCocktail"
         android:label="@string/title_activity_update"
-        tools:layout="@layout/activity_update">
+        tools:layout="@layout/activity_update_cocktail">
         <argument
             android:name="currentCocktail"
             app:argType="com.example.bottomtest.roomdb.model.Cocktail" />
@@ -60,5 +63,13 @@
         android:id="@+id/nav_personal_account"
         android:name="com.example.bottomtest.ui.login.PersonalAccountFragment"
         android:label="PersonalAccountFragment" />
+    <activity
+        android:id="@+id/cocktailsShow"
+        android:name="com.example.bottomtest.ui.cocktails.CocktailsShow"
+        android:label="CocktailsShow" >
+        <argument
+            android:name="currentCocktail"
+            app:argType="com.example.bottomtest.roomdb.model.Cocktail" />
+    </activity>
 
 </navigation>

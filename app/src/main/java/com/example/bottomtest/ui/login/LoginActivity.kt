@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -18,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.bottomtest.R
 import com.example.bottomtest.RegisterActivity
+import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,13 +31,12 @@ class LoginActivity : AppCompatActivity() {
         //startActivity(Intent(this, LoggedUserFragment::class.java))
 
 
-        val username = findViewById<EditText>(R.id.username)
-        val password = findViewById<EditText>(R.id.password)
+        val username = findViewById<TextInputLayout>(R.id.log_e_mail)
+        val password = findViewById<TextInputLayout>(R.id.log_password)
         val login = findViewById<Button>(R.id.login)
         val register = findViewById<Button>(R.id.register)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        register.isEnabled = true
         register.setOnClickListener(View.OnClickListener {
             //TODO: close login tab or not?
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -53,10 +52,10 @@ class LoginActivity : AppCompatActivity() {
             login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+                username.editText?.error = getString(loginState.usernameError)
             }
             if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
+                password.editText?.error = getString(loginState.passwordError)
             }
         })
 
@@ -76,18 +75,18 @@ class LoginActivity : AppCompatActivity() {
             finish()
         })
 
-        username.afterTextChanged {
+        username.editText?.afterTextChanged {
             loginViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
+                    username.editText?.text.toString(),
+                    password.editText?.text.toString()
             )
         }
 
-        password.apply {
+        password.editText?.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                        username.text.toString(),
-                        password.text.toString()
+                        username.editText?.text.toString(),
+                        password.editText?.text.toString()
                 )
             }
 
@@ -95,8 +94,8 @@ class LoginActivity : AppCompatActivity() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
-                                username.text.toString(),
-                                password.text.toString()
+                                username.editText?.text.toString(),
+                                password.editText?.text.toString()
                         )
                 }
                 false
@@ -104,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                loginViewModel.login(username.editText?.text.toString(), password.editText?.text.toString())
             }
         }
     }

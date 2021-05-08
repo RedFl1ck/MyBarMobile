@@ -8,14 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import com.example.bottomtest.R
-import com.example.bottomtest.databinding.ActivityUpdateBinding
+import com.example.bottomtest.databinding.ActivityUpdateCocktailBinding
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 
 
 class UpdateCocktail : AppCompatActivity() {
 
-    private lateinit var binding: ActivityUpdateBinding
+    private lateinit var binding: ActivityUpdateCocktailBinding
 
     private val args by navArgs<UpdateCocktailArgs>()
 
@@ -27,7 +27,7 @@ class UpdateCocktail : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUpdateBinding.inflate(layoutInflater)
+        binding = ActivityUpdateCocktailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

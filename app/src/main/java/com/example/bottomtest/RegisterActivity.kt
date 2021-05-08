@@ -1,65 +1,28 @@
 package com.example.bottomtest
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Patterns
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import com.example.bottomtest.ui.login.LoginActivity
-
-//TODO: fill register activity
+import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.bottomtest.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
 
-    private var dataValid = false
+    private lateinit var binding: ActivityRegisterBinding
+
+    private lateinit var mViewModel: LoginRegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
+        setListeners()
 
-        val register = findViewById<Button>(R.id.register_user)
-        val username = findViewById<EditText>(R.id.register_username)
-        val password = findViewById<EditText>(R.id.register_password)
-
-        register.isEnabled = true
-        register.setOnClickListener(View.OnClickListener {
-            registerDataChanged(username.text.toString(), password.text.toString())
-            if (dataValid){
-                finish()
-                startActivity(Intent(this, LoginActivity::class.java))}
-        })
-    }
-
-    private fun registerDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            Toast.makeText(
-                applicationContext,
-                R.string.invalid_username,
-                Toast.LENGTH_LONG
-            ).show()
-        } else if (!isPasswordValid(password)) {
-            Toast.makeText(
-                applicationContext,
-                R.string.invalid_password,
-                Toast.LENGTH_LONG
-            ).show()
-        } else {
-            dataValid = true
-        }
-    }
-
-    private fun isUserNameValid(username: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(username).matches()
-    }
-
-    // A placeholder password validation check
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -70,5 +33,127 @@ class RegisterActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun sendValidation() {
+        mViewModel.validationReg(
+            binding.regName,
+            binding.regSurname,
+            binding.regPatronymic,
+            binding.regBirthDate,
+            binding.regPhoneNum,
+            binding.regEMail,
+            binding.regPassword,
+            binding.regPasswordSubmit)
+    }
+
+    private fun setListeners(){
+        binding.buttonRegIN.setOnClickListener {
+            sendValidation()
+        }
+        binding.regPasswordSubmit.editText?.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                sendValidation()
+                true
+            } else {
+                false
+            }
+        }
+        binding.regName.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validateName(binding.regName)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validateName(binding.regName)
+            }
+        })
+        binding.regSurname.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validateSurname(binding.regSurname)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validateSurname(binding.regSurname)
+            }
+        })
+        binding.regPatronymic.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validatePatronymic(binding.regPatronymic)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validatePatronymic(binding.regPatronymic)
+            }
+        })
+        binding.regBirthDate.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validateBirthDate(binding.regBirthDate)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validateBirthDate(binding.regBirthDate)
+            }
+        })
+        binding.regPhoneNum.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validatePhoneNum(binding.regPhoneNum)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validatePhoneNum(binding.regPhoneNum)
+            }
+        })
+        binding.regEMail.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validateEmail(binding.regEMail)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validateEmail(binding.regEMail)
+            }
+        })
+        binding.regPassword.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validatePass(binding.regPassword)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validatePass(binding.regPassword)
+            }
+        })
+        binding.regPasswordSubmit.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.validatePassSubmit(binding.regPasswordSubmit, binding.regPassword)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mViewModel.validatePassSubmit(binding.regPasswordSubmit, binding.regPassword)
+            }
+        })
     }
 }

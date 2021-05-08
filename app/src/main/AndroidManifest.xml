@@ -10,18 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BOTTOMTEST">
+        <activity android:name=".ui.cocktails.CocktailsShow" />
         <activity
             android:name=".roomdb.fragments.update.UpdateCocktail"
-            android:label="@string/title_activity_update"/>
+            android:label="@string/title_activity_update" />
         <activity
             android:name=".roomdb.fragments.add.AddNewCocktail"
-            android:label="@string/title_activity_add_new"/>
+            android:label="@string/title_activity_add_new" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login"/>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />

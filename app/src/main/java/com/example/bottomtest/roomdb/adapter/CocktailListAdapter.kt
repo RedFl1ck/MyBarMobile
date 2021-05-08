@@ -1,7 +1,6 @@
 package com.example.bottomtest.roomdb.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Cocktail
-import com.example.bottomtest.roomdb.fragments.update.UpdateCocktail
 import com.example.bottomtest.ui.cocktails.CocktailsFragmentDirections
 import kotlinx.android.synthetic.main.my_row.view.*
 
@@ -36,7 +34,7 @@ class CocktailListAdapter constructor(private val activity: Fragment, private va
         holder.itemView.cocktail_degree_txt.text = currentItem.degree.toString()
 
         holder.itemView.setOnClickListener {
-            val action = CocktailsFragmentDirections.actionNavCocktailsToUpdateActivity(currentItem)
+            val action = CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
     }

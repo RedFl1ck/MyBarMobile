@@ -1,24 +1,25 @@
 package com.example.bottomtest.roomdb.fragments.add
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.bottomtest.R
-import com.example.bottomtest.databinding.ActivityAddBinding
+import com.example.bottomtest.databinding.ActivityAddCocktailBinding
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 
 class AddNewCocktail : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddBinding
+    private lateinit var binding: ActivityAddCocktailBinding
 
     private lateinit var mCocktailViewModel: CocktailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddBinding.inflate(layoutInflater)
+        binding = ActivityAddCocktailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

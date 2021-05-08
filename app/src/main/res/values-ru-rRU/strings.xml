@@ -46,4 +46,29 @@
     <string name="no">Нет</string>
     <string name="exit">Выход</string>
     <string name="exit_sure">Вы действительно хотите выйти?</string>
+
+    <!-- Login / Register -->
+    <string name="text_registration">Регистрация</string>
+    <string name="reg_in">Зарегистрироваться</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="patronymic">Отчество</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="phone_num">Номер телефона</string>
+    <string name="password_submit">Подтвердите пароль</string>
+    <string name="error_empty">Поле не может быть пустым</string>
+    <string name="error_wrong_e_mail">Неправильный E-mail</string>
+    <string name="error_wrong_phone">Неправильный номер телефона</string>
+    <string name="error_short_password">Пароль должен содержать минимум 4 символа</string>
+    <string name="error_match_password">Пароли не совпадают</string>
+    <string name="recovery_password">Восстановление пароля</string>
+    <string name="verify_code">Код из СМС</string>
+    <string name="submit">Подтвердить</string>
+    <string name="authorization">Авторизация</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Пароль</string>
+    <string name="log_in">Войти</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="error_wrong_birth_date">Неправильная дата рождения</string>
+
 </resources>
