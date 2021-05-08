@@ -7,6 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.bottomtest.roomdb.interfaces.CocktailDao
+import com.example.bottomtest.roomdb.interfaces.IngredientDao
 import com.example.bottomtest.roomdb.model.*
 import java.io.BufferedReader
 import java.io.File
@@ -23,6 +24,7 @@ import java.io.File
 abstract class CocktailDatabase : RoomDatabase() {
 
     abstract fun cocktailDao(): CocktailDao
+    abstract fun ingredientDao(): IngredientDao
 
     companion object {
         @Volatile
