@@ -107,7 +107,7 @@ class UpdateCocktail : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_add_new, menu)
+        menuInflater.inflate(R.menu.change_item_menu, menu)
         return true
     }
 
@@ -115,6 +115,10 @@ class UpdateCocktail : AppCompatActivity() {
         return when (item.itemId) {
             android.R.id.home -> {
                 finish()
+                true
+            }
+            R.id.action_change -> {
+                //
                 true
             }
             R.id.add_button -> {

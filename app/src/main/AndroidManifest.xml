@@ -18,6 +18,9 @@
             android:name=".roomdb.fragments.add.AddNewCocktail"
             android:label="@string/title_activity_add_new" />
         <activity
+            android:name=".ui.ingredients.IngredientShow"
+            android:label="@string/title_activity_add_new" />
+        <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
         <activity

@@ -11,6 +11,7 @@
         style="@style/Widget.App.Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
         android:layout_marginTop="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,56 +20,65 @@
             android:padding="12dp">
 
             <ImageView
-                tools:srcCompat="@drawable/black_russian"
+                android:layout_marginTop="30dp"
                 android:id="@+id/cocktail_img"
-                android:layout_width="53dp"
-                android:layout_height="53dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/cocktail_show"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/cocktail_id_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"
-                android:textColor="@color/hektar_text_light"/>
-
-            <TextView
-                style="@style/Widget.App.Card"
                 android:id="@+id/cocktail_name_txt"
+                style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Name"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/cocktail_img"
-                app:layout_constraintTop_toTopOf="@+id/cocktail_img" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/cocktail_img" />
 
             <TextView
-                style="@style/Widget.App.Card"
-                android:id="@+id/cocktail_description_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description"
-                app:layout_constraintStart_toStartOf="@+id/cocktail_name_txt"
-                app:layout_constraintTop_toBottomOf="@+id/cocktail_name_txt" />
-
-            <TextView
-                style="@style/Widget.App.Card"
                 android:id="@+id/cocktail_degree_txt"
+                style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="40 degree"
-                android:textSize="18sp"
+                android:text="Degree"
+                app:layout_constraintStart_toStartOf="@+id/cocktail_volume_txt"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_volume_txt" />
+
+            <TextView
+                android:id="@+id/cocktail_volume_txt"
+                style="@style/Widget.App.Card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="Volume"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/cocktail_name_txt" />
+
+            <TextView
+                android:id="@+id/cocktail_taste_txt"
+                style="@style/Widget.App.Card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Taste"
+                app:layout_constraintStart_toStartOf="@+id/cocktail_name_txt"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_degree_txt" />
+
+            <TextView
+                android:id="@+id/cocktail_group_txt"
+                style="@style/Widget.App.Card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group"
+                app:layout_constraintStart_toStartOf="@+id/cocktail_taste_txt"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_img" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

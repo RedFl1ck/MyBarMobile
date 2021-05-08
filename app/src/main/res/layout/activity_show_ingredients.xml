@@ -26,10 +26,10 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="150dp"
-                    android:src="@drawable/cocktail_show"/>
+                    android:src="@drawable/ingredient_show"/>
 
                 <CheckBox
                     android:button="@drawable/favourite_star"
@@ -46,83 +46,31 @@
                 android:id="@+id/name_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cocktail Name"/>
+                android:text="Ingredient Name"/>
 
             <TextView
                 android:layout_marginTop="8dp"
                 android:id="@+id/description_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cocktail Description"
+                android:text="Ingredient Description"
                 android:inputType="textMultiLine" />
 
             <TextView
+                android:visibility="gone"
                 android:textStyle="italic"
                 android:id="@+id/degree_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Degree" />
 
-            <TextView
-                android:textStyle="italic"
-                android:id="@+id/volume_input_show"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Volume" />
 
             <TextView
-                android:layout_marginTop="16dp"
-                android:maxLines="100"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:id="@+id/receipt_text_show"
+                android:id="@+id/type_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Рецепт"/>
-            <TextView
-                android:maxLines="100"
-                android:id="@+id/receipt_input_show"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Receipt"/>
+                android:text="Type" />
 
-            <TextView
-                android:layout_marginTop="16dp"
-                android:maxLines="100"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:id="@+id/group_text_show"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Группа"/>
-
-            <TextView
-                android:id="@+id/group_input_show"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Group" />
-
-            <TextView
-                android:id="@+id/basis_id_input_show"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Basis ID" />
-
-
-            <TextView
-                android:layout_marginTop="16dp"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:id="@+id/taste_text_show"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Вкус"/>
-
-            <TextView
-                android:id="@+id/taste_input_show"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Taste" />
 
             <Button
                 android:id="@+id/edit_button"

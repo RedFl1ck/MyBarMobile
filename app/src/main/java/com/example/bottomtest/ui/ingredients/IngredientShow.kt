@@ -1,36 +1,37 @@
-package com.example.bottomtest.ui.cocktails
+package com.example.bottomtest.ui.ingredients
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.navArgs
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowCocktailsBinding
-import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
+import com.example.bottomtest.databinding.ActivityShowIngredientsBinding
+import com.example.bottomtest.ui.cocktails.CocktailsShowArgs
 
-class CocktailsShow : AppCompatActivity() {
+class IngredientShow : AppCompatActivity() {
 
-    private lateinit var binding: ActivityShowCocktailsBinding
+    private lateinit var binding: ActivityShowIngredientsBinding
 
-    private val args by navArgs<CocktailsShowArgs>()
-
-    private lateinit var mCocktailViewModel: CocktailViewModel
-
-    //private var receiptSteps = arrayListOf<String>()
-
+    private val args by navArgs<IngredientShowArgs>()
+    //private lateinit var mIngredientViewModel: IngredientViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityShowCocktailsBinding.inflate(layoutInflater)
+        binding = ActivityShowIngredientsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.nameInputShow.text = args.currentCocktail.name
-        binding.descriptionInputShow.text = args.currentCocktail.description
-        binding.degreeInputShow.text = "Крепость: ${args.currentCocktail.degree}°"
-        binding.volumeInputShow.text = "Объем: ${args.currentCocktail.volume} мл"
+        binding.nameInputShow.text = args.currentIngredient.name
+        binding.descriptionInputShow.text = args.currentIngredient.description
+        if (args.currentIngredient.degree != 0){
+            binding.degreeInputShow.isVisible = true
+            binding.degreeInputShow.text = "Крепость: ${args.currentIngredient.degree}°"
+        }
+        binding.typeInputShow.text = args.currentIngredient.type.toString()
 
         /*var receiptSteps = args.currentCocktail.receipt.split(" ").toTypedArray()
         receiptSteps.forEach{
@@ -38,12 +39,6 @@ class CocktailsShow : AppCompatActivity() {
         }
          */
         //binding.receiptInputShow.text = receiptSteps.toString()
-        val temp = args.currentCocktail.receipt
-        binding.receiptInputShow.text = temp
-        binding.groupInputShow.text = args.currentCocktail.cocktail_group
-        binding.basisIdInputShow.text = args.currentCocktail.basis_id.toString()
-        binding.tasteInputShow.text = args.currentCocktail.taste
-
         binding.editButton.setOnClickListener {
 
         }

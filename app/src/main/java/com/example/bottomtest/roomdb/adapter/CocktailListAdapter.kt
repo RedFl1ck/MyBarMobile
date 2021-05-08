@@ -9,8 +9,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.ui.cocktails.CocktailsFragmentDirections
-import kotlinx.android.synthetic.main.my_row.view.*
+import kotlinx.android.synthetic.main.row_cocktail_table.view.*
 
 class CocktailListAdapter constructor(private val activity: Fragment, private val context: Context) : RecyclerView.Adapter<CocktailListAdapter.MyViewHolder>() {
 
@@ -19,7 +20,7 @@ class CocktailListAdapter constructor(private val activity: Fragment, private va
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_row, parent, false))
+        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_cocktail_table, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -28,10 +29,12 @@ class CocktailListAdapter constructor(private val activity: Fragment, private va
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = cocktailList[position]
-        holder.itemView.cocktail_id_txt.text = currentItem.id.toString()
+        holder.itemView.cocktail_picture.setBackgroundResource(R.drawable.cocktail_show)
         holder.itemView.cocktail_name_txt.text = currentItem.name
-        holder.itemView.cocktail_description_txt.text = currentItem.description
-        holder.itemView.cocktail_degree_txt.text = currentItem.degree.toString()
+        holder.itemView.cocktail_volume_txt.text = "Объем: ${currentItem.volume} мл"
+        holder.itemView.cocktail_degree_txt.text = "Крепость: ${currentItem.degree}°"
+        holder.itemView.cocktail_group_txt.text = currentItem.cocktail_group.toString()
+        holder.itemView.cocktail_taste_txt.text = currentItem.taste
 
         holder.itemView.setOnClickListener {
             val action = CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)

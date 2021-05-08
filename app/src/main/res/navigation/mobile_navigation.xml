@@ -22,7 +22,11 @@
         android:id="@+id/nav_ingredients"
         android:name="com.example.bottomtest.ui.ingredients.IngredientsFragment"
         android:label="@string/menu_ingredients"
-        tools:layout="@layout/fragment_ingredients" />
+        tools:layout="@layout/fragment_ingredients" >
+        <action
+            android:id="@+id/action_nav_ingredients_to_ingredientShow"
+            app:destination="@id/ingredientShow" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_favourite"
@@ -59,6 +63,16 @@
             app:argType="com.example.bottomtest.roomdb.model.Cocktail" />
     </activity>
 
+    <activity
+        android:id="@+id/ingredientShow"
+        android:name="com.example.bottomtest.ui.ingredients.IngredientShow"
+        android:label="ingredientShow"
+        tools:layout="@layout/activity_add_new_ingredient">
+        <argument
+            android:name="currentIngredient"
+            app:argType="com.example.bottomtest.roomdb.model.Ingredients" />
+    </activity>
+
     <fragment
         android:id="@+id/nav_personal_account"
         android:name="com.example.bottomtest.ui.login.PersonalAccountFragment"
@@ -66,7 +80,8 @@
     <activity
         android:id="@+id/cocktailsShow"
         android:name="com.example.bottomtest.ui.cocktails.CocktailsShow"
-        android:label="CocktailsShow" >
+        android:label="CocktailsShow"
+        tools:layout="@layout/activity_add_cocktail">
         <argument
             android:name="currentCocktail"
             app:argType="com.example.bottomtest.roomdb.model.Cocktail" />
