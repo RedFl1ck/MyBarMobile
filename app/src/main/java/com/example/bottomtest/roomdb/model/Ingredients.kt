@@ -17,5 +17,6 @@ data class Ingredients(
     val picture: ByteArray,
     val type: String?,
     val degree: Int,
-    val is_favourite: Boolean
+    val is_favourite: Boolean,
+    val created_by_user: Boolean
 ): Parcelable

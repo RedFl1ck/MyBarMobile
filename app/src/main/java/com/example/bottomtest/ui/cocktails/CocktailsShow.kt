@@ -32,14 +32,12 @@ class CocktailsShow : AppCompatActivity() {
         binding.degreeInputShow.text = "Крепость: ${args.currentCocktail.degree}°"
         binding.volumeInputShow.text = "Объем: ${args.currentCocktail.volume} мл"
 
-        /*var receiptSteps = args.currentCocktail.receipt.split(" ").toTypedArray()
+        val receiptSteps = args.currentCocktail.receipt.split("/||/").toTypedArray()
+        var number: Int = 1
         receiptSteps.forEach{
-            binding.receiptInputShow.append(it)
+            binding.receiptInputShow.append("$number. $it\n")
+            number++
         }
-         */
-        //binding.receiptInputShow.text = receiptSteps.toString()
-        val temp = args.currentCocktail.receipt
-        binding.receiptInputShow.text = temp
         binding.groupInputShow.text = args.currentCocktail.cocktail_group
         binding.basisIdInputShow.text = args.currentCocktail.basis_id.toString()
         binding.tasteInputShow.text = args.currentCocktail.taste
