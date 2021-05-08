@@ -22,7 +22,6 @@ class RegisterActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
         setListeners()
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

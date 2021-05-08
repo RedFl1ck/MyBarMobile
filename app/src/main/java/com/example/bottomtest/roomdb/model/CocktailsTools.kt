@@ -2,6 +2,7 @@ package com.example.bottomtest.roomdb.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "cocktails_tools",
@@ -18,7 +19,8 @@ import androidx.room.PrimaryKey
                     childColumns = ["cocktail_id"],
                     onDelete = ForeignKey.NO_ACTION,
                     onUpdate = ForeignKey.NO_ACTION),
-        ])
+        ],
+        indices = [Index(value = ["cocktail_id"]), Index(value = ["tool_id"])])
 data class CocktailsTools(
         @PrimaryKey(autoGenerate = true) var _id: Int = -1,
         val cocktail_id: Int,

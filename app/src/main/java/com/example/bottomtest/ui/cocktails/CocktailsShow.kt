@@ -30,13 +30,14 @@ class CocktailsShow : AppCompatActivity() {
         binding.degreeInputShow.text = args.currentCocktail.degree.toString()
         binding.volumeInputShow.text = args.currentCocktail.volume.toString()
 
-        /*var receiptSteps = args.currentCocktail.receipt.split(" ").toTypedArray()
+        val receiptSteps = args.currentCocktail.receipt.split("/||/").toTypedArray()
+        var number: Int = 1
         receiptSteps.forEach{
-            binding.receiptInputShow.append(it)
+            binding.receiptInputShow.append("$number. $it\n")
+            number++
         }
-         */
-        //binding.receiptInputShow.text = receiptSteps.toString()
-        binding.receiptInputShow.text = args.currentCocktail.receipt.replace("\n", "<br/>")
+        //binding.receiptInputShow.text = receiptSteps
+        //binding.receiptInputShow.text = args.currentCocktail.receipt.replace("\n", "<br/>")
         binding.groupInputShow.text = args.currentCocktail.cocktail_group
         binding.basisIdInputShow.text = args.currentCocktail.basis_id.toString()
         binding.tasteInputShow.text = args.currentCocktail.taste
