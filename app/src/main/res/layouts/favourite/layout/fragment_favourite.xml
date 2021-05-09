@@ -80,7 +80,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 
-        android:id="@+id/fab_cocktails"
+        android:id="@+id/fab_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fabSize="mini"

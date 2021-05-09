@@ -36,7 +36,7 @@ class FavouriteFragment : Fragment() {
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.fabCocktails.setOnClickListener {
+        binding.fabFavourite.setOnClickListener {
             startActivity(Intent(activity, AddNewCocktail::class.java))
         }
 

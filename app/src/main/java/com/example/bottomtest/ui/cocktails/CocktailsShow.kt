@@ -37,7 +37,7 @@ class CocktailsShow : AppCompatActivity() {
         binding.volumeInputShow.text = "Объем: ${args.currentCocktail.volume} мл"
 
         val receiptSteps = args.currentCocktail.receipt.split("/||/").toTypedArray()
-        var number: Int = 1
+        var number = 1
         receiptSteps.forEach{
             binding.receiptInputShow.append("$number. $it\n")
             number++
@@ -45,6 +45,18 @@ class CocktailsShow : AppCompatActivity() {
         binding.groupInputShow.text = args.currentCocktail.cocktail_group
         binding.basisIdInputShow.text = args.currentCocktail.basis_id.toString()
         binding.tasteInputShow.text = args.currentCocktail.taste
+
+        var bool = args.currentCocktail.is_favourite
+        binding.checkFavourite.isChecked = args.currentCocktail.is_favourite
+
+        binding.checkFavourite.setOnClickListener {
+            if (args.currentCocktail.is_favourite) {
+                mCocktailViewModel.setFavourite(args.currentCocktail.id)
+            }
+            else {
+                mCocktailViewModel.setUnfavourite(args.currentCocktail.id)
+            }
+        }
 
         binding.editButton.setOnClickListener {
 
@@ -63,18 +75,6 @@ class CocktailsShow : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    fun onFavouriteCheckboxClicked(view: View){
-        if (view is CheckBox) {
-            val checked: Boolean = view.isChecked
-            if (checked) {
-                mCocktailViewModel.setFavourite(args.currentCocktail.id)
-            }
-            else {
-                mCocktailViewModel.setUnfavourite(args.currentCocktail.id)
-            }
         }
     }
 }
