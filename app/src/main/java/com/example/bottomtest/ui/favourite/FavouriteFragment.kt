@@ -1,5 +1,6 @@
 package com.example.bottomtest.ui.favourite
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.bottomtest.databinding.FragmentFavouriteBinding
 import com.example.bottomtest.databinding.FragmentIngredientsBinding
 import com.example.bottomtest.roomdb.adapter.FavouriteListAdapter
 import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
+import com.example.bottomtest.roomdb.fragments.add.AddNewCocktail
 import com.example.bottomtest.roomdb.viewmodel.FavouriteViewModel
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 
@@ -33,6 +35,10 @@ class FavouriteFragment : Fragment() {
     ): View {
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.fabCocktails.setOnClickListener {
+            startActivity(Intent(activity, AddNewCocktail::class.java))
+        }
 
         // Recyclerview
         val adapter = FavouriteListAdapter(this@FavouriteFragment, this.requireContext())
