@@ -45,12 +45,11 @@ class CocktailsShow : AppCompatActivity() {
         binding.groupInputShow.text = args.currentCocktail.cocktail_group
         binding.basisIdInputShow.text = args.currentCocktail.basis_id.toString()
         binding.tasteInputShow.text = args.currentCocktail.taste
-
-        var bool = args.currentCocktail.is_favourite
+        binding.checkFavourite.isPressed = args.currentCocktail.is_favourite
         binding.checkFavourite.isChecked = args.currentCocktail.is_favourite
 
-        binding.checkFavourite.setOnClickListener {
-            if (args.currentCocktail.is_favourite) {
+        binding.checkFavourite.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
                 mCocktailViewModel.setFavourite(args.currentCocktail.id)
             }
             else {

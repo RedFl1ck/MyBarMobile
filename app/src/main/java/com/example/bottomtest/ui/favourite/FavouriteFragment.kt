@@ -36,9 +36,6 @@ class FavouriteFragment : Fragment() {
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.fabFavourite.setOnClickListener {
-            startActivity(Intent(activity, AddNewCocktail::class.java))
-        }
 
         // Recyclerview
         val adapter = FavouriteListAdapter(this@FavouriteFragment, this.requireContext())
