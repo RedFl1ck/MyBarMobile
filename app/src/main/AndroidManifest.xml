@@ -19,7 +19,7 @@
             android:label="@string/title_activity_add_new" />
         <activity
             android:name=".ui.ingredients.IngredientShow"
-            android:label="@string/title_activity_add_new" />
+            android:label="Ingredient" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />

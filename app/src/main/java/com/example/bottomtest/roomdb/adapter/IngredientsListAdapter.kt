@@ -35,6 +35,8 @@ class IngredientsListAdapter constructor(private val activity: Fragment, private
         if (currentItem.degree != 0){
             holder.itemView.ingredient_degree_txt.isVisible = true
             holder.itemView.ingredient_degree_txt.text = "Крепость: ${currentItem.degree}°"
+        }else{
+            holder.itemView.ingredient_degree_txt.isVisible = false
         }
         holder.itemView.ingredient_type_txt.text = currentItem.type.toString()
 
