@@ -8,15 +8,15 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
 
     val readAllData: LiveData<List<Ingredients>> = ingredientDao.readAllData()
 
-    suspend fun addCocktail(ingredient: Ingredients){
+    suspend fun addIngredient(ingredient: Ingredients){
         ingredientDao.addIngredient(ingredient)
     }
 
-    suspend fun updateCocktail(ingredient: Ingredients){
+    suspend fun updateIngredient(ingredient: Ingredients){
         ingredientDao.updateIngredient(ingredient)
     }
 
-    suspend fun deleteCocktail(ingredient: Ingredients){
+    suspend fun deleteIngredient(ingredient: Ingredients){
         ingredientDao.deleteIngredient(ingredient)
     }
 }

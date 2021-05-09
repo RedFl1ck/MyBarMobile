@@ -26,19 +26,19 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
 
     fun addIngredient(ingredient: Ingredients){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addCocktail(ingredient)
+            repository.addIngredient(ingredient)
         }
     }
 
     fun updateIngredient(ingredient: Ingredients){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateCocktail(ingredient)
+            repository.updateIngredient(ingredient)
         }
     }
 
     fun deleteIngredient(ingredient: Ingredients){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteCocktail(ingredient)
+            repository.deleteIngredient(ingredient)
         }
     }
 }

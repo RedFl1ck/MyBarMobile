@@ -32,9 +32,11 @@
                     android:src="@drawable/cocktail_show"/>
 
                 <CheckBox
+                    android:id="@+id/check_favourite"
                     android:button="@drawable/favourite_star"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:onClick="onFavouriteCheckboxClicked"/>
                     />
 
             </LinearLayout>

@@ -24,4 +24,13 @@ interface CocktailDao {
 
     @Query("SELECT * FROM cocktails where is_deleted == 1 ORDER BY id ASC")
     fun readDeletedData(): LiveData<List<Cocktail>>
+
+    @Query("SELECT name FROM ingredients where id = :basis_id")
+    fun getCocktailBasis(basis_id:Int): LiveData<String>
+
+    @Query("UPDATE cocktails SET is_favourite = 1 WHERE id = :id")
+    fun setFavourite(id: Int)
+
+    @Query("UPDATE cocktails SET is_favourite = 0 WHERE id = :id")
+    fun setUnfavourite(id: Int)
 }

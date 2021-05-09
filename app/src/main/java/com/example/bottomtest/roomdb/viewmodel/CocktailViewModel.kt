@@ -69,4 +69,20 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
             repository.deleteCocktail(cocktail)
         }
     }
+
+    fun getCocktailBasis(basis_id: Int): LiveData<String> {
+        return repository.getCocktailBasis(basis_id)
+    }
+
+    fun setFavourite(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setFavourite(id)
+        }
+    }
+
+    fun setUnfavourite(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setUnfavourite(id)
+        }
+    }
 }

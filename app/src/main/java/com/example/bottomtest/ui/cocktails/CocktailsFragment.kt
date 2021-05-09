@@ -66,7 +66,6 @@ class CocktailsFragment : Fragment() {
             adapter.setData(cocktail)
         })
 
-
         val parent = view.findViewById<ViewGroup>(R.id.container_cocktail)
         //SHEET FILTER
         val btnsheetfilter = layoutInflater.inflate(R.layout.sheet_filter_cocktails, parent, false)

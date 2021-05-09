@@ -3,6 +3,9 @@ package com.example.bottomtest.ui.cocktails
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.CheckBox
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
 import com.example.bottomtest.R
@@ -26,6 +29,7 @@ class CocktailsShow : AppCompatActivity() {
         binding = ActivityShowCocktailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mCocktailViewModel = CocktailViewModel(application)
 
         binding.nameInputShow.text = args.currentCocktail.name
         binding.descriptionInputShow.text = args.currentCocktail.description
@@ -59,6 +63,18 @@ class CocktailsShow : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun onFavouriteCheckboxClicked(view: View){
+        if (view is CheckBox) {
+            val checked: Boolean = view.isChecked
+            if (checked) {
+                mCocktailViewModel.setFavourite(args.currentCocktail.id)
+            }
+            else {
+                mCocktailViewModel.setUnfavourite(args.currentCocktail.id)
+            }
         }
     }
 }

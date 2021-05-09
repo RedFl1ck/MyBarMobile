@@ -20,4 +20,16 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
     suspend fun deleteCocktail(cocktail: Cocktail){
         cocktailDao.deleteCocktail(cocktail)
     }
+
+    fun getCocktailBasis(basis_id: Int): LiveData<String> {
+        return cocktailDao.getCocktailBasis(basis_id)
+    }
+
+    fun setFavourite(id: Int){
+        cocktailDao.setFavourite(id)
+    }
+
+    fun setUnfavourite(id: Int){
+        cocktailDao.setUnfavourite(id)
+    }
 }
