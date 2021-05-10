@@ -6,7 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.ingredients.IngredientsFragment">
 
+    <LinearLayout
+        android:id="@+id/ingredients_linear_filters"
+        style="@style/MyActionBarButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/filter_ingredients_button"
+            style="@style/MyActionBarButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:drawableLeft="@drawable/filter"
+            android:text="@string/filters"
+            android:textAlignment="viewStart"
+            android:textColor="@color/hektar_text_light" />
+
+        <Button
+            android:id="@+id/sort_ingredients_button"
+            style="@style/MyActionBarButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:drawableLeft="@drawable/sort"
+            android:text="@string/sort"
+            android:textAlignment="viewStart"
+            android:textColor="@color/hektar_text_light" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="48dp"
         android:layout_marginBottom="48dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -41,5 +76,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/empty_imageview" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/fab_ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/title_activity_add_new"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,4 +41,16 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
             repository.deleteIngredient(ingredient)
         }
     }
+
+    fun setFavourite(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setFavourite(id)
+        }
+    }
+
+    fun setUnfavourite(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setUnfavourite(id)
+        }
+    }
 }

@@ -27,6 +27,6 @@ data class Cocktail(
         val basis_id: Int,
         val taste: String,
         val is_updatable: Boolean,
-        var is_deleted: Boolean,
+        val is_deleted: Boolean,
         val is_favourite: Boolean
 ): Parcelable

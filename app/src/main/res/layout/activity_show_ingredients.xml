@@ -32,6 +32,7 @@
                     android:src="@drawable/ingredient_show"/>
 
                 <CheckBox
+                    android:id="@+id/check_favourite"
                     android:button="@drawable/favourite_star"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -70,17 +71,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Type" />
-
-
-            <Button
-                android:id="@+id/edit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="60dp"
-                android:text="Edit"
-                android:textAllCaps="false"
-                android:textSize="20sp" />
 
         </LinearLayout>
 

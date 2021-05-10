@@ -18,4 +18,10 @@ interface IngredientDao {
 
     @Query("SELECT * FROM ingredients ORDER BY id ASC")
     fun readAllData(): LiveData<List<Ingredients>>
+
+    @Query("UPDATE ingredients SET is_favourite = 1 WHERE id = :id")
+    fun setFavourite(id: Int)
+
+    @Query("UPDATE ingredients SET is_favourite = 0 WHERE id = :id")
+    fun setUnfavourite(id: Int)
 }

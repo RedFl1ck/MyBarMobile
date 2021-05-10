@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.FragmentCocktailsBinding
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
 import com.example.bottomtest.roomdb.fragments.add.AddNewCocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import java.util.*
@@ -43,22 +46,29 @@ class CocktailsFragment : Fragment() {
         _binding = FragmentCocktailsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         binding.fabCocktails.setOnClickListener {
             startActivity(Intent(activity, AddNewCocktail::class.java))
         }
-
-        //empty_imageview = view.findViewById(R.id.empty_imageview)
-        //no_data = root.findViewById(R.id.no_data)
-        //filter_button = root.findViewById(R.id.filter_cocktails_button)
-        //sort_button = root.findViewById(R.id.sort_cocktails_button)
-
 
         // Recyclerview
         val adapter = CocktailListAdapter(this@CocktailsFragment, this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val bottomNav = activity?.findViewById<BottomNavigationView?>(R.id.nav_view)
+                if (dy > 0) {
+                    activity?.actionBar?.hide()//Scrolling down
+                    (binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams).setMargins(0, 169, 0, 0)
+                    bottomNav?.isVisible = false
+                    binding.fabCocktails.isVisible = false
+                } else if (dy < 0) {
+                    activity?.actionBar?.hide()//Scrolling up
+                    bottomNav?.isVisible = true
+                    binding.fabCocktails.isVisible = true
+                }
+            }
+        })
 
         // CocktailViewModel
         mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
@@ -154,5 +164,4 @@ class CocktailsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

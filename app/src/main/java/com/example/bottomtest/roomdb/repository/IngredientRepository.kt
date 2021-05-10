@@ -19,4 +19,12 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
     suspend fun deleteIngredient(ingredient: Ingredients){
         ingredientDao.deleteIngredient(ingredient)
     }
+
+    fun setFavourite(id: Int){
+        ingredientDao.setFavourite(id)
+    }
+
+    fun setUnfavourite(id: Int){
+        ingredientDao.setUnfavourite(id)
+    }
 }

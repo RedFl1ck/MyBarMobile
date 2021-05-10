@@ -7,7 +7,7 @@
     tools:context=".ui.favourite.FavouriteFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/_favourite_linear_filters"
         style="@style/MyActionBarButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/filter_cocktails_button"
+            android:id="@+id/filter_favourite_button"
             style="@style/MyActionBarButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:textColor="@color/hektar_text_light" />
 
         <Button
-            android:id="@+id/sort_cocktails_button"
+            android:id="@+id/sort_favourite_button"
             style="@style/MyActionBarButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -42,9 +42,9 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="48dp"
         android:layout_marginBottom="48dp"
-        android:id="@+id/recyclerView1"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
