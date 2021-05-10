@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class FavouriteViewModel(application: Application): AndroidViewModel(application)  {
 
-    val readAllData: LiveData<List<Cocktail>>
+    val readCocktailsData: LiveData<List<Cocktail>>
     private val repository: FavouriteRepository
 
     init {
@@ -22,6 +22,6 @@ class FavouriteViewModel(application: Application): AndroidViewModel(application
             application
         ).favouriteDao()
         repository = FavouriteRepository(favouriteDao)
-        readAllData = repository.readAllData
+        readCocktailsData = repository.readCocktailsData
     }
 }

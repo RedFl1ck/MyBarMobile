@@ -5,5 +5,5 @@ import com.example.bottomtest.roomdb.interfaces.FavouriteDao
 import com.example.bottomtest.roomdb.model.Cocktail
 
 class FavouriteRepository(private val favouriteDao: FavouriteDao) {
-    val readAllData: LiveData<List<Cocktail>> = favouriteDao.readAllData()
+    val readCocktailsData: LiveData<List<Cocktail>> = favouriteDao.readCocktailsData()
 }

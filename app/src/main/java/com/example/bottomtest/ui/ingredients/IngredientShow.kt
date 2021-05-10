@@ -43,7 +43,7 @@ class IngredientShow : AppCompatActivity() {
                 mIngredientViewModel.setFavourite(args.currentIngredient.id)
             }
             else {
-                mIngredientViewModel.setUnfavourite(args.currentIngredient.id)
+                mIngredientViewModel.setUnFavourite(args.currentIngredient.id)
             }
         }
     }

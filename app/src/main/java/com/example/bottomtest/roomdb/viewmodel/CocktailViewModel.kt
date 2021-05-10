@@ -80,9 +80,9 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    fun setUnfavourite(id: Int){
+    fun setUnFavourite(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setUnfavourite(id)
+            repository.setUnFavourite(id)
         }
     }
 }

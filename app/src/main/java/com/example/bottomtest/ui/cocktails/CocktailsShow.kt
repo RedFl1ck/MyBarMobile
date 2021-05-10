@@ -165,7 +165,7 @@ class CocktailsShow : AppCompatActivity() {
                 mCocktailViewModel.setFavourite(args.currentCocktail.id)
             }
             else {
-                mCocktailViewModel.setUnfavourite(args.currentCocktail.id)
+                mCocktailViewModel.setUnFavourite(args.currentCocktail.id)
             }
         }
     }

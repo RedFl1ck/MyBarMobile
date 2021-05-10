@@ -48,9 +48,9 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-    fun setUnfavourite(id: Int){
+    fun setUnFavourite(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setUnfavourite(id)
+            repository.setUnFavourite(id)
         }
     }
 }

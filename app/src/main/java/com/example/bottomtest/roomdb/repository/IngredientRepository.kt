@@ -24,7 +24,7 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
         ingredientDao.setFavourite(id)
     }
 
-    fun setUnfavourite(id: Int){
-        ingredientDao.setUnfavourite(id)
+    fun setUnFavourite(id: Int){
+        ingredientDao.setUnFavourite(id)
     }
 }

@@ -29,7 +29,7 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
         cocktailDao.setFavourite(id)
     }
 
-    fun setUnfavourite(id: Int){
-        cocktailDao.setUnfavourite(id)
+    fun setUnFavourite(id: Int){
+        cocktailDao.setUnFavourite(id)
     }
 }

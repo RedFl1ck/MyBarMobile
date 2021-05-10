@@ -32,5 +32,5 @@ interface CocktailDao {
     fun setFavourite(id: Int)
 
     @Query("UPDATE cocktails SET is_favourite = 0 WHERE id = :id")
-    fun setUnfavourite(id: Int)
+    fun setUnFavourite(id: Int)
 }

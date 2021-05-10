@@ -8,5 +8,5 @@ import com.example.bottomtest.roomdb.model.Cocktail
 @Dao
 interface FavouriteDao {
     @Query("SELECT * FROM cocktails WHERE is_favourite = 1 ORDER BY id ASC")
-    fun readAllData(): LiveData<List<Cocktail>>
+    fun readCocktailsData(): LiveData<List<Cocktail>>
 }

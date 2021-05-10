@@ -39,7 +39,7 @@ class FavouriteFragment : Fragment() {
 
         // CocktailViewModel
         mFavouriteViewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
-        mFavouriteViewModel.readAllData.observe(viewLifecycleOwner, { cocktail ->
+        mFavouriteViewModel.readCocktailsData.observe(viewLifecycleOwner, { cocktail ->
             adapter.setData(cocktail)})
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
