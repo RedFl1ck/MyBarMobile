@@ -30,13 +30,13 @@ class ShoppingListViewModel(application: Application): AndroidViewModel(applicat
         }
     }
 
-    fun updateIngredient(ingredient: Ingredients){
+    fun updateItem(ingredient: Ingredients){
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateItem(ingredient)
         }
     }
 
-    fun deleteIngredient(ingredient: Ingredients){
+    fun deleteItem(ingredient: Ingredients){
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteItem(ingredient)
         }

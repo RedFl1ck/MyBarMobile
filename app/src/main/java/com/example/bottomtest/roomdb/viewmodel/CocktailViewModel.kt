@@ -27,29 +27,19 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
     }
 
 
-    fun inputCheck(
-        name: String,
-        description: String,
-        degree: Int,
-        volume: Int,
-        receipt: String,
-        cocktail_group: String?,
-        basis_id: Int,
-        taste: String,
-        is_updatable: Boolean,
-        is_deleted: Boolean,
-        is_favourite: Boolean): Boolean{
-        return !(TextUtils.isEmpty(name)
-                && TextUtils.isEmpty(description)
+    fun inputCheck(cocktail: Cocktail): Boolean{
+        return !(TextUtils.isEmpty(cocktail.name)
+                && TextUtils.isEmpty(cocktail.description)
                 //&& degree.isEmpty()
+                && TextUtils.isEmpty(cocktail.picture)
                 //&& volume.isEmpty()
-                && TextUtils.isEmpty(receipt)
-                && TextUtils.isEmpty(cocktail_group)
+                && TextUtils.isEmpty(cocktail.receipt)
+                && TextUtils.isEmpty(cocktail.cocktail_group)
                 //&& basis_id.isEmpty()
-                && TextUtils.isEmpty(taste)
-                && TextUtils.isEmpty(is_updatable.toString())
-                && TextUtils.isEmpty(is_deleted.toString())
-                && TextUtils.isEmpty(is_favourite.toString()))
+                && TextUtils.isEmpty(cocktail.taste)
+                && TextUtils.isEmpty(cocktail.is_updatable.toString())
+                && TextUtils.isEmpty(cocktail.is_deleted.toString())
+                && TextUtils.isEmpty(cocktail.is_favourite.toString()))
     }
 
     fun addCocktail(cocktail: Cocktail){

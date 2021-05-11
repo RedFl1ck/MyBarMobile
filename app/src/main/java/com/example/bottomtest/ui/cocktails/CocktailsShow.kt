@@ -37,10 +37,10 @@ class CocktailsShow : AppCompatActivity() {
         mCocktailViewModel = CocktailViewModel(application)
 
         //Update Fragment
-        updateFragmentSet()
+        updateFragmentSet(args.currentCocktail)
 
         //Show Fragment
-        showFragmentSet()
+        showFragmentSet(args.currentCocktail)
 
     }
 
@@ -65,21 +65,26 @@ class CocktailsShow : AppCompatActivity() {
                 true
             }
             R.id.add_button -> {
-                val name = binding.nameInputUpdate.text.toString()
-                val description = binding.descriptionInputUpdate.text.toString()
-                val degree = binding.degreeInputUpdate.text.toString().toInt()
-                val volume = binding.volumeInputUpdate.text.toString().toInt()
-                val receipt = binding.receiptInputUpdate.text.toString()
-                val group = binding.groupInputUpdate.text.toString()
-                val basisId = binding.basisIdInputUpdate.text.toString().toInt()
-                val taste = binding.tasteInputUpdate.text.toString()
+                val cocktail = Cocktail(args.currentCocktail.id,
+                    binding.nameInputUpdate.text.toString(),
+                    binding.descriptionInputUpdate.text.toString(),
+                    binding.degreeInputUpdate.text.toString().toInt(),
+                    args.currentCocktail.picture,
+                    binding.volumeInputUpdate.text.toString().toInt(),
+                    binding.receiptInputUpdate.text.toString(),
+                    binding.groupInputUpdate.text.toString(),
+                    binding.basisIdInputUpdate.text.toString().toInt(),
+                    binding.tasteInputUpdate.text.toString(),
+                    isUpdatable,
+                    isDeleted,
+                    binding.checkFavourite.isChecked)
 
-                if(mCocktailViewModel.inputCheck(name, description, degree, volume, receipt, group, basisId, taste, isUpdatable, isDeleted, isFavourite)){
-                    updateItem(name, description, degree, volume, receipt, group, basisId, taste, isUpdatable, isDeleted, isFavourite)
+                if(mCocktailViewModel.inputCheck(cocktail)){
+                    mCocktailViewModel.updateCocktail(cocktail)
                     Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
+                    showFragmentSet(cocktail)
+                    updateFragmentSet(cocktail)
                     changeFragments(true)
-                    showFragmentSet()
-                    updateFragmentSet()
                     true
                 } else {
                     Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show()
@@ -90,48 +95,24 @@ class CocktailsShow : AppCompatActivity() {
         }
     }
 
-    private fun updateItem(
-        name: String,
-        description: String,
-        degree: Int,
-        volume: Int,
-        receipt: String,
-        group: String?,
-        basis_id: Int,
-        taste: String,
-        is_updatable: Boolean,
-        is_deleted: Boolean,
-        is_favourite: Boolean) {
-        // Create Cocktail Object
-        val updatedCocktail = Cocktail(args.currentCocktail.id, name,
-            description,
-            Integer.parseInt(degree.toString()),
-            "",
-            Integer.parseInt(volume.toString()),
-            receipt,
-            group,
-            Integer.parseInt(basis_id.toString()),
-            taste,
-            is_updatable,
-            is_deleted,
-            is_favourite)
-        // Update Current Cocktail
-        mCocktailViewModel.updateCocktail(updatedCocktail)
-    }
-
     private fun deleteCocktail() {
         val builder = android.app.AlertDialog.Builder(this)
         builder.setPositiveButton("Yes") { _, _ ->
             //TODO: CHECK FOR CREATED BY USER
-            isDeleted = true
-            updateItem(args.currentCocktail.name,
+            val deletedCocktail = Cocktail(args.currentCocktail.id,
+                args.currentCocktail.name,
                 args.currentCocktail.description,
-                args.currentCocktail.degree,
-                args.currentCocktail.volume,
+                Integer.parseInt(args.currentCocktail.degree.toString()),
+                args.currentCocktail.picture,
+                Integer.parseInt(args.currentCocktail.volume.toString()),
                 args.currentCocktail.receipt,
                 args.currentCocktail.cocktail_group,
-                args.currentCocktail.basis_id,
-                args.currentCocktail.taste, isUpdatable, isDeleted, isFavourite)
+                Integer.parseInt(args.currentCocktail.basis_id.toString()),
+                args.currentCocktail.taste,
+                args.currentCocktail.is_updatable,
+                true,
+                binding.checkFavourite.isChecked)
+            mCocktailViewModel.updateCocktail(deletedCocktail)
             Toast.makeText(
                 this,
                 "Successfully removed: ${args.currentCocktail.name}",
@@ -144,25 +125,28 @@ class CocktailsShow : AppCompatActivity() {
         builder.create().show()
     }
 
-    private fun showFragmentSet() {
-        binding.groupInputShow.text = args.currentCocktail.cocktail_group
-        binding.basisIdInputShow.text = args.currentCocktail.basis_id.toString()
-        binding.tasteInputShow.text = args.currentCocktail.taste
-        binding.checkFavourite.isChecked = args.currentCocktail.is_favourite
-        binding.nameInputShow.text = args.currentCocktail.name
-        binding.descriptionInputShow.text = args.currentCocktail.description
-        binding.degreeInputShow.text = "Крепость: ${args.currentCocktail.degree}°"
-        binding.volumeInputShow.text = "Объем: ${args.currentCocktail.volume} мл"
-        val ims: InputStream = applicationContext.assets.open("Images/${args.currentCocktail.picture}")
-        // load image as Drawable
+    private fun showFragmentSet(cocktail: Cocktail) {
+        binding.groupInputShow.text = cocktail.cocktail_group
+        binding.basisIdInputShow.text = cocktail.basis_id.toString()
+        binding.tasteInputShow.text = cocktail.taste
+        binding.nameInputShow.text = cocktail.name
+        binding.descriptionInputShow.text = cocktail.description
+        binding.degreeInputShow.text = "Крепость: ${cocktail.degree}°"
+        binding.volumeInputShow.text = "Объем: ${cocktail.volume} мл"
+        isFavourite = cocktail.is_favourite
+        isDeleted = cocktail.is_deleted
+        isUpdatable = cocktail.is_updatable
+
+        binding.checkFavourite.isChecked = cocktail.is_favourite
+
+        val ims: InputStream = applicationContext.assets.open("Images/${cocktail.picture}")
         // load image as Drawable
         val d = Drawable.createFromStream(ims, null)
         // set image to ImageView
-        // set image to ImageView
         binding.cocktailImg.setImageDrawable(d)
-
         ims.close()
-        val receiptSteps = args.currentCocktail.receipt.split("/||/").toTypedArray()
+
+        val receiptSteps = cocktail.receipt.split("/||/").toTypedArray()
         var number = 1
         binding.receiptInputShow.text = ""
         receiptSteps.forEach{
@@ -180,18 +164,15 @@ class CocktailsShow : AppCompatActivity() {
         }
     }
 
-    private fun updateFragmentSet() {
-        binding.nameInputUpdate.setText(args.currentCocktail.name)
-        binding.descriptionInputUpdate.setText(args.currentCocktail.description)
-        binding.degreeInputUpdate.setText(args.currentCocktail.degree.toString())
-        binding.volumeInputUpdate.setText(args.currentCocktail.volume.toString())
-        binding.receiptInputUpdate.setText(args.currentCocktail.receipt)
-        binding.groupInputUpdate.setText(args.currentCocktail.cocktail_group)
-        binding.basisIdInputUpdate.setText(args.currentCocktail.basis_id.toString())
-        binding.tasteInputUpdate.setText(args.currentCocktail.taste)
-        isFavourite = args.currentCocktail.is_favourite
-        isDeleted = args.currentCocktail.is_deleted
-        isUpdatable = args.currentCocktail.is_updatable
+    private fun updateFragmentSet(cocktail: Cocktail) {
+        binding.nameInputUpdate.setText(cocktail.name)
+        binding.descriptionInputUpdate.setText(cocktail.description)
+        binding.degreeInputUpdate.setText(cocktail.degree.toString())
+        binding.volumeInputUpdate.setText(cocktail.volume.toString())
+        binding.receiptInputUpdate.setText(cocktail.receipt)
+        binding.groupInputUpdate.setText(cocktail.cocktail_group)
+        binding.basisIdInputUpdate.setText(cocktail.basis_id.toString())
+        binding.tasteInputUpdate.setText(cocktail.taste)
 
         binding.deleteButton.setOnClickListener {
             deleteCocktail()

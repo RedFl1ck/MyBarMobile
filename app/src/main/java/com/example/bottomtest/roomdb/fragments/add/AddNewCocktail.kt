@@ -28,36 +28,10 @@ class AddNewCocktail : AppCompatActivity() {
     }
 
 
-    private fun insertDataToDatabase(
-        name: String,
-        description: String,
-        degree: Int,
-        volume: Int,
-        receipt: String,
-        group: String,
-        basis_id: Int,
-        taste: String,
-        is_favourite: Boolean) {
-        // Create Cocktail Object
-        val cocktail = Cocktail(
-            0,
-            name,
-            description,
-            Integer.parseInt(degree.toString()),
-            "",
-            Integer.parseInt(volume.toString()),
-            receipt,
-            group,
-            Integer.parseInt(basis_id.toString()),
-            taste,
-            is_updatable = false,
-            is_deleted = false,
-            is_favourite = is_favourite
-        )
+    private fun insertDataToDatabase(cocktail: Cocktail) {
         // Add Data to Database
         mCocktailViewModel.addCocktail(cocktail)
         Toast.makeText(this, "Successfully added!", Toast.LENGTH_LONG).show()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,21 +46,23 @@ class AddNewCocktail : AppCompatActivity() {
                 true
             }
             R.id.add_button -> {
-                val name = binding.nameInput.text.toString()
-                val description = binding.descriptionInput.text.toString()
-                val degree = binding.degreeInput.text.toString().toInt()
-                val volume = binding.volumeInput.text.toString().toInt()
-                val receipt = binding.receiptInput.text.toString()
-                val group = binding.groupInput.text.toString()
-                val basisId = binding.basisIdInput.text.toString().toInt()
-                val taste = binding.tasteInput.text.toString()
-                val isUpdatable = false
-                val isDeleted = false
+                val cocktail = Cocktail(0,
+                    binding.nameInput.text.toString(),
+                    binding.descriptionInput.text.toString(),
+                    binding.degreeInput.text.toString().toInt(),
+                    "22.13.jpg",
+                    binding.volumeInput.text.toString().toInt(),
+                    binding.receiptInput.text.toString(),
+                    binding.groupInput.text.toString(),
+                    binding.basisIdInput.text.toString().toInt(),
+                    binding.tasteInput.text.toString(),
+                    is_updatable = false,
+                    is_deleted = false,
+                    is_favourite = false)
                 //TODO: FAVOURITE BUTTON
-                val isFavourite = false
 
-                if(mCocktailViewModel.inputCheck(name, description, degree, volume, receipt, group, basisId, taste, isUpdatable, isDeleted, isFavourite)){
-                    insertDataToDatabase(name, description, degree, volume, receipt, group, basisId, taste, isFavourite)
+                if(mCocktailViewModel.inputCheck(cocktail)){
+                    insertDataToDatabase(cocktail)
                     finish()
                     true
                 } else {
