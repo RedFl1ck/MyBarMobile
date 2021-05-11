@@ -20,7 +20,7 @@ data class Cocktail(
         val name: String,
         val description: String,
         val degree: Int,
-        val picture: ByteArray?,
+        val picture: String,
         val volume: Int,
         val receipt: String,
         val cocktail_group: String?,

@@ -29,7 +29,8 @@
                     android:layout_width="150dp"
                     android:layout_weight="1"
                     android:layout_height="150dp"
-                    android:src="@drawable/cocktail_show"/>
+                    android:src="@drawable/cocktail_show"
+                    android:id="@+id/cocktail_img"/>
 
                 <CheckBox
                     android:id="@+id/check_favourite"

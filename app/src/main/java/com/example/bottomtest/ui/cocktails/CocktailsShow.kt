@@ -1,5 +1,6 @@
 package com.example.bottomtest.ui.cocktails
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowCocktailsBinding
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
+import java.io.InputStream
 
 
 class CocktailsShow : AppCompatActivity() {
@@ -104,7 +106,7 @@ class CocktailsShow : AppCompatActivity() {
         val updatedCocktail = Cocktail(args.currentCocktail.id, name,
             description,
             Integer.parseInt(degree.toString()),
-            null,
+            "",
             Integer.parseInt(volume.toString()),
             receipt,
             group,
@@ -151,7 +153,15 @@ class CocktailsShow : AppCompatActivity() {
         binding.descriptionInputShow.text = args.currentCocktail.description
         binding.degreeInputShow.text = "Крепость: ${args.currentCocktail.degree}°"
         binding.volumeInputShow.text = "Объем: ${args.currentCocktail.volume} мл"
+        val ims: InputStream = applicationContext.assets.open("Images/${args.currentCocktail.picture}")
+        // load image as Drawable
+        // load image as Drawable
+        val d = Drawable.createFromStream(ims, null)
+        // set image to ImageView
+        // set image to ImageView
+        binding.cocktailImg.setImageDrawable(d)
 
+        ims.close()
         val receiptSteps = args.currentCocktail.receipt.split("/||/").toTypedArray()
         var number = 1
         binding.receiptInputShow.text = ""
