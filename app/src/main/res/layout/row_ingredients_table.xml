@@ -39,15 +39,24 @@
                 app:layout_constraintStart_toEndOf="@+id/ingredient_picture"
                 app:layout_constraintTop_toTopOf="@+id/ingredient_picture" />
 
+            <ImageButton
+                android:backgroundTint="?attr/colorPrimary"
+                android:id="@+id/ingredient_add_to_cart"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/add_to_cart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ingredient_name_txt"
+                android:contentDescription="add" />
+
             <TextView
-                android:visibility="gone"
                 android:id="@+id/ingredient_degree_txt"
                 style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Degree"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ingredient_name_txt" />
+                app:layout_constraintTop_toBottomOf="@id/ingredient_add_to_cart" />
 
 
             <TextView

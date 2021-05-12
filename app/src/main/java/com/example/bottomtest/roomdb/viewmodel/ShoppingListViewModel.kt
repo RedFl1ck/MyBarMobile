@@ -6,13 +6,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bottomtest.roomdb.CocktailDatabase
 import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.roomdb.model.ItemShopping
+import com.example.bottomtest.roomdb.model.ShoppingList
 import com.example.bottomtest.roomdb.repository.ShoppingListRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ShoppingListViewModel(application: Application): AndroidViewModel(application) {
 
-    val readAllData: LiveData<List<Ingredients>>
+    val readAllData: LiveData<List<ItemShopping>>
     private val repository: ShoppingListRepository
 
     init {
@@ -24,21 +26,33 @@ class ShoppingListViewModel(application: Application): AndroidViewModel(applicat
     }
 
 
-    fun addItem(ingredient: Ingredients){
+    fun addItem(item: ShoppingList){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addItem(ingredient)
+            repository.addItem(item)
         }
     }
 
-    fun updateItem(ingredient: Ingredients){
+    fun updateItem(item: ShoppingList){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateItem(ingredient)
+            repository.updateItem(item)
         }
     }
 
-    fun deleteItem(ingredient: Ingredients){
+    fun deleteItem(item: ShoppingList){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteItem(ingredient)
+            repository.deleteItem(item)
+        }
+    }
+
+    fun setValue(value: Float, volume: String, id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setValue(value, volume, id)
+        }
+    }
+
+    fun delete(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delete(id)
         }
     }
 }

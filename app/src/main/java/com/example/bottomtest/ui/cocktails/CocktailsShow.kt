@@ -36,12 +36,11 @@ class CocktailsShow : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mCocktailViewModel = CocktailViewModel(application)
 
-        //Update Fragment
-        updateFragmentSet(args.currentCocktail)
-
         //Show Fragment
         showFragmentSet(args.currentCocktail)
 
+        //Update Fragment
+        updateFragmentSet(args.currentCocktail)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

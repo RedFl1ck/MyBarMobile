@@ -25,7 +25,8 @@
                 android:layout_height="53dp"
                 android:src="@drawable/ingredient_show"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/ingredients" />
 
             <TextView
                 android:id="@+id/count_name_txt"
@@ -64,33 +65,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="count"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
                 app:layout_constraintTop_toBottomOf="@id/count_picture"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <ImageButton
+                android:backgroundTint="?attr/colorPrimary"
                 android:id="@+id/count_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_remove"
                 app:layout_constraintEnd_toStartOf="@id/count_shopping"
-                app:layout_constraintTop_toTopOf="@id/count_shopping"/>
+                app:layout_constraintTop_toTopOf="@id/count_shopping"
+                android:contentDescription="add" />
 
             <ImageButton
+                android:backgroundTint="?attr/colorPrimary"
                 android:id="@+id/count_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add"
                 app:layout_constraintStart_toEndOf="@id/count_shopping"
-                app:layout_constraintTop_toTopOf="@id/count_shopping"/>
+                app:layout_constraintTop_toTopOf="@id/count_shopping"
+                android:contentDescription="delete" />
 
             <EditText
+                android:importantForAutofill="no"
                 android:id="@+id/count_volume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="volume"
+                android:inputType="textAutoComplete"
                 app:layout_constraintStart_toEndOf="@id/count_add"
                 app:layout_constraintTop_toTopOf="@id/count_shopping"/>
+
+            <ImageButton
+                android:backgroundTint="?attr/colorPrimary"
+                android:id="@+id/count_delete_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/count_name_txt"
+                android:contentDescription="delete_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

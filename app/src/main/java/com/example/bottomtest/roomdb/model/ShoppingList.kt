@@ -18,6 +18,6 @@ import androidx.room.PrimaryKey
 data class ShoppingList(
         @PrimaryKey(autoGenerate = true) var _id: Int = -1,
         val ingredient_id: Int,
-        val number: Int,
+        val number: Float,
         val measuring: String
 )

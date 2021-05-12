@@ -27,4 +27,8 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
     fun setUnFavourite(id: Int){
         ingredientDao.setUnFavourite(id)
     }
+
+    fun addToCart(id: Int){
+        ingredientDao.addToCart(id)
+    }
 }

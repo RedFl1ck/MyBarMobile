@@ -1,6 +1,7 @@
 package com.example.bottomtest.roomdb.adapter
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Cocktail
-import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.ui.cocktails.CocktailsFragmentDirections
 import kotlinx.android.synthetic.main.row_cocktail_table.view.*
+import java.io.InputStream
 
 class CocktailListAdapter constructor(private val activity: Fragment, private val context: Context) : RecyclerView.Adapter<CocktailListAdapter.MyViewHolder>() {
 
@@ -29,7 +30,12 @@ class CocktailListAdapter constructor(private val activity: Fragment, private va
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = cocktailList[position]
-        holder.itemView.cocktail_picture.setBackgroundResource(R.drawable.cocktail_show)
+        val ims: InputStream = context.assets.open("Images/${currentItem.picture}")
+        // load image as Drawable
+        val d = Drawable.createFromStream(ims, null)
+        // set image to ImageView
+        holder.itemView.cocktail_picture.setImageDrawable(d)
+        ims.close()
         holder.itemView.cocktail_name_txt.text = currentItem.name
         holder.itemView.cocktail_volume_txt.text = "Объем: ${currentItem.volume} мл"
         holder.itemView.cocktail_degree_txt.text = "Крепость: ${currentItem.degree}°"

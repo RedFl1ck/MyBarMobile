@@ -3,20 +3,30 @@ package com.example.bottomtest.roomdb.repository
 import androidx.lifecycle.LiveData
 import com.example.bottomtest.roomdb.interfaces.ShoppingListDao
 import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.roomdb.model.ItemShopping
+import com.example.bottomtest.roomdb.model.ShoppingList
 
 class ShoppingListRepository(private val shoppingListDao: ShoppingListDao) {
 
-    val readAllData: LiveData<List<Ingredients>> = shoppingListDao.readAllData()
+    val readAllData: LiveData<List<ItemShopping>> = shoppingListDao.readAllData()
 
-    suspend fun addItem(ingredient: Ingredients){
-        shoppingListDao.addItem(ingredient)
+    suspend fun addItem(item: ShoppingList){
+        shoppingListDao.addItem(item)
     }
 
-    suspend fun updateItem(ingredient: Ingredients){
-        shoppingListDao.updateItem(ingredient)
+    suspend fun updateItem(item: ShoppingList){
+        shoppingListDao.updateItem(item)
     }
 
-    suspend fun deleteItem(ingredient: Ingredients){
-        shoppingListDao.deleteItem(ingredient)
+    suspend fun deleteItem(item: ShoppingList){
+        shoppingListDao.deleteItem(item)
+    }
+
+    fun setValue(value: Float, volume: String, id: Int){
+        shoppingListDao.setValue(value, volume, id)
+    }
+
+    fun delete(id: Int){
+        shoppingListDao.delete(id)
     }
 }

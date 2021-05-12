@@ -24,4 +24,7 @@ interface IngredientDao {
 
     @Query("UPDATE ingredients SET is_favourite = 0 WHERE id = :id")
     fun setUnFavourite(id: Int)
+
+    @Query("INSERT INTO shopping_list (ingredient_id, number, measuring) values(:id, 0, 'мл.')")
+    fun addToCart(id: Int)
 }

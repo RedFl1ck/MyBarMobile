@@ -7,11 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.navArgs
 import com.example.bottomtest.R
-import com.example.bottomtest.databinding.ActivityShowCocktailsBinding
 import com.example.bottomtest.databinding.ActivityShowIngredientsBinding
-import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
-import com.example.bottomtest.ui.cocktails.CocktailsShowArgs
 
 class IngredientShow : AppCompatActivity() {
 

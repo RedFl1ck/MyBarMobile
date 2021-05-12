@@ -10,13 +10,15 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 import com.example.bottomtest.ui.ingredients.IngredientsFragmentDirections
-
 import kotlinx.android.synthetic.main.row_ingredients_table.view.*
 
 class IngredientsListAdapter constructor(private val activity: Fragment, private val context: Context) : RecyclerView.Adapter<IngredientsListAdapter.MyViewHolder>() {
 
     private var ingredientsList = emptyList<Ingredients>()
+
+    private lateinit var mIngredientViewModel: IngredientViewModel
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
@@ -39,6 +41,11 @@ class IngredientsListAdapter constructor(private val activity: Fragment, private
             holder.itemView.ingredient_degree_txt.isVisible = false
         }
         holder.itemView.ingredient_type_txt.text = currentItem.type.toString()
+
+        mIngredientViewModel = IngredientViewModel(activity.requireActivity().application)
+        holder.itemView.ingredient_add_to_cart.setOnClickListener {
+            mIngredientViewModel.addToCart(currentItem.id)
+        }
 
         holder.itemView.setOnClickListener {
             val action = IngredientsFragmentDirections.actionNavIngredientsToIngredientShow(currentItem)

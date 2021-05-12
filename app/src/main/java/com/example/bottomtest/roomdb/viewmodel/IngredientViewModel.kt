@@ -53,4 +53,10 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
             repository.setUnFavourite(id)
         }
     }
+
+    fun addToCart(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addToCart(id)
+        }
+    }
 }

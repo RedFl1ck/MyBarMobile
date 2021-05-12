@@ -6,5 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".ui.shopping_list.ShoppingFragment">
 
+    <LinearLayout
+        android:id="@+id/_favourite_linear_filters"
+        style="@style/MyActionBarButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/filter_favourite_button"
+            style="@style/MyActionBarButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:drawableLeft="@drawable/filter"
+            android:text="@string/filters"
+            android:textAlignment="viewStart"
+            android:textColor="@color/hektar_text_light" />
+
+        <Button
+            android:id="@+id/sort_favourite_button"
+            style="@style/MyActionBarButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:drawableLeft="@drawable/sort"
+            android:text="@string/sort"
+            android:textAlignment="viewStart"
+            android:textColor="@color/hektar_text_light" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbars="vertical"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="48dp"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/empty_imageview"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="230dp"
+        android:alpha="0.2"
+        android:contentDescription="@string/empty_db"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_empty" />
+
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/empty_db"
+        android:textSize="20sp"
+        android:textColor="@color/hektar_medium"
+        android:alpha="0.4"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/empty_imageview" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
