@@ -56,7 +56,9 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
 
     fun addToCart(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addToCart(id)
+            if (!repository.isInCart(id)) {
+                repository.addToCart(id)
+            }
         }
     }
 }

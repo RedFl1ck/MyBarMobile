@@ -31,4 +31,8 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
     fun addToCart(id: Int){
         ingredientDao.addToCart(id)
     }
+
+    fun isInCart(id: Int) : Boolean{
+        return ingredientDao.isInCart(id)
+    }
 }

@@ -27,4 +27,7 @@ interface IngredientDao {
 
     @Query("INSERT INTO shopping_list (ingredient_id, number, measuring) values(:id, 0, 'мл.')")
     fun addToCart(id: Int)
+
+    @Query("SELECT 1 FROM shopping_list WHERE ingredient_id = :id")
+    fun isInCart(id: Int) : Boolean
 }

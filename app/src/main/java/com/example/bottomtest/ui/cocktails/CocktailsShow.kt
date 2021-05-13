@@ -126,7 +126,7 @@ class CocktailsShow : AppCompatActivity() {
 
     private fun showFragmentSet(cocktail: Cocktail) {
         binding.groupInputShow.text = cocktail.cocktail_group
-        binding.basisIdInputShow.text = cocktail.basis_id.toString()
+        binding.basisIdInputShow.text = cocktail.basis_name
         binding.tasteInputShow.text = cocktail.taste
         binding.nameInputShow.text = cocktail.name
         binding.descriptionInputShow.text = cocktail.description
