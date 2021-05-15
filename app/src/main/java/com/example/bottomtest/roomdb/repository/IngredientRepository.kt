@@ -36,7 +36,7 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
         ingredientDao.addToCart(id)
     }
 
-    fun readSelectedIngredients(id: Int): LiveData<List<CocktailsIngredients>>{
+    fun readSelectedIngredients(id: Int): LiveData<List<IngredientsList>>{
         return ingredientDao.readSelectedIngredients(id)
     }
 

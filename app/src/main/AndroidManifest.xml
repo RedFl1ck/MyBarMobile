@@ -9,6 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name="MyBarApplication"
         android:theme="@style/Theme.BOTTOMTEST">
         <activity android:name=".ui.cocktails.CocktailsShow" />
         <activity

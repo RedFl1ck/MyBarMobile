@@ -57,8 +57,8 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-    fun readSelectedIngredients(id: Int): LiveData<List<CocktailsIngredients>>{
-        val selectedIngredients : LiveData<List<CocktailsIngredients>>
+    fun readSelectedIngredients(id: Int): LiveData<List<IngredientsList>>{
+        val selectedIngredients : LiveData<List<IngredientsList>>
         viewModelScope.run {
             val job = async { repository.readSelectedIngredients(id) }
             runBlocking {
