@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Name"
+                android:text="@string/name_cocktail"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/ingredient_picture"
@@ -46,17 +46,17 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/shopping_cart__1_"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/ingredient_name_txt"
-                android:contentDescription="add" />
+                app:layout_constraintTop_toBottomOf="@id/ingredient_name_txt"
+                android:contentDescription="@string/add_to_shopping_list" />
 
             <TextView
                 android:id="@+id/ingredient_degree_txt"
                 style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Degree"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ingredient_add_to_cart" />
+                android:text="@string/degree_cocktail"
+                app:layout_constraintStart_toStartOf="@id/ingredient_type_txt"
+                app:layout_constraintTop_toBottomOf="@id/ingredient_type_txt" />
 
 
             <TextView
@@ -64,7 +64,7 @@
                 style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Type"
+                android:text="@string/type_ingredient"
                 app:layout_constraintStart_toStartOf="@+id/ingredient_name_txt"
                 app:layout_constraintTop_toBottomOf="@+id/ingredient_name_txt" />
 

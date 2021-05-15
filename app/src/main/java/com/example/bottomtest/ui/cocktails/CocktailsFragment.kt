@@ -2,10 +2,9 @@ package com.example.bottomtest.ui.cocktails
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +17,6 @@ import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
-import java.util.*
 
 
 class CocktailsFragment : Fragment() {
@@ -29,7 +27,9 @@ class CocktailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var mCocktailViewModel: CocktailViewModel
-    
+
+    private lateinit var adapter: CocktailListAdapter
+
     private var chip1 = false
     private var chip2 = false
     private var chip3 = false
@@ -44,13 +44,14 @@ class CocktailsFragment : Fragment() {
     ): View {
         _binding = FragmentCocktailsBinding.inflate(inflater, container, false)
         val view = binding.root
+        setHasOptionsMenu(true)
 
         binding.fabCocktails.setOnClickListener {
             startActivity(Intent(activity, AddNewCocktail::class.java))
         }
 
         // Recyclerview
-        val adapter = CocktailListAdapter(this.requireActivity(), this.requireContext())
+        adapter = CocktailListAdapter(this.requireActivity(), this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -157,6 +158,31 @@ class CocktailsFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main, menu)
+
+        val searchView = menu.findItem(R.id.action_search).actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    mCocktailViewModel.search(query, viewLifecycleOwner, adapter)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    mCocktailViewModel.search(newText, viewLifecycleOwner, adapter)
+                }
+                 return true
+            }
+
+        })
     }
 
     override fun onDestroyView() {

@@ -1,17 +1,15 @@
 package com.example.bottomtest.roomdb.viewmodel
 
 import android.app.Application
-import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bottomtest.roomdb.CocktailDatabase
-import com.example.bottomtest.roomdb.model.CocktailsIngredients
+import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.model.IngredientsList
 import com.example.bottomtest.roomdb.repository.IngredientRepository
-import com.example.bottomtest.ui.ingredients.IngredientShow
-import com.example.bottomtest.ui.ingredients.IngredientShowArgs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -30,6 +28,16 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
         repository = IngredientRepository(ingredientDao)
         readAllData = repository.readAllData
         readShoppingList = repository.readShoppingList
+    }
+
+    fun search(query: String, viewLifecycleOwner: LifecycleOwner, adapter: IngredientsListAdapter){
+        val searchQuery = "%$query%"
+
+        searchIngredients(searchQuery).observe(viewLifecycleOwner, { list ->
+            list.let {
+                adapter.setData(it)
+            }
+        })
     }
 
     fun addIngredient(ingredient: Ingredients){
@@ -85,5 +93,16 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
                 repository.addToCart(id)
             }
         }
+    }
+
+    fun searchIngredients(searchQuery: String): LiveData<List<Ingredients>>{
+        val selectedIngredients : LiveData<List<Ingredients>>
+        viewModelScope.run {
+            val job = async { repository.searchIngredients(searchQuery) }
+            runBlocking {
+                selectedIngredients =  job.await()
+            }
+        }
+        return selectedIngredients
     }
 }

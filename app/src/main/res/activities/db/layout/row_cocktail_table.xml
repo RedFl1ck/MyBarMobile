@@ -29,7 +29,7 @@
 
             <ImageView
                 android:id="@+id/cocktail_picture"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/cocktail_show"
                 app:layout_constraintStart_toStartOf="@id/back_picture"
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Name"
+                android:text="@string/name_cocktail"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/back_picture"
@@ -54,7 +54,7 @@
                 style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Degree"
+                android:text="@string/degree_cocktail"
                 app:layout_constraintStart_toStartOf="@+id/cocktail_volume_txt"
                 app:layout_constraintTop_toBottomOf="@+id/cocktail_volume_txt" />
 
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="Volume"
+                android:text="@string/volume_cocktail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cocktail_name_txt" />
 
@@ -73,7 +73,7 @@
                 style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Taste"
+                android:text="@string/taste_cocktail"
                 app:layout_constraintStart_toStartOf="@+id/cocktail_name_txt"
                 app:layout_constraintTop_toBottomOf="@+id/cocktail_volume_txt" />
 
@@ -83,7 +83,7 @@
                 style="@style/Widget.App.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Group"
+                android:text="@string/group_cocktail"
                 app:layout_constraintStart_toStartOf="@+id/cocktail_taste_txt"
                 app:layout_constraintTop_toBottomOf="@+id/cocktail_taste_txt" />
 

@@ -16,7 +16,7 @@ import kotlinx.android.parcel.Parcelize
         indices = [Index(value = ["id"])])
 data class Cocktail @JvmOverloads constructor (
         @PrimaryKey(autoGenerate = true)
-    val id: Int,
+        val id: Int,
         val name: String,
         val description: String,
         val degree: Int,

@@ -47,15 +47,14 @@
                 android:id="@+id/name_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingredient Name"/>
+                android:text="@string/name_cocktail"/>
 
             <TextView
                 android:layout_marginTop="8dp"
                 android:id="@+id/description_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingredient Description"
-                android:inputType="textMultiLine" />
+                android:text="@string/description_cocktail" />
 
             <TextView
                 android:visibility="gone"
@@ -63,14 +62,25 @@
                 android:id="@+id/degree_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Degree" />
+                android:text="@string/degree_cocktail" />
 
 
             <TextView
                 android:id="@+id/type_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Type" />
+                android:text="@string/type_ingredient" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="400dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
 

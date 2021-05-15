@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="150dp"
                     android:src="@drawable/cocktail_show"
@@ -48,29 +48,28 @@
                 android:id="@+id/name_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cocktail Name"/>
+                android:text="@string/name_cocktail"/>
 
             <TextView
                 android:layout_marginTop="8dp"
                 android:id="@+id/description_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cocktail Description"
-                android:inputType="textMultiLine" />
+                android:text="@string/description_cocktail"/>
 
             <TextView
                 android:textStyle="italic"
                 android:id="@+id/degree_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Degree" />
+                android:text="@string/degree_cocktail" />
 
             <TextView
                 android:textStyle="italic"
                 android:id="@+id/volume_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Volume" />
+                android:text="@string/volume_cocktail" />
 
             <TextView
                 android:layout_marginTop="16dp"
@@ -80,13 +79,13 @@
                 android:id="@+id/receipt_text_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Рецепт"/>
+                android:text="@string/receipt_cocktail"/>
             <TextView
                 android:maxLines="100"
                 android:id="@+id/receipt_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Receipt"/>
+                android:text="@string/receipt_cocktail"/>
 
             <TextView
                 android:layout_marginTop="16dp"
@@ -96,13 +95,13 @@
                 android:id="@+id/group_text_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Группа"/>
+                android:text="@string/group_cocktail"/>
 
             <TextView
                 android:id="@+id/group_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Group" />
+                android:text="@string/group_cocktail" />
 
             <TextView
                 android:id="@+id/basis_id_input_show"
@@ -118,18 +117,16 @@
                 android:id="@+id/taste_text_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Вкус"/>
+                android:text="@string/taste_cocktail"/>
 
             <TextView
                 android:id="@+id/taste_input_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Taste" />
+                android:text="@string/taste_cocktail" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:scrollbars="vertical"
-                android:layout_marginTop="48dp"
-                android:layout_marginBottom="48dp"
+                android:layout_marginTop="12dp"
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Cocktail Name"
+                android:hint="@string/name_cocktail"
                 android:importantForAutofill="no"
                 android:inputType="textAutoComplete" />
 
@@ -162,7 +159,7 @@
                 android:id="@+id/description_input_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cocktail Description"
+                android:hint="@string/description_cocktail"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine" />
 
@@ -170,7 +167,7 @@
                 android:id="@+id/degree_input_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Degree"
+                android:hint="@string/degree_cocktail"
                 android:importantForAutofill="no"
                 android:inputType="number" />
 
@@ -178,7 +175,7 @@
                 android:id="@+id/volume_input_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Volume"
+                android:hint="@string/volume_cocktail"
                 android:importantForAutofill="no"
                 android:inputType="number" />
 
@@ -186,7 +183,7 @@
                 android:id="@+id/receipt_input_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Receipt"
+                android:hint="@string/receipt_cocktail"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine" />
 
@@ -194,7 +191,7 @@
                 android:id="@+id/group_input_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Group"
+                android:hint="@string/group_cocktail"
                 android:importantForAutofill="no"
                 android:inputType="textAutoComplete" />
 
@@ -210,7 +207,7 @@
                 android:id="@+id/taste_input_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Taste"
+                android:hint="@string/taste_cocktail"
                 android:importantForAutofill="no"
                 android:inputType="textAutoComplete" />
 
@@ -220,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:textAllCaps="false"
                 android:textSize="20sp" />
 

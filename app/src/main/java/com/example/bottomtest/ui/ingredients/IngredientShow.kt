@@ -5,17 +5,20 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowIngredientsBinding
+import com.example.bottomtest.roomdb.adapter.CocktailIngredientListAdapter
+import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
 import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 
 class IngredientShow : AppCompatActivity() {
 
-    companion object {
-        const val INGREDIENT = "ingredient"
-    }
+    companion object {const val INGREDIENT = "ingredient"}
 
     private var ingredient : Ingredients? = null
 
@@ -23,6 +26,7 @@ class IngredientShow : AppCompatActivity() {
 
     private lateinit var mIngredientViewModel: IngredientViewModel
 
+    private lateinit var mCocktailViewModel: CocktailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,18 @@ class IngredientShow : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         ingredient = initIngredient()
+        title = ingredient?.name
+        // Recyclerview
+        val adapter = CocktailListAdapter(this, applicationContext)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // CocktailViewModel
+        mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
+        ingredient?.id?.let {
+            mCocktailViewModel.readSelectedCocktails(it).observe(this, { ingredientID ->
+                adapter.setData(ingredientID)})
+        }
 
         binding.nameInputShow.text = ingredient?.name
         binding.descriptionInputShow.text = ingredient?.description

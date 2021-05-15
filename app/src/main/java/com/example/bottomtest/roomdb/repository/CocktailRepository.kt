@@ -32,4 +32,12 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
     fun setUnFavourite(id: Int){
         cocktailDao.setUnFavourite(id)
     }
+
+    fun readSelectedCocktails(id: Int) : LiveData<List<Cocktail>>{
+        return cocktailDao.readSelectedCocktails(id)
+    }
+
+    fun searchCocktails(searchQuery: String) : LiveData<List<Cocktail>>{
+        return cocktailDao.searchCocktails(searchQuery)
+    }
 }

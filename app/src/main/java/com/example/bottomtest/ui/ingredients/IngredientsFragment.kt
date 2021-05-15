@@ -1,9 +1,8 @@
 package com.example.bottomtest.ui.ingredients
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +23,8 @@ class IngredientsFragment : Fragment() {
 
     private lateinit var mIngredientViewModel: IngredientViewModel
 
+    private lateinit var adapter: IngredientsListAdapter
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -31,9 +32,10 @@ class IngredientsFragment : Fragment() {
     ): View {
         _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         val view = binding.root
+        setHasOptionsMenu(true)
 
         // Recyclerview
-        val adapter = IngredientsListAdapter(this.requireActivity(), this.requireContext())
+        adapter = IngredientsListAdapter(this.requireActivity(), this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -61,5 +63,35 @@ class IngredientsFragment : Fragment() {
 
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main, menu)
+
+        val searchView = menu.findItem(R.id.action_search).actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    mIngredientViewModel.search(query, viewLifecycleOwner, adapter)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    mIngredientViewModel.search(newText, viewLifecycleOwner, adapter)
+                }
+                return true
+            }
+
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

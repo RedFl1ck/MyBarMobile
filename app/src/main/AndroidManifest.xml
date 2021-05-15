@@ -11,13 +11,14 @@
         android:supportsRtl="true"
         android:name="MyBarApplication"
         android:theme="@style/Theme.BOTTOMTEST">
-        <activity android:name=".ui.cocktails.CocktailsShow" />
+        <activity android:name=".ui.cocktails.CocktailsShow"
+            android:label="@string/cocktails"/>
         <activity
             android:name=".ui.cocktails.AddNewCocktail"
             android:label="@string/title_activity_add_new" />
         <activity
             android:name=".ui.ingredients.IngredientShow"
-            android:label="Ingredient" />
+            android:label="@string/ingredients" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />

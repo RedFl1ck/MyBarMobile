@@ -70,5 +70,16 @@
     <string name="log_in">Войти</string>
     <string name="forget_password">Забыли пароль?</string>
     <string name="error_wrong_birth_date">Неправильная дата рождения</string>
+    <string name="name_cocktail">Название</string>
+    <string name="degree_cocktail">Крепость</string>
+    <string name="volume_cocktail">Количество</string>
+    <string name="taste_cocktail">Вкус</string>
+    <string name="group_cocktail">Группа</string>
+    <string name="volume_ingredient">Количество</string>
+    <string name="type_ingredient">Тип</string>
+    <string name="add_to_shopping_list">Добавить в список покупок</string>
+    <string name="description_cocktail">Описание</string>
+    <string name="receipt_cocktail">Рецепт</string>
+    <string name="delete">Удалить</string>
 
 </resources>

@@ -15,16 +15,21 @@ import com.example.bottomtest.databinding.ActivityShowCocktailsBinding
 import com.example.bottomtest.roomdb.adapter.CocktailIngredientListAdapter
 import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
 import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
+import com.example.bottomtest.ui.ingredients.IngredientShow
+import com.example.bottomtest.ui.ingredients.IngredientShowArgs
 import java.io.InputStream
 
 
 class CocktailsShow : AppCompatActivity() {
 
-    private lateinit var binding: ActivityShowCocktailsBinding
+    companion object {const val COCKTAIL = "cocktail"}
 
-    private val args by navArgs<CocktailsShowArgs>()
+    private var cocktail : Cocktail? = null
+
+    private lateinit var binding: ActivityShowCocktailsBinding
 
     private lateinit var mCocktailViewModel: CocktailViewModel
 
@@ -42,22 +47,35 @@ class CocktailsShow : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mCocktailViewModel = CocktailViewModel(application)
+        cocktail = initCocktail()
+        title = cocktail?.name
 
         // Recyclerview
         val adapter = CocktailIngredientListAdapter(this, applicationContext)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // CocktailViewModel
+        // IngredientViewModel
         mIngredientViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
-        mIngredientViewModel.readSelectedIngredients(args.currentCocktail.id).observe(this, { ingredient ->
-            adapter.setData(ingredient)})
+        cocktail?.id?.let {
+            mIngredientViewModel.readSelectedIngredients(it).observe(this, { cocktailID ->
+                adapter.setData(cocktailID)})
+        }
 
         //Show Fragment
-        showFragmentSet(args.currentCocktail)
+        cocktail?.let { showFragmentSet(it)}
 
         //Update Fragment
-        updateFragmentSet(args.currentCocktail)
+        cocktail?.let { updateFragmentSet(it)}
+    }
+
+    private fun initCocktail(): Cocktail?{
+        return if (intent.hasExtra(COCKTAIL)){
+            intent.getParcelableExtra(COCKTAIL)
+        } else {
+            val args by navArgs<CocktailsShowArgs>()
+            args.currentCocktail
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -81,21 +99,24 @@ class CocktailsShow : AppCompatActivity() {
                 true
             }
             R.id.add_button -> {
-                val cocktail = Cocktail(args.currentCocktail.id,
-                    binding.nameInputUpdate.text.toString(),
-                    binding.descriptionInputUpdate.text.toString(),
-                    binding.degreeInputUpdate.text.toString().toInt(),
-                    args.currentCocktail.picture,
-                    binding.volumeInputUpdate.text.toString().toInt(),
-                    binding.receiptInputUpdate.text.toString(),
-                    binding.groupInputUpdate.text.toString(),
-                    binding.basisIdInputUpdate.text.toString().toInt(),
-                    binding.tasteInputUpdate.text.toString(),
-                    isUpdatable,
-                    isDeleted,
-                    binding.checkFavourite.isChecked)
+                val cocktail = cocktail?.let {
+                    Cocktail(
+                        it.id,
+                        binding.nameInputUpdate.text.toString(),
+                        binding.descriptionInputUpdate.text.toString(),
+                        binding.degreeInputUpdate.text.toString().toInt(),
+                        it.picture,
+                        binding.volumeInputUpdate.text.toString().toInt(),
+                        binding.receiptInputUpdate.text.toString(),
+                        binding.groupInputUpdate.text.toString(),
+                        binding.basisIdInputUpdate.text.toString().toInt(),
+                        binding.tasteInputUpdate.text.toString(),
+                        isUpdatable,
+                        isDeleted,
+                        binding.checkFavourite.isChecked)
+                }
 
-                if(mCocktailViewModel.inputCheck(cocktail)){
+                if(cocktail?.let { mCocktailViewModel.inputCheck(it) } == true){
                     mCocktailViewModel.updateCocktail(cocktail)
                     Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
                     showFragmentSet(cocktail)
@@ -115,29 +136,34 @@ class CocktailsShow : AppCompatActivity() {
         val builder = android.app.AlertDialog.Builder(this)
         builder.setPositiveButton("Yes") { _, _ ->
             //TODO: CHECK FOR CREATED BY USER
-            val deletedCocktail = Cocktail(args.currentCocktail.id,
-                args.currentCocktail.name,
-                args.currentCocktail.description,
-                Integer.parseInt(args.currentCocktail.degree.toString()),
-                args.currentCocktail.picture,
-                Integer.parseInt(args.currentCocktail.volume.toString()),
-                args.currentCocktail.receipt,
-                args.currentCocktail.cocktail_group,
-                Integer.parseInt(args.currentCocktail.basis_id.toString()),
-                args.currentCocktail.taste,
-                args.currentCocktail.is_updatable,
-                true,
-                binding.checkFavourite.isChecked)
-            mCocktailViewModel.updateCocktail(deletedCocktail)
+            val deletedCocktail = cocktail?.let {
+                Cocktail(
+                    it.id,
+                    it.name,
+                    it.description,
+                    Integer.parseInt(it.degree.toString()),
+                    it.picture,
+                    Integer.parseInt(it.volume.toString()),
+                    it.receipt,
+                    it.cocktail_group,
+                    Integer.parseInt(it.basis_id.toString()),
+                    it.taste,
+                    it.is_updatable,
+                    true,
+                    binding.checkFavourite.isChecked)
+            }
+            if (deletedCocktail != null) {
+                mCocktailViewModel.updateCocktail(deletedCocktail)
+            }
             Toast.makeText(
                 this,
-                "Successfully removed: ${args.currentCocktail.name}",
+                "Successfully removed: ${cocktail?.name}",
                 Toast.LENGTH_SHORT).show()
             finish()
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete ${args.currentCocktail.name}?")
-        builder.setMessage("Are you sure you want to delete ${args.currentCocktail.name}?")
+        builder.setTitle("Delete ${cocktail?.name}?")
+        builder.setMessage("Are you sure you want to delete ${cocktail?.name}?")
         builder.create().show()
     }
 
@@ -172,10 +198,10 @@ class CocktailsShow : AppCompatActivity() {
 
         binding.checkFavourite.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                mCocktailViewModel.setFavourite(args.currentCocktail.id)
+                mCocktailViewModel.setFavourite(cocktail.id)
             }
             else {
-                mCocktailViewModel.setUnFavourite(args.currentCocktail.id)
+                mCocktailViewModel.setUnFavourite(cocktail.id)
             }
         }
     }

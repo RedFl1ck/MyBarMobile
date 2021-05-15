@@ -2,10 +2,7 @@ package com.example.bottomtest.roomdb.repository
 
 import androidx.lifecycle.LiveData
 import com.example.bottomtest.roomdb.interfaces.IngredientDao
-import com.example.bottomtest.roomdb.model.CocktailsIngredients
-import com.example.bottomtest.roomdb.model.Ingredients
-import com.example.bottomtest.roomdb.model.IngredientsList
-import com.example.bottomtest.roomdb.model.ShoppingList
+import com.example.bottomtest.roomdb.model.*
 
 class IngredientRepository(private val ingredientDao: IngredientDao) {
 
@@ -42,5 +39,9 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
 
     fun isInCart(id: Int) : Boolean{
         return ingredientDao.isInCart(id)
+    }
+
+    fun searchIngredients(searchQuery: String) : LiveData<List<Ingredients>>{
+        return ingredientDao.searchIngredients(searchQuery)
     }
 }

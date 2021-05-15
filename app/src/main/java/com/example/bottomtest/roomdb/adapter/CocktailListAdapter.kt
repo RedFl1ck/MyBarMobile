@@ -2,15 +2,19 @@ package com.example.bottomtest.roomdb.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.ui.cocktails.CocktailsFragmentDirections
+import com.example.bottomtest.ui.cocktails.CocktailsShow
+import com.example.bottomtest.ui.ingredients.IngredientShow
 import kotlinx.android.synthetic.main.row_cocktail_table.view.*
 import java.io.InputStream
 
@@ -44,8 +48,15 @@ class CocktailListAdapter constructor(private val activity: Activity, private va
         holder.itemView.cocktail_taste_txt.text = currentItem.taste
 
         holder.itemView.setOnClickListener {
-            val action = CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)
-            holder.itemView.findNavController().navigate(action)
+            val act = activity.toString().split(".").toTypedArray()
+            if ("ui" in act){
+                val arg = Intent(activity, CocktailsShow::class.java)
+                arg.putExtra(CocktailsShow.COCKTAIL, currentItem)
+                ContextCompat.startActivity(activity, arg, null)
+            } else {
+                val action = CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)
+                holder.itemView.findNavController().navigate(action)
+            }
         }
     }
 

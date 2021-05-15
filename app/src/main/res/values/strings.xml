@@ -174,6 +174,17 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="name_cocktail">Name</string>
+    <string name="degree_cocktail">Degree</string>
+    <string name="volume_cocktail">Volume</string>
+    <string name="taste_cocktail">Taste</string>
+    <string name="group_cocktail">Group</string>
+    <string name="volume_ingredient">Volume</string>
+    <string name="type_ingredient">Type</string>
+    <string name="add_to_shopping_list">Add to shopping list</string>
+    <string name="description_cocktail">Description</string>
+    <string name="receipt_cocktail">Receipt</string>
+    <string name="delete">Delete</string>
 
 
 </resources>
