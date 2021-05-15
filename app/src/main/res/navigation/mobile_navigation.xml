@@ -50,7 +50,7 @@
 
     <activity
         android:id="@+id/addNewActivity"
-        android:name="com.example.bottomtest.roomdb.fragments.add.AddNewCocktail"
+        android:name="com.example.bottomtest.ui.cocktails.AddNewCocktail"
         android:label="@string/title_activity_add_new"
         tools:layout="@layout/activity_add_cocktail"/>
 

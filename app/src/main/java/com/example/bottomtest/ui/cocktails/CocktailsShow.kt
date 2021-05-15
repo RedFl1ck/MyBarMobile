@@ -7,11 +7,16 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowCocktailsBinding
+import com.example.bottomtest.roomdb.adapter.CocktailIngredientListAdapter
+import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
+import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 import java.io.InputStream
 
 
@@ -22,6 +27,8 @@ class CocktailsShow : AppCompatActivity() {
     private val args by navArgs<CocktailsShowArgs>()
 
     private lateinit var mCocktailViewModel: CocktailViewModel
+
+    private lateinit var mIngredientViewModel: IngredientViewModel
 
     private var menu : Menu? = null
 
@@ -35,6 +42,16 @@ class CocktailsShow : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mCocktailViewModel = CocktailViewModel(application)
+
+        // Recyclerview
+        val adapter = CocktailIngredientListAdapter(this, applicationContext)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // CocktailViewModel
+        mIngredientViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
+        mIngredientViewModel.readSelectedIngredients(args.currentCocktail.id).observe(this, { ingredient ->
+            adapter.setData(ingredient)})
 
         //Show Fragment
         showFragmentSet(args.currentCocktail)

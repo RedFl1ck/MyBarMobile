@@ -1,6 +1,5 @@
-package com.example.bottomtest.roomdb.fragments.add
+package com.example.bottomtest.ui.cocktails
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast

@@ -33,7 +33,7 @@ class IngredientsFragment : Fragment() {
         val view = binding.root
 
         // Recyclerview
-        val adapter = IngredientsListAdapter(this@IngredientsFragment, this.requireContext())
+        val adapter = IngredientsListAdapter(this.requireActivity(), this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -41,6 +41,8 @@ class IngredientsFragment : Fragment() {
         mIngredientViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
         mIngredientViewModel.readAllData.observe(viewLifecycleOwner, { ingredient ->
             adapter.setData(ingredient)})
+        mIngredientViewModel.readShoppingList.observe(viewLifecycleOwner, { ingredient ->
+            adapter.setShopping(ingredient)})
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val bottomNav = activity?.findViewById<BottomNavigationView?>(R.id.nav_view)

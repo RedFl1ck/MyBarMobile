@@ -25,9 +25,16 @@ interface IngredientDao {
     @Query("UPDATE ingredients SET is_favourite = 0 WHERE id = :id")
     fun setUnFavourite(id: Int)
 
-    @Query("INSERT INTO shopping_list (ingredient_id, number, measuring) values(:id, 0, 'мл.')")
+    @Query("INSERT INTO shopping_list (ingredient_id, number, measuring) values(:id, 0, 'шт.')")
     fun addToCart(id: Int)
 
     @Query("SELECT 1 FROM shopping_list WHERE ingredient_id = :id")
     fun isInCart(id: Int) : Boolean
+
+    @Query("SELECT ingredient_id FROM shopping_list")
+    fun readShoppingList() : LiveData<List<Int>>
+
+    //@Query("SELECT volume FROM cocktails_ingredients JOIN ingredients ON cocktails_ingredients.ingredient_id = ingredients.id WHERE cocktail_id = :id ORDER BY id ASC")
+    @Query("SELECT * FROM cocktails_ingredients where cocktail_id = :id")
+    fun readSelectedIngredients(id: Int) : LiveData<List<CocktailsIngredients>>
 }

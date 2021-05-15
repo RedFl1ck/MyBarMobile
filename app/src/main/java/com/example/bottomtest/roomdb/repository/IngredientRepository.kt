@@ -2,11 +2,15 @@ package com.example.bottomtest.roomdb.repository
 
 import androidx.lifecycle.LiveData
 import com.example.bottomtest.roomdb.interfaces.IngredientDao
+import com.example.bottomtest.roomdb.model.CocktailsIngredients
 import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.roomdb.model.IngredientsList
+import com.example.bottomtest.roomdb.model.ShoppingList
 
 class IngredientRepository(private val ingredientDao: IngredientDao) {
 
     val readAllData: LiveData<List<Ingredients>> = ingredientDao.readAllData()
+    val readShoppingList: LiveData<List<Int>> = ingredientDao.readShoppingList()
 
     suspend fun addIngredient(ingredient: Ingredients){
         ingredientDao.addIngredient(ingredient)
@@ -30,6 +34,10 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
 
     fun addToCart(id: Int){
         ingredientDao.addToCart(id)
+    }
+
+    fun readSelectedIngredients(id: Int): LiveData<List<CocktailsIngredients>>{
+        return ingredientDao.readSelectedIngredients(id)
     }
 
     fun isInCart(id: Int) : Boolean{

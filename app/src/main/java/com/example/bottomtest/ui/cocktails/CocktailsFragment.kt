@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.FragmentCocktailsBinding
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
-import com.example.bottomtest.roomdb.fragments.add.AddNewCocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -51,7 +50,7 @@ class CocktailsFragment : Fragment() {
         }
 
         // Recyclerview
-        val adapter = CocktailListAdapter(this@CocktailsFragment, this.requireContext())
+        val adapter = CocktailListAdapter(this.requireActivity(), this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

@@ -33,7 +33,7 @@ class FavouriteFragment : Fragment() {
         val view = binding.root
 
         // Recyclerview
-        val adapter = FavouriteListAdapter(this@FavouriteFragment, this.requireContext())
+        val adapter = FavouriteListAdapter(this.requireActivity(), this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

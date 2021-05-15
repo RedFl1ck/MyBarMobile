@@ -20,12 +20,22 @@
             android:padding="12dp">
 
             <ImageView
-                android:id="@+id/cocktail_picture"
-                android:layout_width="53dp"
-                android:layout_height="53dp"
-                android:src="@drawable/cocktail_show"
+                android:id="@+id/back_picture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/full_moon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/cocktail_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:src="@drawable/cocktail_show"
+                app:layout_constraintStart_toStartOf="@id/back_picture"
+                app:layout_constraintTop_toTopOf="@id/back_picture"
+                app:layout_constraintEnd_toEndOf="@id/back_picture"
+                app:layout_constraintBottom_toBottomOf="@id/back_picture"/>
 
             <TextView
                 android:id="@+id/cocktail_name_txt"
@@ -36,8 +46,8 @@
                 android:text="Name"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/cocktail_picture"
-                app:layout_constraintTop_toTopOf="@+id/cocktail_picture" />
+                app:layout_constraintStart_toEndOf="@+id/back_picture"
+                app:layout_constraintTop_toTopOf="@+id/back_picture" />
 
             <TextView
                 android:id="@+id/cocktail_degree_txt"

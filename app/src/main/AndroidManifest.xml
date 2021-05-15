@@ -12,10 +12,7 @@
         android:theme="@style/Theme.BOTTOMTEST">
         <activity android:name=".ui.cocktails.CocktailsShow" />
         <activity
-            android:name=".roomdb.fragments.update.UpdateCocktail"
-            android:label="@string/title_activity_update" />
-        <activity
-            android:name=".roomdb.fragments.add.AddNewCocktail"
+            android:name=".ui.cocktails.AddNewCocktail"
             android:label="@string/title_activity_add_new" />
         <activity
             android:name=".ui.ingredients.IngredientShow"

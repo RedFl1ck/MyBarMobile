@@ -11,7 +11,6 @@
         style="@style/Widget.App.Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="30dp"
         android:layout_marginTop="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,16 +38,6 @@
                 app:layout_constraintStart_toEndOf="@+id/ingredient_picture"
                 app:layout_constraintTop_toTopOf="@+id/ingredient_picture" />
 
-            <ImageButton
-                android:backgroundTint="?attr/colorPrimary"
-                android:id="@+id/ingredient_add_to_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/shopping_cart__1_"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/ingredient_name_txt"
-                android:contentDescription="add" />
-
             <TextView
                 android:id="@+id/ingredient_degree_txt"
                 style="@style/Widget.App.Card"
@@ -56,7 +45,16 @@
                 android:layout_height="wrap_content"
                 android:text="Degree"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ingredient_add_to_cart" />
+                app:layout_constraintTop_toBottomOf="@id/ingredient_name_txt" />
+
+            <TextView
+                android:id="@+id/ingredient_volume_txt"
+                style="@style/Widget.App.Card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Volume"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ingredient_name_txt" />
 
 
             <TextView

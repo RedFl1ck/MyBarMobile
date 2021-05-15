@@ -29,7 +29,7 @@ class ShoppingFragment : Fragment() {
         val view = binding.root
 
         // Recyclerview
-        val adapter = ShoppingListAdapter(this@ShoppingFragment, this.requireContext())
+        val adapter = ShoppingListAdapter(this.requireActivity(), this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
