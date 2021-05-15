@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class IngredientsList(
+    val volume: Int,
     val id: Int,
     val name: String,
     val description: String,
@@ -13,6 +14,5 @@ data class IngredientsList(
     val type: String?,
     val degree: Int,
     val is_favourite: Boolean,
-    val created_by_user: Boolean,
-    val volume: Int
+    val created_by_user: Boolean
 ): Parcelable

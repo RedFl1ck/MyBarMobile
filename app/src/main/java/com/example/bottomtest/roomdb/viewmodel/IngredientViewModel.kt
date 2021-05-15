@@ -1,7 +1,7 @@
 package com.example.bottomtest.roomdb.viewmodel
 
 import android.app.Application
-import android.text.BoringLayout
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -9,8 +9,9 @@ import com.example.bottomtest.roomdb.CocktailDatabase
 import com.example.bottomtest.roomdb.model.CocktailsIngredients
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.model.IngredientsList
-import com.example.bottomtest.roomdb.model.ShoppingList
 import com.example.bottomtest.roomdb.repository.IngredientRepository
+import com.example.bottomtest.ui.ingredients.IngredientShow
+import com.example.bottomtest.ui.ingredients.IngredientShowArgs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -21,7 +22,6 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
     val readAllData: LiveData<List<Ingredients>>
     val readShoppingList: LiveData<List<Int>>
     private val repository: IngredientRepository
-    var readSelectedIngredients: LiveData<List<CocktailsIngredients>>? = null
 
     init {
         val ingredientDao = CocktailDatabase.getDatabase(
@@ -31,7 +31,6 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
         readAllData = repository.readAllData
         readShoppingList = repository.readShoppingList
     }
-
 
     fun addIngredient(ingredient: Ingredients){
         viewModelScope.launch(Dispatchers.IO) {

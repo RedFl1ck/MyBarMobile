@@ -2,23 +2,23 @@ package com.example.bottomtest.roomdb.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
-import com.example.bottomtest.roomdb.model.CocktailsIngredients
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.model.IngredientsList
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
+import com.example.bottomtest.ui.ingredients.IngredientShow
 import kotlinx.android.synthetic.main.row_ingredients_cocktail.view.*
-import kotlinx.android.synthetic.main.row_ingredients_table.view.*
 import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_degree_txt
 import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_name_txt
 import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_picture
 import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_type_txt
-import kotlinx.android.synthetic.main.row_shopping_table.view.*
 
 class CocktailIngredientListAdapter constructor(private val activity: Activity, private val context: Context) : RecyclerView.Adapter<CocktailIngredientListAdapter.MyViewHolder>() {
 
@@ -52,6 +52,20 @@ class CocktailIngredientListAdapter constructor(private val activity: Activity, 
 
         mIngredientViewModel = IngredientViewModel(activity.application)
 
+        holder.itemView.setOnClickListener {
+
+            val ingredient = Ingredients(currentItem.id,
+            currentItem.name,
+            currentItem.description,
+            currentItem.picture,
+            currentItem.type,
+            currentItem.degree,
+            currentItem.is_favourite,
+            currentItem.created_by_user)
+            val arg = Intent(activity, IngredientShow::class.java)
+            arg.putExtra(IngredientShow.INGREDIENT, ingredient)
+            ContextCompat.startActivity(activity, arg, null)
+        }
     }
 
     fun setData(ingredient: List<IngredientsList>){

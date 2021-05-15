@@ -1,12 +1,14 @@
 package com.example.bottomtest.roomdb.model
 
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 @Entity(tableName = "cocktails_ingredients",
         foreignKeys = [
             ForeignKey(
@@ -28,4 +30,4 @@ data class CocktailsIngredients(
         val cocktail_id: Int,
         val ingredient_id: Int,
         val volume: Int
-)
+) : Parcelable

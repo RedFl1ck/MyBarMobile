@@ -8,13 +8,18 @@ import androidx.core.view.isVisible
 import androidx.navigation.navArgs
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowIngredientsBinding
+import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 
 class IngredientShow : AppCompatActivity() {
 
-    private lateinit var binding: ActivityShowIngredientsBinding
+    companion object {
+        const val INGREDIENT = "ingredient"
+    }
 
-    private val args by navArgs<IngredientShowArgs>()
+    private var ingredient : Ingredients? = null
+
+    private lateinit var binding: ActivityShowIngredientsBinding
 
     private lateinit var mIngredientViewModel: IngredientViewModel
 
@@ -26,22 +31,33 @@ class IngredientShow : AppCompatActivity() {
         mIngredientViewModel = IngredientViewModel(application)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.nameInputShow.text = args.currentIngredient.name
-        binding.descriptionInputShow.text = args.currentIngredient.description
-        binding.checkFavourite.isChecked = args.currentIngredient.is_favourite
-        if (args.currentIngredient.degree != 0){
+        ingredient = initIngredient()
+
+        binding.nameInputShow.text = ingredient?.name
+        binding.descriptionInputShow.text = ingredient?.description
+        binding.checkFavourite.isChecked = ingredient?.is_favourite == true
+        if (ingredient?.degree != 0){
             binding.degreeInputShow.isVisible = true
-            binding.degreeInputShow.text = "Крепость: ${args.currentIngredient.degree}°"
+            binding.degreeInputShow.text = "Крепость: ${ingredient?.degree}°"
         }
-        binding.typeInputShow.text = args.currentIngredient.type.toString()
+        binding.typeInputShow.text = ingredient?.type.toString()
 
         binding.checkFavourite.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                mIngredientViewModel.setFavourite(args.currentIngredient.id)
+                ingredient?.id?.let { mIngredientViewModel.setFavourite(it) }
             }
             else {
-                mIngredientViewModel.setUnFavourite(args.currentIngredient.id)
+                ingredient?.id?.let { mIngredientViewModel.setUnFavourite(it) }
             }
+        }
+    }
+
+    private fun initIngredient(): Ingredients?{
+        return if (intent.hasExtra(INGREDIENT)){
+            intent.getParcelableExtra(INGREDIENT)
+        } else {
+            val args by navArgs<IngredientShowArgs>()
+            args.currentIngredient
         }
     }
 
