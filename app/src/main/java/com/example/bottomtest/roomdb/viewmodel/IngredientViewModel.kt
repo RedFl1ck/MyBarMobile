@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.bottomtest.roomdb.CocktailDatabase
+import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.model.IngredientsList
@@ -22,9 +22,7 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
     private val repository: IngredientRepository
 
     init {
-        val ingredientDao = CocktailDatabase.getDatabase(
-            application
-        ).ingredientDao()
+        val ingredientDao = MyBarApplication.getDB().ingredientDao()
         repository = IngredientRepository(ingredientDao)
         readAllData = repository.readAllData
         readShoppingList = repository.readShoppingList

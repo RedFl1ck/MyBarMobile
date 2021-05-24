@@ -4,8 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.bottomtest.roomdb.CocktailDatabase
-import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.model.ItemShopping
 import com.example.bottomtest.roomdb.model.ShoppingList
 import com.example.bottomtest.roomdb.repository.ShoppingListRepository
@@ -18,9 +17,7 @@ class ShoppingListViewModel(application: Application): AndroidViewModel(applicat
     private val repository: ShoppingListRepository
 
     init {
-        val shoppingListDao = CocktailDatabase.getDatabase(
-            application
-        ).shoppingListDao()
+        val shoppingListDao = MyBarApplication.getDB().shoppingListDao()
         repository = ShoppingListRepository(shoppingListDao)//IngredientRepository(ingredientDao)
         readAllData = repository.readAllData
     }

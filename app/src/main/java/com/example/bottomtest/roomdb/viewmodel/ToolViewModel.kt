@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.bottomtest.roomdb.CocktailDatabase
+import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.model.Tools
 import com.example.bottomtest.roomdb.repository.ToolRepository
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +16,7 @@ class ToolViewModel(application: Application): AndroidViewModel(application)  {
     private val repository: ToolRepository
 
     init {
-        val toolDao = CocktailDatabase.getDatabase(
-            application
-        ).toolDao()
+        val toolDao = MyBarApplication.getDB().toolDao()
         repository = ToolRepository(toolDao)
         readAllData = repository.readAllData
     }

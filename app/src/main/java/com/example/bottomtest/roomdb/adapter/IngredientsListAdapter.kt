@@ -44,7 +44,6 @@ class IngredientsListAdapter constructor(private val activity: Activity, private
         holder.itemView.ingredient_type_txt.text = currentItem.type.toString()
         holder.itemView.ingredient_add_to_cart.isVisible = currentItem.id !in shoppingList
         mIngredientViewModel = IngredientViewModel(activity.application)
-        val temp = mIngredientViewModel.isInCart(currentItem.id)
         holder.itemView.ingredient_add_to_cart.setOnClickListener {
             mIngredientViewModel.addToCart(currentItem.id)
         }

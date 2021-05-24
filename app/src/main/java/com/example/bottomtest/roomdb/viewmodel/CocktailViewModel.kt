@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.bottomtest.roomdb.CocktailDatabase
+import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.repository.CocktailRepository
@@ -22,9 +22,7 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
     private val repository: CocktailRepository
 
     init {
-        val cocktailDao = CocktailDatabase.getDatabase(
-            application
-        ).cocktailDao()
+        val cocktailDao = MyBarApplication.getDB().cocktailDao()
         repository = CocktailRepository(cocktailDao)
         readNotDeletedData = repository.readNotDeletedData
         readDeletedData = repository.readDeletedData
