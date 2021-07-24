@@ -25,7 +25,7 @@ interface CocktailDao {
     @Query("SELECT * FROM cocktails where is_deleted == 1 ORDER BY id ASC")
     fun readDeletedData(): LiveData<List<Cocktail>>
 
-    @Query("SELECT * FROM cocktails where name LIKE :searchQuery OR description LIKE :searchQuery ORDER BY id ASC")
+    @Query("SELECT * FROM cocktails where name LIKE :searchQuery ORDER BY id ASC")
     fun searchCocktails(searchQuery : String): LiveData<List<Cocktail>>
 
     @Query("SELECT name FROM ingredients where id = :basis_id")

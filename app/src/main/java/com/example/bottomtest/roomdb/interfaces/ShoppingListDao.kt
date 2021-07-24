@@ -26,4 +26,7 @@ interface ShoppingListDao {
 
     @Query("DELETE FROM shopping_list WHERE ingredient_id = :id")
     fun delete(id: Int)
+
+    @Query("SELECT * FROM ingredients JOIN shopping_list ON ingredients.id = shopping_list.ingredient_id WHERE name LIKE :searchQuery ORDER BY id ASC")
+    fun searchItems(searchQuery : String): LiveData<List<ItemShopping>>
 }

@@ -1,13 +1,14 @@
 package com.example.bottomtest.ui.shopping_list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bottomtest.R
 import com.example.bottomtest.databinding.FragmentShoppingBinding
+import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
 import com.example.bottomtest.roomdb.adapter.ShoppingListAdapter
 import com.example.bottomtest.roomdb.viewmodel.ShoppingListViewModel
 
@@ -20,6 +21,9 @@ class ShoppingFragment : Fragment() {
 
     private lateinit var mShoppingViewModel: ShoppingListViewModel
 
+    private lateinit var adapter: ShoppingListAdapter
+
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -27,9 +31,10 @@ class ShoppingFragment : Fragment() {
     ): View {
         _binding = FragmentShoppingBinding.inflate(inflater, container, false)
         val view = binding.root
+        setHasOptionsMenu(true)
 
         // Recyclerview
-        val adapter = ShoppingListAdapter(this.requireActivity(), this.requireContext())
+        adapter = ShoppingListAdapter(this.requireActivity(), this.requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -39,5 +44,35 @@ class ShoppingFragment : Fragment() {
             adapter.setData(ingredient)})
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main, menu)
+
+        val searchView = menu.findItem(R.id.action_search).actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    mShoppingViewModel.search(query, viewLifecycleOwner, adapter)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    mShoppingViewModel.search(newText, viewLifecycleOwner, adapter)
+                }
+                return true
+            }
+
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

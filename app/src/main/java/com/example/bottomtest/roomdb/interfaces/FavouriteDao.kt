@@ -9,4 +9,7 @@ import com.example.bottomtest.roomdb.model.Cocktail
 interface FavouriteDao {
     @Query("SELECT * FROM cocktails WHERE is_favourite = 1 ORDER BY id ASC")
     fun readCocktailsData(): LiveData<List<Cocktail>>
+
+    @Query("SELECT * FROM cocktails WHERE is_favourite = 1 AND name LIKE :searchQuery ORDER BY id ASC")
+    fun searchCocktails(searchQuery : String): LiveData<List<Cocktail>>
 }

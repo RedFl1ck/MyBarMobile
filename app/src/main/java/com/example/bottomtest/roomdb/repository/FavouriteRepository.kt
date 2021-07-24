@@ -6,4 +6,8 @@ import com.example.bottomtest.roomdb.model.Cocktail
 
 class FavouriteRepository(private val favouriteDao: FavouriteDao) {
     val readCocktailsData: LiveData<List<Cocktail>> = favouriteDao.readCocktailsData()
+
+    fun searchCocktails(searchQuery: String) : LiveData<List<Cocktail>> {
+        return favouriteDao.searchCocktails(searchQuery)
+    }
 }

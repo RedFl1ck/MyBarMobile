@@ -37,6 +37,6 @@ interface IngredientDao {
     @Query("SELECT ingredients.id, name, description, picture, type, degree, is_favourite, created_by_user, volume FROM cocktails_ingredients JOIN ingredients ON cocktails_ingredients.ingredient_id = ingredients.id WHERE cocktail_id = :id ORDER BY ingredients.id ASC")
     fun readSelectedIngredients(id: Int) : LiveData<List<IngredientsList>>
 
-    @Query("SELECT * FROM ingredients where name LIKE :searchQuery OR description LIKE :searchQuery ORDER BY id ASC")
+    @Query("SELECT * FROM ingredients where name LIKE :searchQuery ORDER BY id ASC")
     fun searchIngredients(searchQuery : String): LiveData<List<Ingredients>>
 }

@@ -29,4 +29,8 @@ class ShoppingListRepository(private val shoppingListDao: ShoppingListDao) {
     fun delete(id: Int){
         shoppingListDao.delete(id)
     }
+
+    fun searchIngredients(searchQuery: String) : LiveData<List<ItemShopping>>{
+        return shoppingListDao.searchItems(searchQuery)
+    }
 }
