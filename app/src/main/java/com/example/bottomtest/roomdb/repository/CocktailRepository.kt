@@ -21,10 +21,6 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
         cocktailDao.deleteCocktail(cocktail)
     }
 
-    fun getCocktailBasis(basis_id: Int): LiveData<String> {
-        return cocktailDao.getCocktailBasis(basis_id)
-    }
-
     fun setFavourite(id: Int) {
         cocktailDao.setFavourite(id)
     }
@@ -47,5 +43,9 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
 
     fun getRecommendedCocktails(taste: String, id: Int): LiveData<List<Cocktail>> {
         return cocktailDao.getRecommendedCocktails(taste, id)
+    }
+
+    fun getCocktailBasis(basis_id: Int): LiveData<String> {
+        return cocktailDao.getCocktailBasis(basis_id)
     }
 }

@@ -24,18 +24,18 @@ class ShoppingListViewModel(application: Application): AndroidViewModel(applicat
 
     init {
         val shoppingListDao = MyBarApplication.getDB().shoppingListDao()
-        repository = ShoppingListRepository(shoppingListDao)//IngredientRepository(ingredientDao)
+        repository = ShoppingListRepository(shoppingListDao)
         readAllData = repository.readAllData
     }
 
     fun search(query: String, viewLifecycleOwner: LifecycleOwner, adapter: ShoppingListAdapter){
         val searchQuery = "%$query%"
 
-        repository.searchIngredients(searchQuery).observe(viewLifecycleOwner, { list ->
+        repository.searchIngredients(searchQuery).observe(viewLifecycleOwner) { list ->
             list.let {
                 adapter.setData(it)
             }
-        })
+        }
     }
 
     fun searchItems(searchQuery: String): LiveData<List<ItemShopping>>{

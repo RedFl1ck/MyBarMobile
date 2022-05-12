@@ -5,6 +5,7 @@ import android.text.TextUtils
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
@@ -72,9 +73,16 @@ class CocktailViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun getCocktailBasis(basis_id: Int): LiveData<String> {
-        return repository.getCocktailBasis(basis_id)
-    }
+    /*fun getCocktailBasis(basis_id: Int):  LiveData<String>{
+        val basis : LiveData<String>
+        viewModelScope.run {
+            val job = async { repository.getCocktailBasis(basis_id) }
+            runBlocking {
+                basis =  job.await()
+            }
+        }
+        return basis
+    }*/
 
     fun setFavourite(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -125,5 +133,9 @@ class CocktailViewModel(application: Application) : AndroidViewModel(application
             }
         }
         return selectedCocktails
+    }
+
+    fun getCocktailBasis(basis_id: Int): LiveData<String> {
+        return repository.getCocktailBasis(basis_id)
     }
 }

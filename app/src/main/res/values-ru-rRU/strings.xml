@@ -83,5 +83,6 @@
     <string name="description_cocktail">Описание</string>
     <string name="receipt_cocktail">Рецепт</string>
     <string name="delete">Удалить</string>
+    <string name="title_activity_dashboards">Дашборды</string>
 
 </resources>

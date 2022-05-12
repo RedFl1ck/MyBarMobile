@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.idea/deploymentTargetDropDown.xml
+/app/src/main/res/values-night/strings.xml
+/.idea/deploymentTargetDropDown.xml
+/app/src/main/res/values-night/strings.xml

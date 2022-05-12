@@ -28,9 +28,6 @@ interface CocktailDao {
     @Query("SELECT * FROM cocktails where name LIKE :searchQuery ORDER BY id ASC")
     fun searchCocktails(searchQuery: String): LiveData<List<Cocktail>>
 
-    @Query("SELECT name FROM ingredients where id = :basis_id")
-    fun getCocktailBasis(basis_id: Int): LiveData<String>
-
     @Query("UPDATE cocktails SET is_favourite = 1 WHERE id = :id")
     fun setFavourite(id: Int)
 
@@ -45,4 +42,7 @@ interface CocktailDao {
 
     @Query("SELECT * FROM cocktails WHERE taste = :taste AND is_favourite = 0 AND id != :id ORDER BY open_count DESC LIMIT 5")
     fun getRecommendedCocktails(taste: String, id: Int): LiveData<List<Cocktail>>
+
+    @Query("SELECT name FROM ingredients WHERE id = :basis_id")
+    fun getCocktailBasis(basis_id: Int): LiveData<String>
 }
