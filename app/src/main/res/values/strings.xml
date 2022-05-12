@@ -185,6 +185,8 @@
     <string name="description_cocktail">Description</string>
     <string name="receipt_cocktail">Receipt</string>
     <string name="delete">Delete</string>
+    <string name="ingredients_show">Ingredients:</string>
+    <string name="recommended_show">Recommended cocktails:</string>
 
 
 </resources>

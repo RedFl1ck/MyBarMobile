@@ -125,11 +125,40 @@
                 android:layout_height="wrap_content"
                 android:text="@string/taste_cocktail" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="12dp"
-                android:id="@+id/recyclerView"
+            <TextView
+                android:layout_marginTop="16dp"
+                android:maxLines="100"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:id="@+id/ingredients_text_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/ingredients_show"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="12dp"
+                android:id="@+id/recyclerViewIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:maxLines="100"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:id="@+id/recommended_text_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/recommended_show"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="12dp"
+                android:id="@+id/recyclerViewCocktails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

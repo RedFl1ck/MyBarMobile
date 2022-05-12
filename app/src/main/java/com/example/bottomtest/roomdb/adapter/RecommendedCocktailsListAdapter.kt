@@ -8,29 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Cocktail
-import com.example.bottomtest.roomdb.repository.CocktailRepository
-import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
-import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 import com.example.bottomtest.ui.cocktails.CocktailsFragmentDirections
 import com.example.bottomtest.ui.cocktails.CocktailsShow
-import com.example.bottomtest.ui.ingredients.IngredientShow
 import kotlinx.android.synthetic.main.row_cocktail_table.view.*
 import java.io.InputStream
 
-class CocktailListAdapter constructor(private val activity: Activity, private val context: Context) : RecyclerView.Adapter<CocktailListAdapter.MyViewHolder>() {
+class RecommendedCocktailsListAdapter constructor(private val activity: Activity, private val context: Context) : RecyclerView.Adapter<RecommendedCocktailsListAdapter.MyViewHolder>() {
 
     private var cocktailList = emptyList<Cocktail>()
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_cocktail_table, parent, false))
+        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_recommended_cocktail_table, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -49,8 +43,6 @@ class CocktailListAdapter constructor(private val activity: Activity, private va
         holder.itemView.cocktail_name_txt.text = currentItem.name
         holder.itemView.cocktail_volume_txt.text = "Объем: ${currentItem.volume} мл"
         holder.itemView.cocktail_degree_txt.text = "Крепость: ${currentItem.degree}°"
-        holder.itemView.cocktail_group_txt.text = currentItem.cocktail_group.toString()
-        holder.itemView.cocktail_taste_txt.text = currentItem.taste
 
         holder.itemView.setOnClickListener {
             val act = activity.toString().split(".").toTypedArray()

@@ -13,21 +13,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowCocktailsBinding
 import com.example.bottomtest.roomdb.adapter.CocktailIngredientListAdapter
-import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
+import com.example.bottomtest.roomdb.adapter.RecommendedCocktailsListAdapter
 import com.example.bottomtest.roomdb.model.Cocktail
-import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
-import com.example.bottomtest.ui.ingredients.IngredientShow
-import com.example.bottomtest.ui.ingredients.IngredientShowArgs
 import java.io.InputStream
 
 
 class CocktailsShow : AppCompatActivity() {
 
-    companion object {const val COCKTAIL = "cocktail"}
+    companion object {
+        const val COCKTAIL = "cocktail"
+    }
 
-    private var cocktail : Cocktail? = null
+    private var cocktail: Cocktail? = null
 
     private lateinit var binding: ActivityShowCocktailsBinding
 
@@ -35,7 +34,7 @@ class CocktailsShow : AppCompatActivity() {
 
     private lateinit var mIngredientViewModel: IngredientViewModel
 
-    private var menu : Menu? = null
+    private var menu: Menu? = null
 
     private var isFavourite: Boolean = false
     private var isDeleted: Boolean = false
@@ -51,26 +50,42 @@ class CocktailsShow : AppCompatActivity() {
         title = cocktail?.name
 
         // Recyclerview
-        val adapter = CocktailIngredientListAdapter(this, applicationContext)
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapterIngredients = CocktailIngredientListAdapter(this, applicationContext)
+        binding.recyclerViewIngredients.adapter = adapterIngredients
+        binding.recyclerViewIngredients.layoutManager = LinearLayoutManager(this)
 
         // IngredientViewModel
-        mIngredientViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
+        mIngredientViewModel = ViewModelProvider(this)[IngredientViewModel::class.java]
         cocktail?.id?.let {
-            mIngredientViewModel.readSelectedIngredients(it).observe(this, { cocktailID ->
-                adapter.setData(cocktailID)})
+            mIngredientViewModel.readSelectedIngredients(it).observe(this) { cocktailID ->
+                adapterIngredients.setData(cocktailID)
+            }
+        }
+
+        // Recyclerview
+        val adapterCocktails = RecommendedCocktailsListAdapter(this, applicationContext)
+        binding.recyclerViewCocktails.adapter = adapterCocktails
+        val horizontalLayoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewCocktails.layoutManager = horizontalLayoutManager
+
+        // mCocktailViewModel
+        mCocktailViewModel = ViewModelProvider(this)[CocktailViewModel::class.java]
+        cocktail?.let {
+            mCocktailViewModel.getRecommendedCocktails(it.taste, it.id).observe(this) { cocktails ->
+                adapterCocktails.setData(cocktails)
+            }
         }
 
         //Show Fragment
-        cocktail?.let { showFragmentSet(it)}
+        cocktail?.let { showFragmentSet(it) }
 
         //Update Fragment
-        cocktail?.let { updateFragmentSet(it)}
+        cocktail?.let { updateFragmentSet(it) }
     }
 
-    private fun initCocktail(): Cocktail?{
-        return if (intent.hasExtra(COCKTAIL)){
+    private fun initCocktail(): Cocktail? {
+        return if (intent.hasExtra(COCKTAIL)) {
             intent.getParcelableExtra(COCKTAIL)
         } else {
             val args by navArgs<CocktailsShowArgs>()
@@ -87,8 +102,8 @@ class CocktailsShow : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                if (binding.cocktailShowLinear.isVisible){
-                finish()
+                if (binding.cocktailShowLinear.isVisible) {
+                    finish()
                 } else {
                     changeFragments(true)
                 }
@@ -113,10 +128,12 @@ class CocktailsShow : AppCompatActivity() {
                         binding.tasteInputUpdate.text.toString(),
                         isUpdatable,
                         isDeleted,
-                        binding.checkFavourite.isChecked)
+                        binding.checkFavourite.isChecked,
+                        0
+                    )
                 }
 
-                if(cocktail?.let { mCocktailViewModel.inputCheck(it) } == true){
+                if (cocktail?.let { mCocktailViewModel.inputCheck(it) } == true) {
                     mCocktailViewModel.updateCocktail(cocktail)
                     Toast.makeText(this, "Updated Successfully!", Toast.LENGTH_SHORT).show()
                     showFragmentSet(cocktail)
@@ -150,7 +167,9 @@ class CocktailsShow : AppCompatActivity() {
                     it.taste,
                     it.is_updatable,
                     true,
-                    binding.checkFavourite.isChecked)
+                    binding.checkFavourite.isChecked,
+                    it.open_count
+                )
             }
             if (deletedCocktail != null) {
                 mCocktailViewModel.updateCocktail(deletedCocktail)
@@ -158,7 +177,8 @@ class CocktailsShow : AppCompatActivity() {
             Toast.makeText(
                 this,
                 "Successfully removed: ${cocktail?.name}",
-                Toast.LENGTH_SHORT).show()
+                Toast.LENGTH_SHORT
+            ).show()
             finish()
         }
         builder.setNegativeButton("No") { _, _ -> }
@@ -168,6 +188,7 @@ class CocktailsShow : AppCompatActivity() {
     }
 
     private fun showFragmentSet(cocktail: Cocktail) {
+        mCocktailViewModel.incrementOpenCocktail(cocktail.id)
         binding.groupInputShow.text = cocktail.cocktail_group
         binding.basisIdInputShow.text = cocktail.basis_name
         binding.tasteInputShow.text = cocktail.taste
@@ -191,7 +212,7 @@ class CocktailsShow : AppCompatActivity() {
         val receiptSteps = cocktail.receipt.split("/||/").toTypedArray()
         var number = 1
         binding.receiptInputShow.text = ""
-        receiptSteps.forEach{
+        receiptSteps.forEach {
             binding.receiptInputShow.append("$number. $it\n")
             number++
         }
@@ -199,8 +220,7 @@ class CocktailsShow : AppCompatActivity() {
         binding.checkFavourite.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 mCocktailViewModel.setFavourite(cocktail.id)
-            }
-            else {
+            } else {
                 mCocktailViewModel.setUnFavourite(cocktail.id)
             }
         }

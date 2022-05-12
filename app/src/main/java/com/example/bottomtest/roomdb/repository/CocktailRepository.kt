@@ -9,15 +9,15 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
     val readNotDeletedData: LiveData<List<Cocktail>> = cocktailDao.readNotDeletedData()
     val readDeletedData: LiveData<List<Cocktail>> = cocktailDao.readDeletedData()
 
-    suspend fun addCocktail(cocktail: Cocktail){
+    suspend fun addCocktail(cocktail: Cocktail) {
         cocktailDao.addCocktail(cocktail)
     }
 
-    suspend fun updateCocktail(cocktail: Cocktail){
+    suspend fun updateCocktail(cocktail: Cocktail) {
         cocktailDao.updateCocktail(cocktail)
     }
 
-    suspend fun deleteCocktail(cocktail: Cocktail){
+    suspend fun deleteCocktail(cocktail: Cocktail) {
         cocktailDao.deleteCocktail(cocktail)
     }
 
@@ -25,19 +25,27 @@ class CocktailRepository(private val cocktailDao: CocktailDao) {
         return cocktailDao.getCocktailBasis(basis_id)
     }
 
-    fun setFavourite(id: Int){
+    fun setFavourite(id: Int) {
         cocktailDao.setFavourite(id)
     }
 
-    fun setUnFavourite(id: Int){
+    fun setUnFavourite(id: Int) {
         cocktailDao.setUnFavourite(id)
     }
 
-    fun readSelectedCocktails(id: Int) : LiveData<List<Cocktail>>{
+    fun readSelectedCocktails(id: Int): LiveData<List<Cocktail>> {
         return cocktailDao.readSelectedCocktails(id)
     }
 
-    fun searchCocktails(searchQuery: String) : LiveData<List<Cocktail>>{
+    fun searchCocktails(searchQuery: String): LiveData<List<Cocktail>> {
         return cocktailDao.searchCocktails(searchQuery)
+    }
+
+    fun incrementOpenCocktail(id: Int) {
+        cocktailDao.incrementOpenCocktail(id)
+    }
+
+    fun getRecommendedCocktails(taste: String, id: Int): LiveData<List<Cocktail>> {
+        return cocktailDao.getRecommendedCocktails(taste, id)
     }
 }

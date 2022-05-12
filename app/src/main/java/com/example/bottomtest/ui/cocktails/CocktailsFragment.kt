@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.FragmentCocktailsBinding
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
+import com.example.bottomtest.roomdb.repository.CocktailRepository
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -72,9 +74,9 @@ class CocktailsFragment : Fragment() {
 
         // CocktailViewModel
         mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
-        mCocktailViewModel.readNotDeletedData.observe(viewLifecycleOwner, { cocktail ->
+        mCocktailViewModel.readNotDeletedData.observe(viewLifecycleOwner) { cocktail ->
             adapter.setData(cocktail)
-        })
+        }
 
         val parent = view.findViewById<ViewGroup>(R.id.container_cocktail)
         //SHEET FILTER

@@ -75,6 +75,8 @@
     <string name="volume_cocktail">Количество</string>
     <string name="taste_cocktail">Вкус</string>
     <string name="group_cocktail">Группа</string>
+    <string name="ingredients_show">Ингредиенты:</string>
+    <string name="recommended_show">Попробуйте эти коктейли:</string>
     <string name="volume_ingredient">Количество</string>
     <string name="type_ingredient">Тип</string>
     <string name="add_to_shopping_list">Добавить в список покупок</string>

@@ -57,7 +57,8 @@ class AddNewCocktail : AppCompatActivity() {
                     binding.tasteInput.text.toString(),
                     is_updatable = false,
                     is_deleted = false,
-                    is_favourite = false)
+                    is_favourite = false,
+                    open_count = 0)
                 //TODO: FAVOURITE BUTTON
 
                 if(mCocktailViewModel.inputCheck(cocktail)){

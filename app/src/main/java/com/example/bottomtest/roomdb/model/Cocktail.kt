@@ -29,5 +29,6 @@ data class Cocktail @JvmOverloads constructor (
         val is_updatable: Boolean,
         val is_deleted: Boolean,
         val is_favourite: Boolean,
+        val open_count: Int?,
         @Ignore val basis_name: String? = null
 ): Parcelable

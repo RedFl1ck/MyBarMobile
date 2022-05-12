@@ -15,10 +15,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class CocktailViewModel(application: Application): AndroidViewModel(application) {
+class CocktailViewModel(application: Application) : AndroidViewModel(application) {
 
     val readNotDeletedData: LiveData<List<Cocktail>>
-    val readDeletedData: LiveData<List<Cocktail>>
+    private val readDeletedData: LiveData<List<Cocktail>>
     private val repository: CocktailRepository
 
     init {
@@ -28,18 +28,18 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
         readDeletedData = repository.readDeletedData
     }
 
-    fun search(query: String, viewLifecycleOwner: LifecycleOwner, adapter: CocktailListAdapter){
+    fun search(query: String, viewLifecycleOwner: LifecycleOwner, adapter: CocktailListAdapter) {
         val searchQuery = "%$query%"
 
-        searchCocktails(searchQuery).observe(viewLifecycleOwner, { list ->
+        searchCocktails(searchQuery).observe(viewLifecycleOwner) { list ->
             list.let {
                 adapter.setData(it)
             }
-        })
+        }
     }
 
 
-    fun inputCheck(cocktail: Cocktail): Boolean{
+    fun inputCheck(cocktail: Cocktail): Boolean {
         return !(TextUtils.isEmpty(cocktail.name)
                 && TextUtils.isEmpty(cocktail.description)
                 && cocktail.degree.toString().isEmpty()
@@ -54,19 +54,19 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
                 && TextUtils.isEmpty(cocktail.is_favourite.toString()))
     }
 
-    fun addCocktail(cocktail: Cocktail){
+    fun addCocktail(cocktail: Cocktail) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addCocktail(cocktail)
         }
     }
 
-    fun updateCocktail(cocktail: Cocktail){
+    fun updateCocktail(cocktail: Cocktail) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateCocktail(cocktail)
         }
     }
 
-    fun deleteCocktail(cocktail: Cocktail){
+    fun deleteCocktail(cocktail: Cocktail) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteCocktail(cocktail)
         }
@@ -76,35 +76,52 @@ class CocktailViewModel(application: Application): AndroidViewModel(application)
         return repository.getCocktailBasis(basis_id)
     }
 
-    fun setFavourite(id: Int){
+    fun setFavourite(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.setFavourite(id)
         }
     }
 
-    fun setUnFavourite(id: Int){
+    fun setUnFavourite(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.setUnFavourite(id)
         }
     }
 
-    fun readSelectedCocktails(id: Int): LiveData<List<Cocktail>>{
-        val selectedCocktails : LiveData<List<Cocktail>>
+    fun readSelectedCocktails(id: Int): LiveData<List<Cocktail>> {
+        val selectedCocktails: LiveData<List<Cocktail>>
         viewModelScope.run {
             val job = async { repository.readSelectedCocktails(id) }
             runBlocking {
-                selectedCocktails =  job.await()
+                selectedCocktails = job.await()
             }
         }
         return selectedCocktails
     }
 
-    private fun searchCocktails(searchQuery: String): LiveData<List<Cocktail>>{
-        val selectedCocktails : LiveData<List<Cocktail>>
+    private fun searchCocktails(searchQuery: String): LiveData<List<Cocktail>> {
+        val selectedCocktails: LiveData<List<Cocktail>>
         viewModelScope.run {
             val job = async { repository.searchCocktails(searchQuery) }
             runBlocking {
-                selectedCocktails =  job.await()
+                selectedCocktails = job.await()
+            }
+        }
+        return selectedCocktails
+    }
+
+    fun incrementOpenCocktail(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.incrementOpenCocktail(id)
+        }
+    }
+
+    fun getRecommendedCocktails(taste: String, id: Int): LiveData<List<Cocktail>> {
+        val selectedCocktails: LiveData<List<Cocktail>>
+        viewModelScope.run {
+            val job = async { repository.getRecommendedCocktails(taste, id) }
+            runBlocking {
+                selectedCocktails = job.await()
             }
         }
         return selectedCocktails
