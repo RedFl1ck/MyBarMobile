@@ -64,9 +64,8 @@
                 style="@style/Widget.App.Card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:text="@string/volume_cocktail"
-                app:layout_constraintStart_toEndOf="@+id/back_picture"
+                app:layout_constraintStart_toStartOf="@+id/cocktail_name_txt"
                 app:layout_constraintTop_toBottomOf="@+id/cocktail_name_txt" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
