@@ -57,8 +57,8 @@ class CocktailsShow : AppCompatActivity() {
         // IngredientViewModel
         mIngredientViewModel = ViewModelProvider(this)[IngredientViewModel::class.java]
         cocktail?.id?.let {
-            mIngredientViewModel.readSelectedIngredients(it).observe(this) { cocktailID ->
-                adapterIngredients.setData(cocktailID)
+            mIngredientViewModel.readSelectedIngredients(it).observe(this) { ingredientsList ->
+                adapterIngredients.setData(ingredientsList)
             }
         }
 

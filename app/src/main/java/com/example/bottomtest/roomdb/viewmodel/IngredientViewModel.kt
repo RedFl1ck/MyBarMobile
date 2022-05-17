@@ -10,12 +10,9 @@ import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.model.IngredientsList
 import com.example.bottomtest.roomdb.repository.IngredientRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
-class IngredientViewModel(application: Application): AndroidViewModel(application) {
+class IngredientViewModel(application: Application) : AndroidViewModel(application) {
 
     val readAllData: LiveData<List<Ingredients>>
     val readShoppingList: LiveData<List<Int>>
@@ -28,29 +25,29 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
         readShoppingList = repository.readShoppingList
     }
 
-    fun search(query: String, viewLifecycleOwner: LifecycleOwner, adapter: IngredientsListAdapter){
+    fun search(query: String, viewLifecycleOwner: LifecycleOwner, adapter: IngredientsListAdapter) {
         val searchQuery = "%$query%"
 
-        searchIngredients(searchQuery).observe(viewLifecycleOwner, { list ->
+        searchIngredients(searchQuery).observe(viewLifecycleOwner) { list ->
             list.let {
                 adapter.setData(it)
             }
-        })
+        }
     }
 
-    fun addIngredient(ingredient: Ingredients){
+    fun addIngredient(ingredient: Ingredients) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addIngredient(ingredient)
         }
     }
 
-    fun updateIngredient(ingredient: Ingredients){
+    fun updateIngredient(ingredient: Ingredients) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateIngredient(ingredient)
         }
     }
 
-    fun deleteIngredient(ingredient: Ingredients){
+    fun deleteIngredient(ingredient: Ingredients) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteIngredient(ingredient)
         }
@@ -67,38 +64,43 @@ class IngredientViewModel(application: Application): AndroidViewModel(applicatio
         viewModelScope.run {
             val job = async { repository.readSelectedIngredients(id) }
             runBlocking {
-                selectedIngredients =  job.await()
+                selectedIngredients = job.await()
             }
         }
         return selectedIngredients
     }
 
-    fun setUnFavourite(id: Int){
+    fun setUnFavourite(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.setUnFavourite(id)
         }
     }
 
-    fun isInCart(id: Int){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.isInCart(id)
+    fun isInCart(id: Int): Boolean {
+        var isInCard: Boolean
+        viewModelScope.run {
+            val job = async { repository.isInCart(id) }
+            runBlocking {
+                isInCard = job.await()
+            }
         }
+        return isInCard
     }
 
-    fun addToCart(id: Int){
+    fun addToCart(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (!repository.isInCart(id)){
+            if (!repository.isInCart(id)) {
                 repository.addToCart(id)
             }
         }
     }
 
-    fun searchIngredients(searchQuery: String): LiveData<List<Ingredients>>{
-        val selectedIngredients : LiveData<List<Ingredients>>
+    private fun searchIngredients(searchQuery: String): LiveData<List<Ingredients>> {
+        val selectedIngredients: LiveData<List<Ingredients>>
         viewModelScope.run {
             val job = async { repository.searchIngredients(searchQuery) }
             runBlocking {
-                selectedIngredients =  job.await()
+                selectedIngredients = job.await()
             }
         }
         return selectedIngredients

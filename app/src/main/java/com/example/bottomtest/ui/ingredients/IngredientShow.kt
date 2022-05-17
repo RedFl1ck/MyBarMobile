@@ -10,7 +10,6 @@ import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowIngredientsBinding
-import com.example.bottomtest.roomdb.adapter.CocktailIngredientListAdapter
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
@@ -20,7 +19,7 @@ class IngredientShow : AppCompatActivity() {
 
     companion object {const val INGREDIENT = "ingredient"}
 
-    private var ingredient : Ingredients? = null
+    private var ingredient: Ingredients? = null
 
     private lateinit var binding: ActivityShowIngredientsBinding
 
@@ -43,16 +42,17 @@ class IngredientShow : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         // CocktailViewModel
-        mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
+        mCocktailViewModel = ViewModelProvider(this)[CocktailViewModel::class.java]
         ingredient?.id?.let {
-            mCocktailViewModel.readSelectedCocktails(it).observe(this, { ingredientID ->
-                adapter.setData(ingredientID)})
+            mCocktailViewModel.readSelectedCocktails(it).observe(this) { ingredientID ->
+                adapter.setData(ingredientID)
+            }
         }
 
         binding.nameInputShow.text = ingredient?.name
         binding.descriptionInputShow.text = ingredient?.description
         binding.checkFavourite.isChecked = ingredient?.is_favourite == true
-        if (ingredient?.degree != 0){
+        if (ingredient?.degree != 0) {
             binding.degreeInputShow.isVisible = true
             binding.degreeInputShow.text = "Крепость: ${ingredient?.degree}°"
         }
@@ -61,8 +61,7 @@ class IngredientShow : AppCompatActivity() {
         binding.checkFavourite.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 ingredient?.id?.let { mIngredientViewModel.setFavourite(it) }
-            }
-            else {
+            } else {
                 ingredient?.id?.let { mIngredientViewModel.setUnFavourite(it) }
             }
         }
