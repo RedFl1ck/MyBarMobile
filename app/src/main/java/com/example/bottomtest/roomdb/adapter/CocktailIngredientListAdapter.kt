@@ -61,7 +61,9 @@ class CocktailIngredientListAdapter constructor(private val activity: Activity, 
             currentItem.type,
             currentItem.degree,
             currentItem.is_favourite,
-            currentItem.created_by_user)
+            currentItem.created_by_user,
+            currentItem.open_count,
+            currentItem.shopping_count)
             val arg = Intent(activity, IngredientShow::class.java)
             arg.putExtra(IngredientShow.INGREDIENT, ingredient)
             ContextCompat.startActivity(activity, arg, null)

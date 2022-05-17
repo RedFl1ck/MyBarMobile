@@ -18,5 +18,7 @@ data class Ingredients(
     val type: String?,
     val degree: Int,
     val is_favourite: Boolean,
-    val created_by_user: Boolean
+    val created_by_user: Boolean,
+    val open_count: Int?,
+    val shopping_count: Int?
 ): Parcelable

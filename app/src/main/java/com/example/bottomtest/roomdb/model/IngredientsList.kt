@@ -3,6 +3,7 @@ package com.example.bottomtest.roomdb.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+// ToDo зачем она нужна? Уже есть готовая модель коктейля
 @Parcelize
 data class IngredientsList(
     val volume: Int,
@@ -14,5 +15,7 @@ data class IngredientsList(
     val type: String?,
     val degree: Int,
     val is_favourite: Boolean,
-    val created_by_user: Boolean
+    val created_by_user: Boolean,
+    val open_count: Int?,
+    val shopping_count: Int?
 ): Parcelable
