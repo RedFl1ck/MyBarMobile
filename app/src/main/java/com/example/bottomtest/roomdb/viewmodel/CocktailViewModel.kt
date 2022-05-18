@@ -5,11 +5,11 @@ import android.text.TextUtils
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
 import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.IngredientsList
 import com.example.bottomtest.roomdb.repository.CocktailRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -96,15 +96,15 @@ class CocktailViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun readSelectedCocktails(id: Int): LiveData<List<Cocktail>> {
-        val selectedCocktails: LiveData<List<Cocktail>>
+    fun getIngredientsByCocktailId(id: Int): LiveData<List<IngredientsList>> {
+        val selectedIngredients: LiveData<List<IngredientsList>>
         viewModelScope.run {
-            val job = async { repository.readSelectedCocktails(id) }
+            val job = async { repository.getIngredientsByCocktailId(id) }
             runBlocking {
-                selectedCocktails = job.await()
+                selectedIngredients = job.await()
             }
         }
-        return selectedCocktails
+        return selectedIngredients
     }
 
     private fun searchCocktails(searchQuery: String): LiveData<List<Cocktail>> {

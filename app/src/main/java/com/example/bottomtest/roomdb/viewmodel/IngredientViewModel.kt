@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
+import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.model.IngredientsList
 import com.example.bottomtest.roomdb.repository.IngredientRepository
@@ -59,15 +60,15 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun readSelectedIngredients(id: Int): LiveData<List<IngredientsList>>{
-        val selectedIngredients : LiveData<List<IngredientsList>>
+    fun getCocktailsByIngredientId(id: Int): LiveData<List<Cocktail>> {
+        val selectedCocktails: LiveData<List<Cocktail>>
         viewModelScope.run {
-            val job = async { repository.readSelectedIngredients(id) }
+            val job = async { repository.getCocktailsByIngredientId(id) }
             runBlocking {
-                selectedIngredients = job.await()
+                selectedCocktails = job.await()
             }
         }
-        return selectedIngredients
+        return selectedCocktails
     }
 
     fun setUnFavourite(id: Int) {

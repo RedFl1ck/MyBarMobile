@@ -34,8 +34,8 @@ interface IngredientDao {
     @Query("SELECT ingredient_id FROM shopping_list")
     fun readShoppingList(): LiveData<List<Int>>
 
-    @Query("SELECT ingredients.id, name, description, picture, type, degree, is_favourite, created_by_user, volume FROM cocktails_ingredients JOIN ingredients ON cocktails_ingredients.ingredient_id = ingredients.id WHERE cocktail_id = :id ORDER BY ingredients.id ASC")
-    fun readSelectedIngredients(id: Int) : LiveData<List<IngredientsList>>
+    @Query("SELECT cocktails.id, name, description, degree, picture, cocktails.volume, receipt, cocktail_group, basis_id, taste, is_deleted, is_updatable, is_favourite FROM cocktails JOIN cocktails_ingredients ON cocktails_ingredients.cocktail_id = cocktails.id WHERE ingredient_id = :id ORDER BY cocktails.id ASC")
+    fun getCocktailsByIngredientId(id: Int): LiveData<List<Cocktail>>
 
     @Query("SELECT * FROM ingredients where name LIKE :searchQuery ORDER BY id ASC")
     fun searchIngredients(searchQuery: String): LiveData<List<Ingredients>>

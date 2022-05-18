@@ -2,50 +2,51 @@ package com.example.bottomtest.roomdb.repository
 
 import androidx.lifecycle.LiveData
 import com.example.bottomtest.roomdb.interfaces.CocktailDao
-import com.example.bottomtest.roomdb.model.*
+import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.IngredientsList
 
-class CocktailRepository(private val cocktailDao: CocktailDao) {
+class CocktailRepository(private val dao: CocktailDao) {
 
-    val readNotDeletedData: LiveData<List<Cocktail>> = cocktailDao.readNotDeletedData()
-    val readDeletedData: LiveData<List<Cocktail>> = cocktailDao.readDeletedData()
+    val readNotDeletedData: LiveData<List<Cocktail>> = dao.readNotDeletedData()
+    val readDeletedData: LiveData<List<Cocktail>> = dao.readDeletedData()
 
     suspend fun addCocktail(cocktail: Cocktail) {
-        cocktailDao.addCocktail(cocktail)
+        dao.addCocktail(cocktail)
     }
 
     suspend fun updateCocktail(cocktail: Cocktail) {
-        cocktailDao.updateCocktail(cocktail)
+        dao.updateCocktail(cocktail)
     }
 
     suspend fun deleteCocktail(cocktail: Cocktail) {
-        cocktailDao.deleteCocktail(cocktail)
+        dao.deleteCocktail(cocktail)
     }
 
     fun setFavourite(id: Int) {
-        cocktailDao.setFavourite(id)
+        dao.setFavourite(id)
     }
 
     fun setUnFavourite(id: Int) {
-        cocktailDao.setUnFavourite(id)
+        dao.setUnFavourite(id)
     }
 
-    fun readSelectedCocktails(id: Int): LiveData<List<Cocktail>> {
-        return cocktailDao.readSelectedCocktails(id)
+    fun getIngredientsByCocktailId(id: Int): LiveData<List<IngredientsList>> {
+        return dao.getIngredientsByCocktailId(id)
     }
 
     fun searchCocktails(searchQuery: String): LiveData<List<Cocktail>> {
-        return cocktailDao.searchCocktails(searchQuery)
+        return dao.searchCocktails(searchQuery)
     }
 
     fun incrementOpenCocktail(id: Int) {
-        cocktailDao.incrementOpenCocktail(id)
+        dao.incrementOpenCocktail(id)
     }
 
     fun getRecommendedCocktails(taste: String, id: Int): LiveData<List<Cocktail>> {
-        return cocktailDao.getRecommendedCocktails(taste, id)
+        return dao.getRecommendedCocktails(taste, id)
     }
 
     fun getCocktailBasis(basis_id: Int): LiveData<String> {
-        return cocktailDao.getCocktailBasis(basis_id)
+        return dao.getCocktailBasis(basis_id)
     }
 }
