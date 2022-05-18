@@ -39,4 +39,10 @@ interface IngredientDao {
 
     @Query("SELECT * FROM ingredients where name LIKE :searchQuery ORDER BY id ASC")
     fun searchIngredients(searchQuery: String): LiveData<List<Ingredients>>
+
+    @Query("UPDATE ingredients SET open_count = open_count + 1 WHERE id = :id")
+    fun incrementOpenCount(id: Int)
+
+    @Query("SELECT id, name, shopping_count from ingredients where shopping_count > 0 LIMIT :limit")
+    suspend fun getDataForSoppingChart(limit: Int): List<ShoppingChartItem>
 }

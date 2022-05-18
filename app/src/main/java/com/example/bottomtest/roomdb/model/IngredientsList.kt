@@ -3,7 +3,7 @@ package com.example.bottomtest.roomdb.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-// ToDo зачем она нужна? Уже есть готовая модель коктейля
+
 @Parcelize
 data class IngredientsList(
     val volume: Int,

@@ -44,4 +44,12 @@ class IngredientRepository(private val ingredientDao: IngredientDao) {
     fun searchIngredients(searchQuery: String): LiveData<List<Ingredients>> {
         return ingredientDao.searchIngredients(searchQuery)
     }
+
+    fun incrementOpenCount(id: Int) {
+        ingredientDao.incrementOpenCount(id)
+    }
+
+    suspend fun getDataForSoppingChart(limit: Int) : List<ShoppingChartItem> {
+        return ingredientDao.getDataForSoppingChart(limit)
+    }
 }

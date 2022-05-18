@@ -57,6 +57,9 @@ class ShoppingListAdapter constructor(private val activity: Activity, private va
         holder.itemView.count_delete_item.setOnClickListener {
             val builder = android.app.AlertDialog.Builder(context)
             builder.setPositiveButton("Да") { _, _ ->
+                // инкрементируем кол-во для статистики
+                mShoppingViewModel.updateShoppingCount(currentItem.id, currentItem.number.toInt())
+
                 mShoppingViewModel.delete(currentItem.id)
             }
             builder.setNegativeButton("Нет") { _, _ -> }

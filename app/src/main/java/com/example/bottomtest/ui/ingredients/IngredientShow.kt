@@ -35,6 +35,7 @@ class IngredientShow : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         ingredient = initIngredient()
+        ingredient?.let { mIngredientViewModel.incrementOpenIngredient(it.id) }
         title = ingredient?.name
         // Recyclerview
         val adapter = CocktailListAdapter(this, applicationContext)

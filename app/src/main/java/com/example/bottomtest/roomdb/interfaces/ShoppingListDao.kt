@@ -29,4 +29,7 @@ interface ShoppingListDao {
 
     @Query("SELECT * FROM ingredients JOIN shopping_list ON ingredients.id = shopping_list.ingredient_id WHERE name LIKE :searchQuery ORDER BY id ASC")
     fun searchItems(searchQuery : String): LiveData<List<ItemShopping>>
+
+    @Query("UPDATE ingredients SET shopping_count = shopping_count + :amount WHERE id = :id")
+    fun updateShoppingCount(id: Int, amount: Int)
 }

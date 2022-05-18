@@ -4,13 +4,16 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.roomdb.adapter.IngredientsListAdapter
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.model.IngredientsList
+import com.example.bottomtest.roomdb.model.ShoppingChartItem
 import com.example.bottomtest.roomdb.repository.IngredientRepository
 import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class IngredientViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -104,5 +107,25 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
             }
         }
         return selectedIngredients
+    }
+
+    fun incrementOpenIngredient(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.incrementOpenCount(id)
+        }
+    }
+
+    suspend fun getDataForSoppingChart(limit: Int?): List<ShoppingChartItem> {
+        var selectedIngredients: List<ShoppingChartItem>
+        var correctLimit = 0
+        if (limit == null || limit > 50) {
+            correctLimit = 50
+        }
+
+        viewModelScope.run {
+            val job = async { repository.getDataForSoppingChart(correctLimit) }
+            return job.await()
+        }
+        //return selectedIngredients
     }
 }

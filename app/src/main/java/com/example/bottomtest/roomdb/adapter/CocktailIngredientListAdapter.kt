@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_degr
 import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_name_txt
 import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_picture
 import kotlinx.android.synthetic.main.row_ingredients_table.view.ingredient_type_txt
+import kotlinx.coroutines.coroutineScope
 
 class CocktailIngredientListAdapter constructor(
     private val activity: Activity,

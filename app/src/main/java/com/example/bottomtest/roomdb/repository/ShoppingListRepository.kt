@@ -33,4 +33,8 @@ class ShoppingListRepository(private val shoppingListDao: ShoppingListDao) {
     fun searchIngredients(searchQuery: String) : LiveData<List<ItemShopping>>{
         return shoppingListDao.searchItems(searchQuery)
     }
+
+    fun updateShoppingCount(id: Int, amount: Int) {
+        shoppingListDao.updateShoppingCount(id, amount)
+    }
 }

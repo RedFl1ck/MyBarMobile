@@ -78,4 +78,13 @@ class ShoppingListViewModel(application: Application): AndroidViewModel(applicat
             repository.delete(id)
         }
     }
+
+    fun updateShoppingCount(id: Int, amount:Int) {
+        if (amount <= 0){
+            return
+        }
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateShoppingCount(id, amount)
+        }
+    }
 }
