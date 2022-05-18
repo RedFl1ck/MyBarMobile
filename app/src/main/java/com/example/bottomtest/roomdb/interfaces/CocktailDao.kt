@@ -2,7 +2,8 @@ package com.example.bottomtest.roomdb.interfaces
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.bottomtest.roomdb.model.*
+import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.IngredientsList
 
 @Dao
 interface CocktailDao {
@@ -34,8 +35,8 @@ interface CocktailDao {
     @Query("UPDATE cocktails SET is_favourite = 0 WHERE id = :id")
     fun setUnFavourite(id: Int)
 
-    @Query("SELECT cocktails.id, name, description, degree, picture, cocktails.volume, receipt, cocktail_group, basis_id, taste, is_deleted, is_updatable, is_favourite FROM cocktails JOIN cocktails_ingredients ON cocktails_ingredients.cocktail_id = cocktails.id WHERE ingredient_id = :id ORDER BY cocktails.id ASC")
-    fun readSelectedCocktails(id: Int): LiveData<List<Cocktail>>
+    @Query("SELECT ingredients.id, name, description, picture, type, degree, is_favourite, created_by_user, volume FROM cocktails_ingredients JOIN ingredients ON cocktails_ingredients.ingredient_id = ingredients.id WHERE cocktail_id = :id ORDER BY ingredients.id ASC")
+    fun getIngredientsByCocktailId(id: Int): LiveData<List<IngredientsList>>
 
     @Query("UPDATE cocktails SET open_count = open_count + 1 WHERE id = :id")
     fun incrementOpenCocktail(id: Int)

@@ -2,47 +2,48 @@ package com.example.bottomtest.roomdb.repository
 
 import androidx.lifecycle.LiveData
 import com.example.bottomtest.roomdb.interfaces.IngredientDao
-import com.example.bottomtest.roomdb.model.*
+import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.Ingredients
 
-class IngredientRepository(private val ingredientDao: IngredientDao) {
+class IngredientRepository(private val dao: IngredientDao) {
 
-    val readAllData: LiveData<List<Ingredients>> = ingredientDao.readAllData()
-    val readShoppingList: LiveData<List<Int>> = ingredientDao.readShoppingList()
+    val readAllData: LiveData<List<Ingredients>> = dao.readAllData()
+    val readShoppingList: LiveData<List<Int>> = dao.readShoppingList()
 
     suspend fun addIngredient(ingredient: Ingredients) {
-        ingredientDao.addIngredient(ingredient)
+        dao.addIngredient(ingredient)
     }
 
     suspend fun updateIngredient(ingredient: Ingredients) {
-        ingredientDao.updateIngredient(ingredient)
+        dao.updateIngredient(ingredient)
     }
 
     suspend fun deleteIngredient(ingredient: Ingredients) {
-        ingredientDao.deleteIngredient(ingredient)
+        dao.deleteIngredient(ingredient)
     }
 
-    fun setFavourite(id: Int){
-        ingredientDao.setFavourite(id)
+    fun setFavourite(id: Int) {
+        dao.setFavourite(id)
     }
 
     fun setUnFavourite(id: Int) {
-        ingredientDao.setUnFavourite(id)
+        dao.setUnFavourite(id)
     }
 
     fun addToCart(id: Int) {
-        ingredientDao.addToCart(id)
+        dao.addToCart(id)
     }
 
-    fun readSelectedIngredients(id: Int): LiveData<List<IngredientsList>>{
-        return ingredientDao.readSelectedIngredients(id)
+    fun getCocktailsByIngredientId(id: Int): LiveData<List<Cocktail>> {
+        return dao.getCocktailsByIngredientId(id)
     }
 
     fun isInCart(id: Int): Boolean {
-        return ingredientDao.isInCart(id)
+        return dao.isInCart(id)
     }
 
     fun searchIngredients(searchQuery: String): LiveData<List<Ingredients>> {
-        return ingredientDao.searchIngredients(searchQuery)
+        return dao.searchIngredients(searchQuery)
     }
 
     fun incrementOpenCount(id: Int) {

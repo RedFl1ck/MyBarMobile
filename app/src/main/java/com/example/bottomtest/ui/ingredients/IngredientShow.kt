@@ -5,27 +5,25 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.ActivityShowIngredientsBinding
 import com.example.bottomtest.roomdb.adapter.CocktailListAdapter
 import com.example.bottomtest.roomdb.model.Ingredients
-import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 
 class IngredientShow : AppCompatActivity() {
 
-    companion object {const val INGREDIENT = "ingredient"}
+    companion object {
+        const val INGREDIENT = "ingredient"
+    }
 
     private var ingredient: Ingredients? = null
 
     private lateinit var binding: ActivityShowIngredientsBinding
 
     private lateinit var mIngredientViewModel: IngredientViewModel
-
-    private lateinit var mCocktailViewModel: CocktailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +40,8 @@ class IngredientShow : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // CocktailViewModel
-        mCocktailViewModel = ViewModelProvider(this)[CocktailViewModel::class.java]
         ingredient?.id?.let {
-            mCocktailViewModel.readSelectedCocktails(it).observe(this) { ingredientID ->
+            mIngredientViewModel.getCocktailsByIngredientId(it).observe(this) { ingredientID ->
                 adapter.setData(ingredientID)
             }
         }
@@ -68,8 +64,8 @@ class IngredientShow : AppCompatActivity() {
         }
     }
 
-    private fun initIngredient(): Ingredients?{
-        return if (intent.hasExtra(INGREDIENT)){
+    private fun initIngredient(): Ingredients? {
+        return if (intent.hasExtra(INGREDIENT)) {
             intent.getParcelableExtra(INGREDIENT)
         } else {
             val args by navArgs<IngredientShowArgs>()

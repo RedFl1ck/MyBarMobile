@@ -16,7 +16,6 @@ import com.example.bottomtest.roomdb.adapter.CocktailIngredientListAdapter
 import com.example.bottomtest.roomdb.adapter.RecommendedCocktailsListAdapter
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
-import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 import java.io.InputStream
 
 
@@ -31,8 +30,6 @@ class CocktailsShow : AppCompatActivity() {
     private lateinit var binding: ActivityShowCocktailsBinding
 
     private lateinit var mCocktailViewModel: CocktailViewModel
-
-    private lateinit var mIngredientViewModel: IngredientViewModel
 
     private var menu: Menu? = null
 
@@ -54,10 +51,8 @@ class CocktailsShow : AppCompatActivity() {
         binding.recyclerViewIngredients.adapter = adapterIngredients
         binding.recyclerViewIngredients.layoutManager = LinearLayoutManager(this)
 
-        // IngredientViewModel
-        mIngredientViewModel = ViewModelProvider(this)[IngredientViewModel::class.java]
         cocktail?.id?.let {
-            mIngredientViewModel.readSelectedIngredients(it).observe(this) { ingredientsList ->
+            mCocktailViewModel.getIngredientsByCocktailId(it).observe(this) { ingredientsList ->
                 adapterIngredients.setData(ingredientsList)
             }
         }
