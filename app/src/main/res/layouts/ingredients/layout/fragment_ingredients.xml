@@ -25,7 +25,8 @@
             android:drawableLeft="@drawable/filter"
             android:text="@string/filters"
             android:textAlignment="viewStart"
-            android:textColor="@color/hektar_text_light" />
+            android:textColor="@color/hektar_text_light"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/sort_ingredients_button"
@@ -36,14 +37,14 @@
             android:drawableLeft="@drawable/sort"
             android:text="@string/sort"
             android:textAlignment="viewStart"
-            android:textColor="@color/hektar_text_light" />
+            android:textColor="@color/hektar_text_light"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:scrollbars="vertical"
         android:layout_marginTop="48dp"
-        android:layout_marginBottom="48dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

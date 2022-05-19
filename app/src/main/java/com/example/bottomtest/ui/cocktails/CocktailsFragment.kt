@@ -60,7 +60,7 @@ class CocktailsFragment : Fragment() {
         setOnScrollListener()
 
         // CocktailViewModel
-        mCocktailViewModel = ViewModelProvider(this).get(CocktailViewModel::class.java)
+        mCocktailViewModel = ViewModelProvider(this)[CocktailViewModel::class.java]
         mCocktailViewModel.readNotDeletedData.observe(viewLifecycleOwner) { cocktail ->
             adapter.setData(cocktail)
         }
@@ -181,17 +181,11 @@ class CocktailsFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val bottomNav = activity?.findViewById<BottomNavigationView?>(R.id.nav_view)
                 if (dy > 0) {
-                    activity?.actionBar?.hide()//Scrolling down
-                    (binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams).setMargins(
-                        0,
-                        binding.cocktailLinearFilters.height,
-                        0,
-                        0
-                    )
+                    //Scrolling down
                     bottomNav?.isVisible = false
                     binding.fabCocktails.isVisible = false
                 } else if (dy < 0) {
-                    activity?.actionBar?.hide()//Scrolling up
+                    //Scrolling up
                     bottomNav?.isVisible = true
                     binding.fabCocktails.isVisible = true
                 }
@@ -200,7 +194,6 @@ class CocktailsFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        //super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.main, menu)
 
         val searchView = menu.findItem(R.id.action_search).actionView as? SearchView

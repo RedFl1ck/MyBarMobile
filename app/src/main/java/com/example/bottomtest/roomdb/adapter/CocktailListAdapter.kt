@@ -8,29 +8,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bottomtest.MyBarApplication
 import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Cocktail
-import com.example.bottomtest.roomdb.repository.CocktailRepository
-import com.example.bottomtest.roomdb.viewmodel.CocktailViewModel
-import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 import com.example.bottomtest.ui.cocktails.CocktailsFragmentDirections
 import com.example.bottomtest.ui.cocktails.CocktailsShow
-import com.example.bottomtest.ui.ingredients.IngredientShow
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.row_cocktail_table.view.*
 import java.io.InputStream
 
-class CocktailListAdapter constructor(private val activity: Activity, private val context: Context) : RecyclerView.Adapter<CocktailListAdapter.MyViewHolder>() {
+class CocktailListAdapter constructor(
+    private val activity: Activity,
+    private val context: Context
+) : RecyclerView.Adapter<CocktailListAdapter.MyViewHolder>() {
 
     private var cocktailList = emptyList<Cocktail>()
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_cocktail_table, parent, false))
+        return MyViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.row_cocktail_table, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -54,18 +55,20 @@ class CocktailListAdapter constructor(private val activity: Activity, private va
 
         holder.itemView.setOnClickListener {
             val act = activity.toString().split(".").toTypedArray()
-            if ("ui" in act){
+            if ("ui" in act) {
                 val arg = Intent(activity, CocktailsShow::class.java)
                 arg.putExtra(CocktailsShow.COCKTAIL, currentItem)
                 ContextCompat.startActivity(activity, arg, null)
             } else {
-                val action = CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)
+                val action =
+                    CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)
                 holder.itemView.findNavController().navigate(action)
+                activity.findViewById<BottomNavigationView?>(R.id.nav_view)?.isVisible = true
             }
         }
     }
 
-    fun setData(cocktail: List<Cocktail>){
+    fun setData(cocktail: List<Cocktail>) {
         this.cocktailList = cocktail
         notifyDataSetChanged()
     }
