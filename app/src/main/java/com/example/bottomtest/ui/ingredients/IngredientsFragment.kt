@@ -50,7 +50,6 @@ class IngredientsFragment : Fragment() {
         }
         setOnScrollListener()
 
-
         return view
     }
 
@@ -59,17 +58,11 @@ class IngredientsFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val bottomNav = activity?.findViewById<BottomNavigationView?>(R.id.nav_view)
                 if (dy > 0) {
-                    activity?.actionBar?.hide()//Scrolling down
-                    (binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams).setMargins(
-                        0,
-                        binding.ingredientsLinearFilters.height,
-                        0,
-                        0
-                    )
+                    //Scrolling down
                     bottomNav?.isVisible = false
                     binding.fabIngredients.isVisible = false
                 } else if (dy < 0) {
-                    activity?.actionBar?.hide()//Scrolling up
+                    //Scrolling up
                     bottomNav?.isVisible = true
                     binding.fabIngredients.isVisible = true
                 }

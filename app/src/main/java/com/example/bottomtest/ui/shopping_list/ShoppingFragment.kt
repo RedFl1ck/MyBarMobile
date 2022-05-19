@@ -6,10 +6,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomtest.R
 import com.example.bottomtest.databinding.FragmentShoppingBinding
 import com.example.bottomtest.roomdb.adapter.ShoppingListAdapter
 import com.example.bottomtest.roomdb.viewmodel.ShoppingListViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class ShoppingFragment : Fragment() {
 
@@ -43,8 +46,18 @@ class ShoppingFragment : Fragment() {
         mShoppingViewModel.readAllData.observe(viewLifecycleOwner) { ingredient ->
             adapter.setData(ingredient)
         }
+        setOnScrollListener()
 
         return view
+    }
+
+    private fun setOnScrollListener() {
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                (binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin =
+                    activity?.findViewById<BottomNavigationView?>(R.id.nav_view)?.height ?: 0
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

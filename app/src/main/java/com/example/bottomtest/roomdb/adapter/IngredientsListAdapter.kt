@@ -12,19 +12,25 @@ import com.example.bottomtest.R
 import com.example.bottomtest.roomdb.model.Ingredients
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 import com.example.bottomtest.ui.ingredients.IngredientsFragmentDirections
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.row_ingredients_table.view.*
 
-class IngredientsListAdapter constructor(private val activity: Activity, private val context: Context) : RecyclerView.Adapter<IngredientsListAdapter.MyViewHolder>() {
+class IngredientsListAdapter constructor(
+    private val activity: Activity,
+    private val context: Context
+) : RecyclerView.Adapter<IngredientsListAdapter.MyViewHolder>() {
 
     private var ingredientsList = emptyList<Ingredients>()
     private var shoppingList = emptyList<Int>()
 
     private lateinit var mIngredientViewModel: IngredientViewModel
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_ingredients_table, parent, false))
+        return MyViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.row_ingredients_table, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -35,10 +41,10 @@ class IngredientsListAdapter constructor(private val activity: Activity, private
         val currentItem = ingredientsList[position]
         holder.itemView.ingredient_picture.setBackgroundResource(R.drawable.ingredient_show)
         holder.itemView.ingredient_name_txt.text = currentItem.name
-        if (currentItem.degree != 0){
+        if (currentItem.degree != 0) {
             holder.itemView.ingredient_degree_txt.isVisible = true
             holder.itemView.ingredient_degree_txt.text = "Крепость: ${currentItem.degree}°"
-        }else{
+        } else {
             holder.itemView.ingredient_degree_txt.isVisible = false
         }
         holder.itemView.ingredient_type_txt.text = currentItem.type.toString()
@@ -49,17 +55,19 @@ class IngredientsListAdapter constructor(private val activity: Activity, private
         }
 
         holder.itemView.setOnClickListener {
-            val action = IngredientsFragmentDirections.actionNavIngredientsToIngredientShow(currentItem)
+            val action =
+                IngredientsFragmentDirections.actionNavIngredientsToIngredientShow(currentItem)
             holder.itemView.findNavController().navigate(action)
+            activity.findViewById<BottomNavigationView?>(R.id.nav_view)?.isVisible = true
         }
     }
 
-    fun setData(ingredient: List<Ingredients>){
+    fun setData(ingredient: List<Ingredients>) {
         this.ingredientsList = ingredient
         notifyDataSetChanged()
     }
 
-    fun setShopping(shoppingList: List<Int>){
+    fun setShopping(shoppingList: List<Int>) {
         this.shoppingList = shoppingList
         notifyDataSetChanged()
     }
