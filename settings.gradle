@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "BOTTOM TEST"
+rootProject.name = "My Bar Application"
