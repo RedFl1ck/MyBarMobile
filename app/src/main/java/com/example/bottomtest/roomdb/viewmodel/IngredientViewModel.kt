@@ -117,7 +117,7 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     suspend fun getDataForSoppingChart(limit: Int?): List<ShoppingChartItem> {
-        var selectedIngredients: List<ShoppingChartItem>
+        // var selectedIngredients: List<ShoppingChartItem>
         var correctLimit = 0
         if (limit == null || limit > 50) {
             correctLimit = 50
