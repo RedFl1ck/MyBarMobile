@@ -45,6 +45,13 @@ class FavouriteFragment : Fragment() {
         mFavouriteViewModel.readCocktailsData.observe(viewLifecycleOwner) { cocktail ->
             adapter.setData(cocktail)
         }
+
+        setOnScrollListener()
+
+        return view
+    }
+
+    private fun setOnScrollListener() {
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val bottomNav = activity?.findViewById<BottomNavigationView?>(R.id.nav_view)
@@ -52,7 +59,7 @@ class FavouriteFragment : Fragment() {
                     activity?.actionBar?.hide()//Scrolling down
                     (binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams).setMargins(
                         0,
-                        169,
+                        binding.favouriteLinearFilters.height,
                         0,
                         0
                     )
@@ -63,12 +70,9 @@ class FavouriteFragment : Fragment() {
                 }
             }
         })
-
-        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        //super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.main, menu)
 
         val searchView = menu.findItem(R.id.action_search).actionView as? SearchView

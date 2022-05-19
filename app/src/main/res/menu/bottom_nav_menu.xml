@@ -19,7 +19,7 @@
             android:title="@string/shopping" />
         <item
             android:id="@+id/nav_dashboards"
-            android:icon="@drawable/shopping_cart"
+            android:icon="@drawable/ic_dashboard"
             android:title="@string/title_activity_dashboards" />
 
         <!--

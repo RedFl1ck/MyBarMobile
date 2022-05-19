@@ -7,7 +7,7 @@
     tools:context=".ui.cocktails.CocktailsFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/cocktail_linear_filters"
         style="@style/MyActionBarButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,8 @@
             android:drawableLeft="@drawable/filter"
             android:text="@string/filters"
             android:textAlignment="viewStart"
-            android:textColor="@color/hektar_text_light" />
+            android:textColor="@color/hektar_text_light"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/sort_cocktails_button"
@@ -36,7 +37,8 @@
             android:drawableLeft="@drawable/sort"
             android:text="@string/sort"
             android:textAlignment="viewStart"
-            android:textColor="@color/hektar_text_light" />
+            android:textColor="@color/hektar_text_light"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 
