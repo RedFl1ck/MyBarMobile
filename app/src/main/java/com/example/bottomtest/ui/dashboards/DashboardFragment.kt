@@ -199,6 +199,12 @@ class DashboardFragment : Fragment() {
         return resultData
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(com.example.bottomtest.R.menu.main, menu)
+
+        menu.findItem(com.example.bottomtest.R.id.action_search).isVisible = false
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

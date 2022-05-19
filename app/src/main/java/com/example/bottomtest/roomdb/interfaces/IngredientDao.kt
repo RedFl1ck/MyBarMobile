@@ -2,7 +2,9 @@ package com.example.bottomtest.roomdb.interfaces
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.bottomtest.roomdb.model.*
+import com.example.bottomtest.roomdb.model.Cocktail
+import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.roomdb.model.ShoppingChartItem
 
 @Dao
 interface IngredientDao {

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.bottomtest.roomdb.interfaces.IngredientDao
 import com.example.bottomtest.roomdb.model.Cocktail
 import com.example.bottomtest.roomdb.model.Ingredients
+import com.example.bottomtest.roomdb.model.ShoppingChartItem
 
 class IngredientRepository(private val dao: IngredientDao) {
 
@@ -47,10 +48,10 @@ class IngredientRepository(private val dao: IngredientDao) {
     }
 
     fun incrementOpenCount(id: Int) {
-        ingredientDao.incrementOpenCount(id)
+        dao.incrementOpenCount(id)
     }
 
-    suspend fun getDataForSoppingChart(limit: Int) : List<ShoppingChartItem> {
-        return ingredientDao.getDataForSoppingChart(limit)
+    suspend fun getDataForSoppingChart(limit: Int): List<ShoppingChartItem> {
+        return dao.getDataForSoppingChart(limit)
     }
 }

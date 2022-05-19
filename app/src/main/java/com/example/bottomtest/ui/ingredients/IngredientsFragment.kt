@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class IngredientsFragment : Fragment() {
 
     private var _binding: FragmentIngredientsBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -26,9 +27,9 @@ class IngredientsFragment : Fragment() {
     private lateinit var adapter: IngredientsListAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -40,17 +41,24 @@ class IngredientsFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // CocktailViewModel
-        mIngredientViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
-        mIngredientViewModel.readAllData.observe(viewLifecycleOwner, { ingredient ->
-            adapter.setData(ingredient)})
-        mIngredientViewModel.readShoppingList.observe(viewLifecycleOwner, { ingredient ->
-            adapter.setShopping(ingredient)})
+        mIngredientViewModel = ViewModelProvider(this)[IngredientViewModel::class.java]
+        mIngredientViewModel.readAllData.observe(viewLifecycleOwner) { ingredient ->
+            adapter.setData(ingredient)
+        }
+        mIngredientViewModel.readShoppingList.observe(viewLifecycleOwner) { ingredient ->
+            adapter.setShopping(ingredient)
+        }
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val bottomNav = activity?.findViewById<BottomNavigationView?>(R.id.nav_view)
                 if (dy > 0) {
                     activity?.actionBar?.hide()//Scrolling down
-                    (binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams).setMargins(0, 169, 0, 0)
+                    (binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams).setMargins(
+                        0,
+                        169,
+                        0,
+                        0
+                    )
                     bottomNav?.isVisible = false
                     binding.fabIngredients.isVisible = false
                 } else if (dy < 0) {
@@ -72,7 +80,7 @@ class IngredientsFragment : Fragment() {
         val searchView = menu.findItem(R.id.action_search).actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true
 
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     mIngredientViewModel.search(query, viewLifecycleOwner, adapter)
