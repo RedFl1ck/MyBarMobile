@@ -1,6 +1,5 @@
 package com.example.bottomtest.ui.dashboards
 
-import android.R.attr.data
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
@@ -14,6 +13,8 @@ import com.example.bottomtest.databinding.FragmentDasboardsBinding
 import com.example.bottomtest.roomdb.viewmodel.IngredientViewModel
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,12 +96,11 @@ class DashboardsFragment : Fragment() {
     private suspend fun MakePieChart(pieChart: PieChart, lineChart: LineChart){
         val data = GetDataForPieChart()
         val dataSet = PieDataSet(data, "")
-        dataSet.colors = mutableListOf(Color.GRAY, Color.CYAN, Color.LTGRAY, Color.MAGENTA)
+        dataSet.colors = mutableListOf(Color.GRAY, Color.DKGRAY, Color.LTGRAY)
 
         pieChart.data = PieData(dataSet)
         pieChart.description.isEnabled = false
         pieChart.legend.isEnabled = false
-        pieChart.maxVisibleCount
         pieChart.setNoDataText("Недостатчно данных!")
         pieChart.setEntryLabelColor(Color.BLACK)
         lifecycleScope.launch(Dispatchers.Main) {
@@ -123,8 +123,21 @@ class DashboardsFragment : Fragment() {
     // ToDo сделать
     private suspend fun MakeLineChart(pieChart: PieChart, lineChart: LineChart){
         val data = GetDataForLineChart()
-        val dataSet = LineDataSet(data, "Line график")
+        val dataSet = LineDataSet(data, "")
+        dataSet.colors = mutableListOf(Color.DKGRAY)
+        dataSet.lineWidth = 2.5f
         lineChart.data = LineData(dataSet)
+        val xAxis: XAxis = lineChart.xAxis
+        xAxis.granularity = 1f // minimum axis-step (interval) is 1
+        val yLeftAxis: YAxis = lineChart.axisLeft
+        yLeftAxis.granularity = 1f // minimum axis-step (interval) is 1
+        yLeftAxis.axisMinimum = 0f
+        val yRightAxis: YAxis = lineChart.axisRight
+        yRightAxis.granularity = 1f // minimum axis-step (interval) is 1
+        yRightAxis.axisMinimum = 0f
+        lineChart.description.isEnabled = false
+        pieChart.legend.isEnabled = false
+        pieChart.setNoDataText("Недостатчно данных!")
         lifecycleScope.launch(Dispatchers.Main) {
             lineChart.invalidate()
             lineChart.isVisible = true
@@ -136,8 +149,8 @@ class DashboardsFragment : Fragment() {
     private suspend fun GetDataForLineChart(): MutableList<Entry> {
         val data = mIngredientViewModel.getDataForSoppingChart(null)
         val res = mutableListOf<Entry>()
-        for (item in data) {
-            res.add(Entry(item.shopping_count.toFloat(), 0F))
+        for ((index, item) in data.withIndex()) {
+            res.add(Entry(index.toFloat(), item.shopping_count.toFloat()))
         }
         return res
     }
