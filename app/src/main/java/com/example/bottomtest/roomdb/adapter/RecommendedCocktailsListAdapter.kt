@@ -17,14 +17,20 @@ import com.example.bottomtest.ui.cocktails.CocktailsShow
 import kotlinx.android.synthetic.main.row_cocktail_table.view.*
 import java.io.InputStream
 
-class RecommendedCocktailsListAdapter constructor(private val activity: Activity, private val context: Context) : RecyclerView.Adapter<RecommendedCocktailsListAdapter.MyViewHolder>() {
+class RecommendedCocktailsListAdapter constructor(
+    private val activity: Activity,
+    private val context: Context
+) : RecyclerView.Adapter<RecommendedCocktailsListAdapter.MyViewHolder>() {
 
     private var cocktailList = emptyList<Cocktail>()
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_recommended_cocktail_table, parent, false))
+        return MyViewHolder(
+            LayoutInflater.from(context)
+                .inflate(R.layout.row_recommended_cocktail_table, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -46,18 +52,20 @@ class RecommendedCocktailsListAdapter constructor(private val activity: Activity
 
         holder.itemView.setOnClickListener {
             val act = activity.toString().split(".").toTypedArray()
-            if ("ui" in act){
+            if ("ui" in act) {
                 val arg = Intent(activity, CocktailsShow::class.java)
                 arg.putExtra(CocktailsShow.COCKTAIL, currentItem)
+                arg.putExtra(CocktailsShow.RECOMMENDATION, true)
                 ContextCompat.startActivity(activity, arg, null)
             } else {
-                val action = CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)
+                val action =
+                    CocktailsFragmentDirections.actionNavCocktailsToCocktailsShow(currentItem)
                 holder.itemView.findNavController().navigate(action)
             }
         }
     }
 
-    fun setData(cocktail: List<Cocktail>){
+    fun setData(cocktail: List<Cocktail>) {
         this.cocktailList = cocktail
         notifyDataSetChanged()
     }

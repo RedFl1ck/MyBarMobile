@@ -23,6 +23,7 @@ class CocktailsShow : AppCompatActivity() {
 
     companion object {
         const val COCKTAIL = "cocktail"
+        const val RECOMMENDATION = "recommendation"
     }
 
     private var cocktail: Cocktail? = null
@@ -77,6 +78,8 @@ class CocktailsShow : AppCompatActivity() {
 
         //Update Fragment
         cocktail?.let { updateFragmentSet(it) }
+
+        initRecommendationWindow()
     }
 
     private fun initCocktail(): Cocktail? {
@@ -85,6 +88,17 @@ class CocktailsShow : AppCompatActivity() {
         } else {
             val args by navArgs<CocktailsShowArgs>()
             args.currentCocktail
+        }
+    }
+
+    private fun initRecommendationWindow() {
+        if (intent.hasExtra(RECOMMENDATION)) {
+            intent.getBooleanExtra(RECOMMENDATION, false)
+            val builder = android.app.AlertDialog.Builder(this)
+            builder.setNegativeButton("Нет") { _, _ -> }
+            builder.setPositiveButton("Да") { _, _ -> }
+            builder.setTitle("Была ли рекоммендация полезной?")
+            builder.create().show()
         }
     }
 

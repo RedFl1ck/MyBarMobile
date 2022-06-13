@@ -68,15 +68,25 @@ class ShoppingListAdapter constructor(
         holder.itemView.count_delete_item.setOnClickListener {
             val builder = android.app.AlertDialog.Builder(context)
             builder.setPositiveButton("Да") { _, _ ->
-                // инкрементируем кол-во для статистики
-                // TODO инкрементировать не по кнопке удаления
-                mShoppingViewModel.updateShoppingCount(currentItem.id, currentItem.number.toInt())
-
                 mShoppingViewModel.delete(currentItem.id)
             }
             builder.setNegativeButton("Нет") { _, _ -> }
             builder.setTitle("Удалить ${currentItem.name}?")
             builder.setMessage("Вы уверены, что хотите удалить ${currentItem.name}?")
+            builder.create().show()
+        }
+
+        holder.itemView.count_done_item.setOnClickListener {
+            val builder = android.app.AlertDialog.Builder(context)
+            builder.setPositiveButton("Да") { _, _ ->
+                // инкрементируем кол-во для статистики
+                mShoppingViewModel.updateShoppingCount(currentItem.id, currentItem.number.toInt())
+
+                mShoppingViewModel.delete(currentItem.id)
+            }
+            builder.setNegativeButton("Нет") { _, _ -> }
+            builder.setTitle("Учет ${currentItem.name}?")
+            builder.setMessage("Вы уверены, что хотите завершить работу с ${currentItem.name}?")
             builder.create().show()
         }
 
