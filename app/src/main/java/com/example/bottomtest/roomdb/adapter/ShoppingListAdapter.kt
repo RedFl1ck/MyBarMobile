@@ -11,16 +11,21 @@ import com.example.bottomtest.roomdb.model.ItemShopping
 import com.example.bottomtest.roomdb.viewmodel.ShoppingListViewModel
 import kotlinx.android.synthetic.main.row_shopping_table.view.*
 
-class ShoppingListAdapter constructor(private val activity: Activity, private val context: Context) : RecyclerView.Adapter<ShoppingListAdapter.MyViewHolder>() {
+class ShoppingListAdapter constructor(
+    private val activity: Activity,
+    private val context: Context
+) : RecyclerView.Adapter<ShoppingListAdapter.MyViewHolder>() {
 
     private var shoppingList = emptyList<ItemShopping>()
 
     private lateinit var mShoppingViewModel: ShoppingListViewModel
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_shopping_table, parent, false))
+        return MyViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.row_shopping_table, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -37,20 +42,26 @@ class ShoppingListAdapter constructor(private val activity: Activity, private va
         mShoppingViewModel = ShoppingListViewModel(activity.application)
 
         holder.itemView.count_add.setOnClickListener {
-            holder.itemView.count_shopping.setText((holder.itemView.count_shopping.text.toString().toFloat() + 1).toString())
+            holder.itemView.count_shopping.setText(
+                (holder.itemView.count_shopping.text.toString().toFloat() + 1).toString()
+            )
             mShoppingViewModel.setValue(
                 holder.itemView.count_shopping.text.toString().toFloat(),
                 holder.itemView.count_volume.text.toString(),
-                currentItem.id)
+                currentItem.id
+            )
         }
 
         holder.itemView.count_delete.setOnClickListener {
-            if (holder.itemView.count_shopping.text.toString().toFloat() != 0f){
-                holder.itemView.count_shopping.setText((holder.itemView.count_shopping.text.toString().toFloat() - 1).toString())
+            if (holder.itemView.count_shopping.text.toString().toFloat() != 0f) {
+                holder.itemView.count_shopping.setText(
+                    (holder.itemView.count_shopping.text.toString().toFloat() - 1).toString()
+                )
                 mShoppingViewModel.setValue(
                     holder.itemView.count_shopping.text.toString().toFloat(),
                     holder.itemView.count_volume.text.toString(),
-                    currentItem.id)
+                    currentItem.id
+                )
             }
         }
 
@@ -58,6 +69,7 @@ class ShoppingListAdapter constructor(private val activity: Activity, private va
             val builder = android.app.AlertDialog.Builder(context)
             builder.setPositiveButton("Да") { _, _ ->
                 // инкрементируем кол-во для статистики
+                // TODO инкрементировать не по кнопке удаления
                 mShoppingViewModel.updateShoppingCount(currentItem.id, currentItem.number.toInt())
 
                 mShoppingViewModel.delete(currentItem.id)
@@ -68,13 +80,9 @@ class ShoppingListAdapter constructor(private val activity: Activity, private va
             builder.create().show()
         }
 
-        /*holder.itemView.setOnClickListener {
-            val action = IngredientsFragmentDirections.actionNavIngredientsToIngredientShow(currentItem)
-            holder.itemView.findNavController().navigate(action)
-        }*/
     }
 
-    fun setData(item: List<ItemShopping>){
+    fun setData(item: List<ItemShopping>) {
         this.shoppingList = item
         notifyDataSetChanged()
     }
