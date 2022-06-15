@@ -108,14 +108,14 @@
             style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/long" />
+            android:text="@string/type_long" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip2_2"
             style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/shot" />
+            android:text="@string/type_long" />
 
     </com.google.android.material.chip.ChipGroup>
 
