@@ -38,6 +38,10 @@ class CocktailRepository(private val dao: CocktailDao) {
         return dao.searchCocktails(searchQuery)
     }
 
+    fun filterCocktails(strong: Boolean): LiveData<List<Cocktail>> {
+        return dao.filterCocktails(strong)
+    }
+
     fun incrementOpenCocktail(id: Int) {
         dao.incrementOpenCocktail(id)
     }

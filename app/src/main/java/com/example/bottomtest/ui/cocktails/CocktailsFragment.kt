@@ -92,18 +92,12 @@ class CocktailsFragment : Fragment() {
                 .setOnCheckedChangeListener { compoundButton: CompoundButton, isChecked: Boolean ->
                     //bottomSheetView.findViewById<Chip>(R.id.chip_1).onSaveInstanceState()
                     chip1 = if (isChecked) {
-                        Toast.makeText(
-                            this.requireContext(),
-                            "you checked filter 1",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        mCocktailViewModel.filter(isChecked, viewLifecycleOwner, adapter)
                         true
                     } else {
-                        Toast.makeText(
-                            this.requireContext(),
-                            "you unchecked filter 1",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        mCocktailViewModel.readNotDeletedData.observe(viewLifecycleOwner) { cocktail ->
+                            adapter.setData(cocktail)
+                        }
                         false
                     }
                 }

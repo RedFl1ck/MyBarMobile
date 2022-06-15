@@ -29,6 +29,9 @@ interface CocktailDao {
     @Query("SELECT * FROM cocktails where name LIKE :searchQuery ORDER BY id ASC")
     fun searchCocktails(searchQuery: String): LiveData<List<Cocktail>>
 
+    @Query("SELECT * FROM cocktails where cocktail_group LIKE case when :strong then '%крепкие%' else '' end ORDER BY id ASC")
+    fun filterCocktails(strong: Boolean): LiveData<List<Cocktail>>
+
     @Query("UPDATE cocktails SET is_favourite = 1 WHERE id = :id")
     fun setFavourite(id: Int)
 

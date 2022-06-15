@@ -39,6 +39,13 @@ class CocktailViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun filter(strong: Boolean, viewLifecycleOwner: LifecycleOwner, adapter: CocktailListAdapter) {
+        filterCocktails(strong).observe(viewLifecycleOwner) { list ->
+            list.let {
+                adapter.setData(it)
+            }
+        }
+    }
 
     fun inputCheck(cocktail: Cocktail): Boolean {
         return !(TextUtils.isEmpty(cocktail.name)
@@ -111,6 +118,17 @@ class CocktailViewModel(application: Application) : AndroidViewModel(application
         val selectedCocktails: LiveData<List<Cocktail>>
         viewModelScope.run {
             val job = async { repository.searchCocktails(searchQuery) }
+            runBlocking {
+                selectedCocktails = job.await()
+            }
+        }
+        return selectedCocktails
+    }
+
+    private fun filterCocktails(strong: Boolean): LiveData<List<Cocktail>> {
+        val selectedCocktails: LiveData<List<Cocktail>>
+        viewModelScope.run {
+            val job = async { repository.filterCocktails(strong) }
             runBlocking {
                 selectedCocktails = job.await()
             }
