@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="7.5dp"
             android:elevation="0dp"
-            android:text="Done" />
+            android:text="@string/done" />
 
     </LinearLayout>
 
@@ -42,11 +42,11 @@
         android:background="@color/white" />
 
     <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Strength"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/strength"
         android:textColor="@color/hektar_text_light" />
 
     <com.google.android.material.chip.ChipGroup
@@ -55,32 +55,32 @@
         android:layout_margin="15dp">
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.App.Chip.Filter"
             android:id="@+id/chip_1"
+            style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Strong" />
+            android:text="@string/strong" />
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.App.Chip.Filter"
             android:id="@+id/chip_2"
+            style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Moderately strong" />
+            android:text="@string/moderately_strong" />
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.App.Chip.Filter"
             android:id="@+id/chip_3"
+            style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Soft" />
+            android:text="@string/soft" />
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.App.Chip.Filter"
             android:id="@+id/chip_4"
+            style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Non alcoholic" />
+            android:text="@string/non_alcoholic" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -91,11 +91,11 @@
         android:background="@color/white" />
 
     <TextView
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Type"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/type"
         android:textColor="@color/hektar_text_light" />
 
     <com.google.android.material.chip.ChipGroup
@@ -104,18 +104,18 @@
         android:layout_margin="15dp">
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.App.Chip.Filter"
             android:id="@+id/chip2_1"
+            style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Long" />
+            android:text="@string/long" />
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.App.Chip.Filter"
             android:id="@+id/chip2_2"
+            style="@style/Widget.App.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shot"/>
+            android:text="@string/shot" />
 
     </com.google.android.material.chip.ChipGroup>
 

@@ -84,5 +84,14 @@
     <string name="receipt_cocktail">Рецепт</string>
     <string name="delete">Удалить</string>
     <string name="title_activity_dashboards">Дашборды</string>
+    <string name="strength">Крепость</string>
+    <string name="strong">Крепкий</string>
+    <string name="moderately_strong">Умеренно крепкий</string>
+    <string name="soft">Легкий</string>
+    <string name="non_alcoholic">Безалкогольный</string>
+    <string name="type">Тип</string>
+    <string name="type_long">Лонг</string>
+    <string name="type_shot">Шот</string>
+    <string name="done">Применить</string>
 
 </resources>

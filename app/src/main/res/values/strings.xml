@@ -188,6 +188,15 @@
     <string name="title_activity_dashboards">Dashboards</string>
     <string name="ingredients_show">Ingredients:</string>
     <string name="recommended_show">Recommended cocktails:</string>
+    <string name="strength">Strength</string>
+    <string name="strong">Strong</string>
+    <string name="moderately_strong">Moderately strong</string>
+    <string name="soft">Soft</string>
+    <string name="non_alcoholic">Non alcoholic</string>
+    <string name="type">Type</string>
+    <string name="type_long">Long</string>
+    <string name="type_shot">Shot</string>
+    <string name="done">Done</string>
 
 
 </resources>
